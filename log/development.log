@@ -20,3 +20,45 @@ Connecting to database specified by database.yml
 
 Started GET "/assets/rails.png" for 127.0.0.1 at 2015-01-03 17:28:45 -0800
 Served asset /rails.png - 304 Not Modified (10ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2015-01-03 18:05:31 -0800
+
+ActionController::RoutingError (No route matches [GET] "/"):
+  actionpack (3.2.21) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.21) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.21) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.21) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.21) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.21) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.21) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.21) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.21) lib/action_dispatch/middleware/static.rb:83:in `call'
+  railties (3.2.21) lib/rails/engine.rb:484:in `call'
+  railties (3.2.21) lib/rails/application.rb:231:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.21) lib/rails/rack/log_tailer.rb:17:in `call'
+  thin (1.5.1) lib/thin/connection.rb:81:in `block in pre_process'
+  thin (1.5.1) lib/thin/connection.rb:79:in `catch'
+  thin (1.5.1) lib/thin/connection.rb:79:in `pre_process'
+  thin (1.5.1) lib/thin/connection.rb:54:in `process'
+  thin (1.5.1) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine (1.0.4) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine (1.0.4) lib/eventmachine.rb:187:in `run'
+  thin (1.5.1) lib/thin/backends/base.rb:63:in `start'
+  thin (1.5.1) lib/thin/server.rb:159:in `start'
+  rack (1.4.5) lib/rack/handler/thin.rb:13:in `run'
+  rack (1.4.5) lib/rack/server.rb:268:in `start'
+  railties (3.2.21) lib/rails/commands/server.rb:70:in `start'
+  railties (3.2.21) lib/rails/commands.rb:55:in `block in <top (required)>'
+  railties (3.2.21) lib/rails/commands.rb:50:in `tap'
+  railties (3.2.21) lib/rails/commands.rb:50:in `<top (required)>'
+  script/rails:6:in `require'
+  script/rails:6:in `<main>'
+
+
+  Rendered c:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/actionpack-3.2.21/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (20.0ms)
