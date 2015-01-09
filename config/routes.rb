@@ -1,6 +1,15 @@
 Code::Application.routes.draw do
   
+  mount Surveyor::Engine => "/surveys", :as => "surveyor"
+
+  resources :home
+  
   root :to => 'home#index'
+  
+  post "/video_choice" => 'home#video_choice'
+  post "/audio_choice" => 'home#audio_choice'
+  post "/text_choice" => 'home#text_choice'
+  
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

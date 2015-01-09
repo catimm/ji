@@ -30,16 +30,15 @@ gem 'figaro'
 gem 'stripe'
 gem 'rabl'
 gem 'pg', '0.17.1'
-gem 'bootstrap-sass',
-  git: 'https://github.com/twbs/bootstrap-sass', 
-  ref: '540ad23430b1bdb2c72591daf61507ec9e38e468'
+gem 'bootstrap-sass', '3.1.1'
+gem 'autoprefixer-rails'
 gem 'omniauth'
 gem 'omniauth-linkedin-oauth2'
 gem "omnicontacts"
 gem 'squeel'
 gem 'thin'
 gem 'rest-client'
-
+gem 'surveyor', '1.4.0'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

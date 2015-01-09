@@ -2,6 +2,21 @@
 	<script src='//cameratag.com/api/v4/js/cameratag.js' type='text/javascript'></script>
 </head>
 <body>
-	<h1>Camera Test</h1>
-	<camera id='ji' data-app-id='a-32eb0680-75e3-0132-1565-22000a8c0328' data-maxlength='300'></camera>
+	<h4>Choose how you'd like to respond:</h4>
+	<div class="btn-group">
+		<%= button_to "Video", video_choice_path, class: 'btn btn-primary', remote: true %>	
+		<%= button_to "Audio", audio_choice_path, class: 'btn btn-primary', remote: true %>
+		<%= button_to "Text", text_choice_path, remote: true, class: "btn btn-primary" %>
+	</div>
+	<div id="responseArea">
+		<div id="videoResponse" class="hidden">
+			<%= render 'video' %>
+		</div>
+		<div id="audioResponse" class="hidden">
+			<%= render 'audio' %>
+		</div>
+		<div id="textResponse" class="hidden">
+			<%= render 'text' %>
+		</div>
+	</div>
 </body>
