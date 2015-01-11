@@ -1,3 +1,8 @@
+### Status
+[![Gem Version](https://badge.fury.io/rb/surveyor.svg)](http://badge.fury.io/rb/surveyor)
+[![Build Status](https://travis-ci.org/NUBIC/surveyor.svg)](https://travis-ci.org/NUBIC/surveyor)
+[![Code Climate](https://codeclimate.com/github/NUBIC/surveyor.png)](https://codeclimate.com/github/NUBIC/surveyor)
+
 ## Why surveyor?
 
 Surveyor is a developer tool to deliver surveys in Rails applications.
@@ -19,8 +24,10 @@ without maintaining a fork.
 
 Surveyor works with:
 
-* Ruby 1.8.7, 1.9.2, and 1.9.3
-* Rails 3.1-3.2
+* Ruby 2.0.0 and 2.1.1
+* Rails 3.2 and 4.0
+
+In keeping with the Rails team maintenance [policy] we no longer support Rails 3.1 (stick with v1.4.0 if you need Rails 3.1) or Ruby 1.9.3 (stick with v1.4.0 if you need Ruby 1.8.7 or 1.9.3).
 
 Some key dependencies are:
 
@@ -31,6 +38,7 @@ Some key dependencies are:
 A more exhaustive list can be found in the [gemspec][].
 
 [gemspec]: https://github.com/NUBIC/surveyor/blob/master/surveyor.gemspec
+[policy]: http://weblog.rubyonrails.org/2013/2/24/maintenance-policy-for-ruby-on-rails/
 
 ## Install
 
@@ -58,9 +66,11 @@ Surveyor's controller, helper, models, and views may be overridden by classes in
 
     script/rails generate surveyor:custom
 
-and read `surveys/EXTENDING\_SURVEYOR`
+and read the instructions generated in [`surveys/EXTENDING_SURVEYOR.MD`][extending]
 
-## Upgrade
+[extending]: https://github.com/NUBIC/surveyor/blob/master/lib/generators/surveyor/templates/surveys/EXTENDING_SURVEYOR.md
+
+## Upgrade surveyor
 
 To get the latest version of surveyor, bundle, install and migrate:
 
@@ -71,6 +81,27 @@ To get the latest version of surveyor, bundle, install and migrate:
 and review the [changelog][] for changes that may affect your customizations.
 
 [changelog]: https://github.com/NUBIC/surveyor/blob/master/CHANGELOG.md
+
+## What surveyor does and doesn't do
+
+### Does do
+* use a DSL to parse large surveys without hours of copy/paste into a gui builder
+* support complex, rule-based dependencies (skip-logic)
+* JSON export of both surveys and response sets
+* allow customization of all models, views, and controller, as well as helpers and routes
+* follow semantic versioning
+* exclusive checkboxes - a checkbox that when checked, unchecks all the others
+
+### Doesn't do
+* Enforce mandatory questions... yet (although it does have some[1] methods[2] on ResponseSet to support that)
+* Dependencies within repeaters... yet [#235](http://github.com/NUBIC/surveyor/issues/235)
+* Validations within the UI... yet [#34](http://github.com/NUBIC/surveyor/issues/34), although it does have model support and database representations
+* GUI creating, editing, deleting and administration of surveys... yet [#414](http://github.com/NUBIC/surveyor/issues/414)
+* Consistently support HTML tags in title, text, help_text attributes. We intend to move to markdown support [#413](http://github.com/NUBIC/surveyor/issues/413) so that same survey definition can be used with [nu_surveyor](http://github.com/NUBIC/nu_surveyor).
+
+[1]: http://github.com/NUBIC/surveyor/blob/master/lib/surveyor/models/response_set_methods.rb#L94
+[2]: http://github.com/NUBIC/surveyor/blob/master/lib/surveyor/models/response_set_methods.rb#L97
+
 
 ## Users of spork
 
@@ -114,7 +145,7 @@ Take a look at our [screencast][] (a bit dated now).
 
 [surveyor-dev]: https://groups.google.com/group/surveyor-dev
 [issues]: https://github.com/NUBIC/surveyor/issues
-[ci]:https://public-ci.nubic.northwestern.edu/job/surveyor/
+[ci]:https://travis-ci.org/NUBIC/surveyor
 [screencast]:http://vimeo.com/7051279
 
 ## Contribute, test
@@ -125,30 +156,8 @@ you don't have it, then bundle, generate the app in `testbed`, and run the specs
     $ bundle update
     $ bundle exec rake testbed
     $ bundle exec rake spec
-    $ bundle exec rake cucumber
 
 [bundler]: http://gembundler.com/
-
-## Selenium
-
-Some of surveyor's integration tests use Selenium WebDriver and Capybara. The
-WebDriver-based tests default to running in Chrome due to an unfortunate
-[Firefox bug][FF566671]. For them to run, you'll either need:
-
-* Chrome and [chromedriver][] installed, or
-* to switch to use Firefox instead
-
-To use Firefox instead of Chrome, invoke one or more features with
-`SELENIUM_BROWSER` set in the environment:
-
-    $ SELENIUM_BROWSER=firefox bundle exec rake cucumber
-    $ SELENIUM_BROWSER=firefox bundle exec cucumber features/ajax_submissions.feature
-
-Note that when running features in Firefox, you must allow the WebDriver-driven
-Firefox to retain focus, otherwise some tests will fail.
-
-[FF566671]: https://bugzilla.mozilla.org/show_bug.cgi?id=566671
-[chromedriver]: http://code.google.com/p/selenium/wiki/ChromeDriver
 
 Copyright (c) 2008-2013 Brian Chamberlain and Mark Yoon, released under the [MIT license][mit]
 
