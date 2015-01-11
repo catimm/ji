@@ -34,4 +34,7 @@ Code::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+  
+  # asked to change this because of an error
+  config.eager_load = false
 end
