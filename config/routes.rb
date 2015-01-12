@@ -1,5 +1,6 @@
 Code::Application.routes.draw do
   
+  devise_for :users
   mount SurveyorGui::Engine => "/surveyor_gui", :as => "surveyor_gui"
   mount Surveyor::Engine => "/surveys", :as => "surveyor"
   
