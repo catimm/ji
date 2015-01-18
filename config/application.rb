@@ -62,6 +62,6 @@ module Code
     config.assets.version = '1.0'
     
     # forcing application to not access the DB or load models when precompiling assets--only on Rails 3.2
-    # config.assets.initialize_on_precompile = false
+    config.assets.initialize_on_precompile = false
   end
 end
