@@ -12,6 +12,9 @@ Code::Application.routes.draw do
   post "/audio_choice" => 'home#audio_choice'
   post "/text_choice" => 'home#text_choice'
   
+  get "/input" => 'input#first'
+  post "/first_input_response" => 'input#first_input_response'
+  
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

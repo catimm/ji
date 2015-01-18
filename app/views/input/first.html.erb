@@ -1,0 +1,30 @@
+<head>
+	<script src='//cameratag.com/api/v4/js/cameratag.js' type='text/javascript'></script>
+</head>
+<body>
+	<%-#  the next line of code is needed to satisfy surveyor_gui requirements, otherwise js freezes/loops -%>
+	<div id="surveyor_gui_mount_point" data-surveyor_gui_mount_point="<%= surveyor_gui.surveyforms_path %>"></div>
+	<div>
+		<h2>Play the video to get a little background . . .</h2>
+	</div>
+	<div>
+		<video id='MyStory' data-uuid='v-79f5eca0-7fff-0132-10eb-22000a8c0328'></video>
+	</div>
+	<div>
+		<%= button_to "Got it. What's next?", first_input_response_path, class: 'btn btn-primary', remote: true %>	
+	</div>
+	<div id="firstInputResponse" class="hidden">
+		<div>
+			<h3>In short, here's what we're asserting:</h3>
+			<li>Choosing a good craft beer you like can take too long and be overcomplicated.</li>
+			<li>Finding a good craft beer through a recommendation rarely works because others don't know your taste preferences.</li>
+			<li>Relying on vague and overly beer-y descriptions doesn't help find a good craft beer either.</li>
+		</div>
+		<div>
+			<h3>So, does any of this resonate with you? Use the record box below to tell us what you think.</h3>
+		</div>
+		<div>
+			<%= render 'home/video' %>
+		</div>
+	</div>
+</body>
