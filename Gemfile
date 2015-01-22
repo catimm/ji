@@ -41,6 +41,7 @@ gem 'rest-client'
 gem 'surveyor', '~> 1.4.0', github: 'NUBIC/surveyor'
 gem 'surveyor_gui'
 gem 'tzinfo-data' 
+gem "Ziggeo", :git => "https://github.com/Ziggeo/ZiggeoRubySdk.git"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
