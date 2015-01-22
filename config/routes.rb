@@ -16,6 +16,7 @@ Code::Application.routes.draw do
   post "/first_input_response" => 'input#first_input_response'
   
   match '/video/new' => 'input#video_url', :via => [:post]
+  get "/input/video_url" => 'input#video_url'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
