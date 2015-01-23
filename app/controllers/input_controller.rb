@@ -10,8 +10,8 @@ class InputController < ApplicationController
   end
   
   def video_url
-    data = JSON.parse(request.raw_post)
-    @video_uuid = data["uuid"]
+    @data = JSON.parse(request.raw_post)
+
   end
   
 end
