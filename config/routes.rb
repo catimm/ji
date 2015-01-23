@@ -1,6 +1,10 @@
 Code::Application.routes.draw do
   
-  devise_for :users
+  devise_for :users, path_names: { sign_in: "login", sign_out: "logout", sign_up: "register" },
+  controllers: { omniauth_callbacks: "authentications", registrations: "registrations"  }
+
+  resources :users
+  
   mount SurveyorGui::Engine => "/surveyor_gui", :as => "surveyor_gui"
   mount Surveyor::Engine => "/surveys", :as => "surveyor"
   
