@@ -43,7 +43,7 @@ gem 'surveyor', '~> 1.4.0', github: 'NUBIC/surveyor'
 gem 'surveyor_gui'
 gem 'tzinfo-data' 
 gem "Ziggeo", :git => "https://github.com/Ziggeo/ZiggeoRubySdk.git"
-gem 'rails_12factor', group: :production
+gem 'rails_12factor'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
