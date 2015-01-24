@@ -14,7 +14,7 @@
             <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
                   <% if user_signed_in? %>
-				    <li><h5 class="welcome">Welcome <%= current_user.email %>!</h5></li>
+				    <li><h5 class="welcome">Welcome <%= current_user.first_name %>!</h5></li>
 				    <li><%= link_to "Log out", destroy_user_session_path, method: :delete  %></li>
 				  <% else %>
 		          	<li> <%= link_to "Register", new_user_registration_path %></li>
