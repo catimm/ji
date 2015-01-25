@@ -10,3 +10,4 @@
 */config/application.yml
 log/
 tmp/
+.env

@@ -11,6 +11,10 @@ group :development, :test do
   gem 'mailcatcher'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -27,14 +31,14 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'annotate'
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-linkedin'
 gem 'figaro'
 gem 'stripe'
 gem 'rabl'
 gem 'pg', '0.17.1'
 gem 'bootstrap-sass', '3.1.1'
 gem 'autoprefixer-rails'
-gem 'omniauth'
-gem 'omniauth-linkedin-oauth2'
 gem "omnicontacts"
 gem 'squeel'
 gem 'thin'
@@ -43,7 +47,7 @@ gem 'surveyor', '~> 1.4.0', github: 'NUBIC/surveyor'
 gem 'surveyor_gui'
 gem 'tzinfo-data' 
 gem "Ziggeo", :git => "https://github.com/Ziggeo/ZiggeoRubySdk.git"
-gem 'rails_12factor'
+gem 'mandrill-api'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

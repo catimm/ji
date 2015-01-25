@@ -14,8 +14,8 @@
 #  inactive_at            :datetime
 #  css_url                :string(255)
 #  custom_class           :string(255)
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  created_at             :datetime
+#  updated_at             :datetime
 #  display_order          :integer
 #  api_id                 :string(255)
 #  survey_version         :integer          default(0)

@@ -1,23 +1,13 @@
-<body>
-	<%-#  the next line of code is needed to satisfy surveyor_gui requirements, otherwise js freezes/loops -%>
-	<div id="surveyor_gui_mount_point" data-surveyor_gui_mount_point="<%= surveyor_gui.surveyforms_path %>"></div>
-	 <%= render 'layouts/header' %> 
-	<div class="intro-header"></div>
-	<h4>Choose how you'd like to respond:</h4>
-	<div class="btn-group">
-		<%= button_to "Video", video_choice_path, class: 'btn btn-primary', remote: true %>	
-		<%= button_to "Audio", audio_choice_path, class: 'btn btn-primary', remote: true %>
-		<%= button_to "Text", text_choice_path, remote: true, class: "btn btn-primary" %>
-	</div>
-	<div id="responseArea">
-		<div id="videoResponse" class="hidden">
-			<%= render 'video' %>
-		</div>
-		<div id="audioResponse" class="hidden">
-			<%= render 'audio' %>
-		</div>
-		<div id="textResponse" class="hidden">
-			<%= render 'text' %>
+<%-#  the next line of code is needed to satisfy surveyor_gui requirements, otherwise js freezes/loops -%>
+<div id="surveyor_gui_mount_point" data-surveyor_gui_mount_point="<%= surveyor_gui.surveyforms_path %>"></div>
+<div class="intro-header"></div> 
+<div id="section wrap">
+	<%= render 'layouts/header' %> 
+	<div class="container mainBody">
+		<div class="row">
+			<div class="page-header">
+			  <h1>Home Page</h1>
+			</div>
 		</div>
 	</div>
-</body>
+</div>

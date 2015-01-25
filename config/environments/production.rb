@@ -20,6 +20,20 @@ Code::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  # Email setup
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default_url_options = { :host => 'calm-coast-5967.herokuapp.com' }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.mandrillapp.com",
+    port: 587,
+    authentication: "plain",
+    user_name: "app32989419@heroku.com",
+    password: ENV['MANDRILL_APIKEY'],
+    enable_starttls_auto: true
+  }
+  
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 
