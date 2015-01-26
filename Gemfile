@@ -29,6 +29,7 @@ end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'json'
 gem 'annotate'
 gem 'devise'
 gem 'omniauth'
