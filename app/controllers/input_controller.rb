@@ -20,7 +20,7 @@ class InputController < ApplicationController
     video.completed = data_parsed["created_at"]
     
     if video.save
-      input_video_url_path
+      @video = video
     end 
 
   end
