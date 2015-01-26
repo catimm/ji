@@ -3,7 +3,7 @@ class ResponseSetUser
     #find the user.  You can use the commented code below, but switch the model name
     #if your user model is not User.
     #
-    #@user = User.find_by_id(user_id)
+    @user = User.find_by_id(user_id)
   end
 
   def report_user_name
