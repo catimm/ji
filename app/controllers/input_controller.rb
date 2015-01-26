@@ -17,7 +17,7 @@ class InputController < ApplicationController
     
     video = Video.new
     video.uuid = data_parsed["uuid"]
-    video.completed = data_parsed["formats"]["completed_at"]
+    video.completed = data_parsed["created_at"]
     
     if video.save
       input_video_url_path
