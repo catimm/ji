@@ -22,6 +22,6 @@ class InputController < ApplicationController
   end
   
   def view_video_info
-    @video = Video.where(1)
+    @video = Video.find(1)
   end
 end
