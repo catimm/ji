@@ -18,6 +18,7 @@ class InputController < ApplicationController
     video = Video.new
     video.uuid = data_parsed["uuid"]
     video.completed = data_parsed['formats'][0]['completed_at']
+    video.video_url = data_parsed['formats'][0]['video_url']
 
   end
   
