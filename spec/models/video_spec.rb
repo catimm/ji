@@ -4,10 +4,10 @@
 #
 #  id         :integer          not null, primary key
 #  uuid       :string(255)
-#  url        :string(255)
 #  completed  :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  video_url  :string(255)
 #
 
 require 'rails_helper'
