@@ -18,11 +18,10 @@ class InputController < ApplicationController
     video = Video.new
     video.uuid = data_parsed["uuid"]
     video.completed = data_parsed["created_at"]
-    
-    if video.save
-      @video = video
-    end 
 
   end
   
+  def view_video_info
+    @video = Video.where(1)
+  end
 end
