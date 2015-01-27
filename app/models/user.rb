@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
          
   has_many :authentications
+  has_many :videos
   
   
   def apply_omniauth(omni)
