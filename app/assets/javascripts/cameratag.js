@@ -6,6 +6,8 @@ $(document).ready(function(){
 		CameraTag.observe('jitest', "initialized", function(){
 			myCamera = CameraTag.cameras['jitest'];
 		});
-		myCamera.addVideoData( identity = {camera:"jitest", user:"12"} 
-		);
+		myCamera.addVideoData(js_object){
+			camera:"jitest", 
+			user:"12"
+		});
 });
