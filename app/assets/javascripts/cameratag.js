@@ -5,10 +5,12 @@ $(document).ready(function(){
 		});
 		CameraTag.observe('jitest', "initialized", function(){
 			myCamera = CameraTag.cameras['jitest'];
+			
+			var js_object = {
+			    camera: "jitest", 
+			    user: "12"
+			};
+			myCamera.addVideoData(js_object);
 		});
-		var js_object = {
-		    camera: "jitest", 
-		    user: "12"
-		};
-		myCamera.addVideoData(js_object);
+		
 });
