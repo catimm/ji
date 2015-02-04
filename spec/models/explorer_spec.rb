@@ -1,18 +1,18 @@
 # == Schema Information
 #
-# Table name: videos
+# Table name: explorers
 #
 #  id         :integer          not null, primary key
-#  uuid       :string(255)
+#  user_id    :integer
+#  last_name  :string(255)
+#  city       :string(255)
+#  state      :string(255)
 #  created_at :datetime
 #  updated_at :datetime
-#  video_url  :string(255)
-#  user_id    :integer
-#  camera     :string(255)
 #
 
 require 'rails_helper'
 
-RSpec.describe Video, :type => :model do
+RSpec.describe Explorer, :type => :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

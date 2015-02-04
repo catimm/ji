@@ -1,0 +1,40 @@
+	<div class="row explorationOverview">
+			<div class="col-sm-4">
+				<div class="packageLeft" style="background-image: url(<%= @explorations.picture %>)">
+			</div>
+			<div class="col-sm-8">
+				<div class="packageRight">
+					<div class="explorationTitle">
+						<h2 class="overviewText"><%= @explorer_first %> <%= @explorer_last %></h2>
+					</div>
+					<div class="explorationExplorer">
+						<h4 class="overviewText"><%= @name %></h4>
+					</div>
+					<div class="explorationDescription">
+						<h4 class="overviewText"><%= @explorations.description %></h4>
+					</div>
+					<div class="explorationStats">
+						<div>
+							<h4 class="overviewText"><%= @complete %>%</h4>
+							<h5 class="overviewText">complete</h5>
+						</div>
+						<div>
+							<h4 class="overviewText"><%= @people %></h4>
+							<h5 class="overviewText">people to go</h5>
+						</div>
+						<div>
+							<h4 class="overviewText"></h4>
+							<h5 class="overviewText">days to go</h5>
+						</div>
+					</div>
+					<div class="explorationButton">
+						<%= form_for @start, url: {action: "update"} do |f| %>
+						  <%= f.hidden_field :user_id, value: params[:id] %>
+						  <%= f.hidden_field :exploration_id, value: @explorations.id %>
+						  <%= f.hidden_field :started, value: @time %>
+						  <%= f.submit value: "Provide input", class: "btn btn-success responseButtons" %>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>

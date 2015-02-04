@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127013018) do
+ActiveRecord::Schema.define(version: 20150204023237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,55 @@ ActiveRecord::Schema.define(version: 20150127013018) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "column_id"
+  end
+
+  create_table "exploration_invitations", force: true do |t|
+    t.integer  "user_id"
+    t.string   "friend_email"
+    t.string   "accept"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "exploration_id"
+  end
+
+  create_table "exploration_users", force: true do |t|
+    t.integer  "exploration_id"
+    t.integer  "user_id"
+    t.datetime "started"
+    t.string   "completed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "status"
+  end
+
+  create_table "explorations", force: true do |t|
+    t.string   "category"
+    t.string   "picture"
+    t.integer  "completions_required"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "explorer_id"
+    t.integer  "steps"
+  end
+
+  create_table "explorers", force: true do |t|
+    t.integer  "user_id"
+    t.string   "last_name"
+    t.string   "city"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "problems", force: true do |t|
+    t.integer  "exploration_id"
+    t.string   "title"
+    t.text     "description"
+    t.text     "problem_one"
+    t.text     "problem_two"
+    t.text     "problem_three"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "question_groups", force: true do |t|
@@ -243,16 +292,11 @@ ActiveRecord::Schema.define(version: 20150127013018) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "first_name"
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
@@ -284,11 +328,11 @@ ActiveRecord::Schema.define(version: 20150127013018) do
 
   create_table "videos", force: true do |t|
     t.string   "uuid"
-    t.string   "completed"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "video_url"
     t.integer  "user_id"
+    t.string   "camera"
   end
 
 end

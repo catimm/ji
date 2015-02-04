@@ -99,6 +99,11 @@ GEM
       thor (~> 0.14)
     formtastic (2.2.1)
       actionpack (>= 3.0)
+    gon (5.2.3)
+      actionpack (>= 2.3.0)
+      json
+      multi_json
+      request_store (>= 1.0.5)
     haml (4.0.6)
       tilt
     hash-deep-merge (0.1.1)
@@ -190,6 +195,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
+    request_store (1.1.0)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
     rest-client (1.7.2-x86-mingw32)
@@ -297,6 +303,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   figaro
+  gon
   jquery-rails
   jquery-ui-rails
   json

@@ -49,6 +49,7 @@ gem 'surveyor_gui'
 gem 'tzinfo-data' 
 gem "Ziggeo", :git => "https://github.com/Ziggeo/ZiggeoRubySdk.git"
 gem 'mandrill-api'
+gem 'gon'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
