@@ -6,10 +6,10 @@
 #  exploration_id :integer
 #  user_id        :integer
 #  started        :datetime
-#  completed      :string(255)
 #  created_at     :datetime
 #  updated_at     :datetime
 #  status         :integer
+#  completed      :datetime
 #
 
 class ExplorationUser < ActiveRecord::Base
