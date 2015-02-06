@@ -10,6 +10,7 @@
 #  updated_at           :datetime
 #  explorer_id          :integer
 #  steps                :integer
+#  end_date             :datetime
 #
 
 require 'rails_helper'

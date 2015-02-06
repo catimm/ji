@@ -1,15 +1,78 @@
-<h2>Log in</h2>
-
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email, required: false, autofocus: true %>
-    <%= f.input :password, required: false %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+<div class="intro-header"></div>
+<div id="section wrap">
+	<%= render 'layouts/header' %> 
+	<div class="intro-header"></div>
+	<div class="row"> 
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4 box">
+			<div class="row">
+				<div class="col-sm-12">
+						<h2 class="formSpace">Log in</h2>
+					    <%= form_for(resource, :class => "input-group", :as => resource_name, :url => session_path(resource_name)) do |f| %> 
+					      <%- flash.each do |name, msg| -%>
+						    <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+						  <%- end -%>
+							<div class="row formSpace"> 
+								<div class="col-sm-1"></div>
+								<div class="col-sm-10">
+						      		<%= f.email_field :email, :class => "form-control", placeholder: "Email" %> 
+								</div>
+								<div class="col-sm-1"></div>
+							</div>
+							<div class="row"> 
+								<div class="col-sm-1"></div>
+								<div class="col-sm-10 forgot">
+							 		<%= f.password_field :password, :class => "form-control", placeholder: "Password" %> 
+							 		<%= render "devise/shared/forgot" %>
+								</div>
+								<div class="col-sm-1"></div>
+							</div>
+							<div class="row formSpace">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-5">
+							      <% if devise_mapping.rememberable? %>
+								    <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+								  <% end %>
+						  		</div>
+						  		<div class="col-sm-5">
+					      			<%= f.submit "Login", class: "btn btn-default btn-success onRight" %> 
+					      		</div>
+					      		<div class="col-sm-1"></div>
+					      	</div>
+					    <% end %> 
+					  </div> 
+					</div>
+					<div class="row formSpace2">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-10">
+							<div class="line"></div>
+							<div class="lineText gray"> or </div>
+						</div>
+						<div class="col-sm-1"></div>
+					</div>
+					<div class="row">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-10">
+							<%= render "devise/shared/linkedin" %>
+						</div>
+						<div class="col-sm-1"></div>
+					</div>
+					<div class="row formSpace">
+						<div class="col-sm-3"></div>
+						<div class="col-sm-6">
+							<h6 class="liStatement">We'll never post anything to LinkedIn on your behalf</h6>
+						</div>
+						<div class="col-sm-3"></div>
+					</div>
+					<div class="row signupBox">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-10">
+							<h5 class="signupOffer">New to ji? </h5> <%= render "devise/shared/signup" %>
+						</div>
+						<div class="col-sm-1"></div>
+					</div>
+			</div>
+		</div>
+		<div class="col-sm-4"></div>
+	</div>
+</div>

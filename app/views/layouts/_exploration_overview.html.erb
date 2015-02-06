@@ -1,40 +1,49 @@
 	<div class="row explorationOverview">
 			<div class="col-sm-4">
-				<div class="packageLeft" style="background-image: url(<%= @explorations.picture %>)">
+				<div class="packageLeft" style="background-image: url(<%= @problems.exploration.picture %>)"></div>
 			</div>
 			<div class="col-sm-8">
-				<div class="packageRight">
-					<div class="explorationTitle">
-						<h2 class="overviewText"><%= @explorer_first %> <%= @explorer_last %></h2>
-					</div>
-					<div class="explorationExplorer">
-						<h4 class="overviewText"><%= @name %></h4>
-					</div>
-					<div class="explorationDescription">
-						<h4 class="overviewText"><%= @explorations.description %></h4>
-					</div>
-					<div class="explorationStats">
-						<div>
-							<h4 class="overviewText"><%= @complete %>%</h4>
-							<h5 class="overviewText">complete</h5>
-						</div>
-						<div>
-							<h4 class="overviewText"><%= @people %></h4>
-							<h5 class="overviewText">people to go</h5>
-						</div>
-						<div>
-							<h4 class="overviewText"></h4>
-							<h5 class="overviewText">days to go</h5>
+					<div class="row explorationTitle">
+						<div class="col-sm-12">
+							<h3><%= @problems.title %></h3>
 						</div>
 					</div>
-					<div class="explorationButton">
-						<%= form_for @start, url: {action: "update"} do |f| %>
-						  <%= f.hidden_field :user_id, value: params[:id] %>
-						  <%= f.hidden_field :exploration_id, value: @explorations.id %>
-						  <%= f.hidden_field :started, value: @time %>
-						  <%= f.submit value: "Provide input", class: "btn btn-success responseButtons" %>
-						<% end %>
+					<div class="row explorationExplorer">
+						<div class="col-sm-3">
+							<h6 class="gray"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <%= @problems.exploration.explorer.user.first_name %> <%= @problems.exploration.explorer.last_name %></h6>
+						</div>
+						<div class="col-sm-3">
+							<h6 class="gray"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <%= @problems.exploration.explorer.city %>, <%= @problems.exploration.explorer.state %></h6>
+						</div>
+						<div class="col-sm-6"></div>
 					</div>
-				</div>
+					<div class="row explorationDescription">
+						<h5 class="gray"><%= @problems.description %></h5>
+					</div>
+					<div class="row explorationStats">
+						<div class="col-sm-2">
+							<h3><%= @completed %>%</h3>
+							<h6 class="gray">complete</h6>
+						</div>
+						<div class="col-sm-2">
+							<h3><%= @people %></h3>
+							<h6 class="gray">participants</h6>
+						</div>
+						<div class="col-sm-2">
+							<h3><%= @days_left %></h3>
+							<h6 class="gray">days to go</h6>
+						</div>
+						<div class="col-sm-5">
+							<%= form_for @start, url: {action: "update"} do |f| %>
+							  <%= f.hidden_field :user_id, value: params[:id] %>
+							  <%= f.hidden_field :exploration_id, value: @problems.exploration.id %>
+							  <%= f.hidden_field :started, value: @time %>
+							  <%= f.submit value: "Provide input", class: "btn btn-success inputButton" %>
+							<% end %>
+						</div>
+						<div class="col-sm-1"></div>
+					</div>
+				
 			</div>
+			<div class="col-sm-0"></div>
 		</div>

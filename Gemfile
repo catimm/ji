@@ -38,7 +38,7 @@ gem 'figaro'
 gem 'stripe'
 gem 'rabl'
 gem 'pg', '0.17.1'
-gem 'bootstrap-sass', '3.1.1'
+gem 'bootstrap-sass', '3.3.3'
 gem 'autoprefixer-rails'
 gem "omnicontacts"
 gem 'squeel'
@@ -49,6 +49,7 @@ gem 'tzinfo-data'
 gem "Ziggeo", :git => "https://github.com/Ziggeo/ZiggeoRubySdk.git"
 gem 'mandrill-api'
 gem 'gon'
+gem 'font-awesome-sass', '~> 4.3.0'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

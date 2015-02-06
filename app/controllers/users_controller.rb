@@ -1,27 +1,25 @@
 class UsersController < ApplicationController
   def show
+    require 'date'
+    @problems = Problem.find_by id: '1'
     
-    @explorations = Exploration.find_by id: '1'
-    
-    @explorer_id = @explorations.explorer_id
-    @explorer = Explorer.find_by id: @explorer_id
-    @explorer_last = @explorer.last_name
-    @explorer_user = @explorer.user_id
-    @explorer_name = User.find_by id: @explorer_user
-    @explorer_first = @explorer_name.first_name
-    
-    asking = @explorations.completions_required
+    asking = @problems.exploration.completions_required
     completed = ExplorationUser.where("completed IS NOT NULL").count
-
-    Rails.logger.debug("My asking #: #{asking.inspect}")
-    Rails.logger.debug("My completed #: #{completed.inspect}")
-    
-    @people = asking - completed
-    @completed = completed / asking
+    finished = @problems.exploration.end_date
 
     @time = Time.now
+    
+    @people = completed
+    @completed = (completed / asking).round
+    @days_left = ((finished - @time)/1.day).round  
+    
+    Rails.logger.debug("My finished #: #{finished.inspect}")
 
     @start = ExplorationUser.new
+    
+  end
+  
+  def update
     
   end
 end

@@ -9,9 +9,15 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require bootstrap
- *= require_tree .
+ *= require home
+ *= require input
+
+ *= require user
  */
 
-
+@import "surveyor";
+@import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap-social";
+@import "font-awesome-sprockets";
+@import "font-awesome";
