@@ -1,3 +1,24 @@
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap-social";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+
+.hidden {
+  display: none;
+}
+.show {
+  display: inline;
+}
+.button_to {
+  width: 100px;
+  float: left;
+}
+.intro-header {
+  height: 50px;
+}
 .box {
   background: #fff;
   border: 1px solid #e7e7e7;
@@ -94,6 +115,10 @@ label {
     font-size: 1.25em;
     width: 100%;
 }
+.inputButton2 {
+    font-size: 1.25em;
+    width: 100%;
+}
 .gray {
    color: #606060;
 }
@@ -115,3 +140,55 @@ label {
 .longButton {
   width: 100%;
 }
+
+.videoCenter {
+  
+}
+#introVideo {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+.buttonArea {
+  font-size: 1.25em;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.textArea {
+  min-height: 225px;
+  margin-left: 1em;
+}
+.specialFontSize {
+  font-size: 1.1em;
+}
+#surveyor {
+  background: #fff;
+}
+.survey_section {
+  .title {
+    display: none !important;
+  }
+}
+legend {
+  border: none;
+  margin-bottom: 0;
+}
+.q_default {
+  span {
+    font-size: 0.75em;
+    .qnum {
+      font-size: 1.1em;
+    }
+  }
+  ol {
+    padding-left: 1em !important;
+    margin-bottom: 0 !important;
+  }
+}
+.choice {
+  label {
+    color: #000;
+  }
+}
+  

@@ -1,0 +1,29 @@
+<div class="intro-header"></div>
+<div id="section wrap">
+	<%= render 'layouts/header' %> 
+	<div class="container mainBody">
+		<div class="row">
+			<div class="page-header">
+			  <h2>Step 7 of 8: Additional thoughts (optional)</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-5">
+				<camera id='jifive' data-app-id='a-c4599770-83f9-0132-1095-22000a8c0328' data-sources='record,upload' data-maxlength='300' style='width:480px;height:270px;' data-poll-for-processed='true'></camera>
+			</div>
+			<div class="col-sm-5">
+				<div class="row textArea">
+					<h5 class="specialFontSize">If you mentioned other annoyances related to drinking craft beer, how do you currently deal with those?</h5>
+					<h5 class="specialFontSize">Also, is there anything else we haven't touched on that you'd like to mention?</h5>
+				</div>
+				<div class="row buttonArea">
+					<form method="post" action="/surveys/craft-beer-demographics" accept-charset="UTF-8">
+						<input type="submit" value="Take me to the last step" name="commit" default="default" class="btn btn-success inputButton2">
+					</form>
+				</div>	
+			</div>
+			<div class="col-sm-1"></div>
+		</div>
+	</div>
+</div>

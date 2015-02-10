@@ -6,10 +6,14 @@ Code::Application.routes.draw do
 
   resources :users
   resources :exploration_users
-  
-  resources :home
+  resources :explorations
   
   root :to => 'home#index'
+  
+  post 'users/:id' => 'users#update'
+  get  "/problem/first" => 'problem#first', :as => 'step1', :path => "/first"
+  get  "/problem/second" => 'problem#second', :as => 'step2', :path => "/second"
+  post "/surveys/craft-beer-input" => 'surveyor#create', :as=> "craft_beer"
   
   post "/video_choice" => 'home#video_choice'
   post "/audio_choice" => 'home#audio_choice'

@@ -1,0 +1,24 @@
+<div class="intro-header"></div>
+<div id="section wrap">
+	<%= render 'layouts/header' %> 
+	<div class="container mainBody">
+		<div class="row">
+			<div class="page-header">
+			  <h2>Step 1 of 8: Intro</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-5">
+				<video id='introVideo' data-uuid='v-0051feb0-8418-0132-10ef-22000a8c0328'></video>
+			</div>
+			<div class="col-sm-5">
+				<div class="row textArea"></div>
+				<div class="row buttonArea">
+					<%= link_to "Take me to Step 2", step2_path, :method => "get", class: "btn btn-success inputButton2" %>
+				</div>	
+			</div>
+			<div class="col-sm-1"></div>
+		</div>
+	</div>
+</div>

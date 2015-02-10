@@ -1,0 +1,26 @@
+<div class="intro-header"></div>
+<div id="section wrap">
+	<%= render 'layouts/header' %> 
+	<div class="container mainBody">
+		<div class="row">
+			<div class="page-header">
+			  <h2>Step 4 of 8: Choosing a craft beer</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-5">
+				<camera id='jitwo' data-app-id='a-c4599770-83f9-0132-1095-22000a8c0328' data-sources='record,upload' data-maxlength='300' style='width:480px;height:270px;' data-poll-for-processed='true'></camera>
+			</div>
+			<div class="col-sm-5">
+				<div class="row textArea">
+					<h5 class="specialFontSize">Can you explain how you go about choosing a craft beer to drink? Do you find it complex or time consuming? If so, what’s your solution to help minimize that?</h5>
+				</div>
+				<div class="row buttonArea">
+					<%= link_to "Take me to Step 5", step5_path, :method => "get", class: "btn btn-success inputButton2", id: "step4Button", "disabled" =>"true" %>
+				</div>	
+			</div>
+			<div class="col-sm-1"></div>
+		</div>
+	</div>
+</div>

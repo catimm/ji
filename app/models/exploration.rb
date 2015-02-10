@@ -11,6 +11,8 @@
 #  explorer_id          :integer
 #  steps                :integer
 #  end_date             :datetime
+#  title                :string(255)
+#  description          :text
 #
 
 class Exploration < ActiveRecord::Base
@@ -19,4 +21,12 @@ class Exploration < ActiveRecord::Base
   has_many :exploration_users
   has_many :exploration_invitations
   has_many :problems
+  
+  def self.feedback_complete(id)
+    ExplorationUser.where(:exploration_id => id).where("completed IS NOT NULL").count
+  end
+  
+  def self.feedback_completed
+    ExplorationUser.where(:exploration_id => self.id).where("completed IS NOT NULL").count
+  end
 end

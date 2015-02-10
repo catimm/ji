@@ -1,0 +1,67 @@
+$(document).ready(function(){
+
+		CameraTag.observe('jione', "published", function(){			
+			myCamera = CameraTag.cameras['jione'];
+
+			var js_object = {
+			    camera: "jione", 
+			    user: gon.current_user
+			};
+			
+			myCamera.addVideoData(js_object);
+			
+			$("#step2Button").removeAttr('disabled');
+		});
+		
+		CameraTag.observe('jitwo', "published", function(){			
+			myCamera = CameraTag.cameras['jitwo'];
+
+			var js_object = {
+			    camera: "jitwo", 
+			    user: gon.current_user
+			};
+			
+			myCamera.addVideoData(js_object);
+			
+			$("#step4Button").removeAttr('disabled');
+		});
+		
+		CameraTag.observe('jithree', "published", function(){			
+			myCamera = CameraTag.cameras['jithree'];
+
+			var js_object = {
+			    camera: "jithree", 
+			    user: gon.current_user
+			};
+			
+			myCamera.addVideoData(js_object);
+			
+			$("#step5Button").removeAttr('disabled');
+		});
+		
+		CameraTag.observe('jifour', "published", function(){			
+			myCamera = CameraTag.cameras['jifour'];
+
+			var js_object = {
+			    camera: "jifour", 
+			    user: gon.current_user
+			};
+			
+			myCamera.addVideoData(js_object);
+			
+			$("#step5Button").removeAttr('disabled');
+		});
+		
+		CameraTag.observe('jifive', "published", function(){			
+			myCamera = CameraTag.cameras['jifive'];
+
+			var js_object = {
+			    camera: "jifive", 
+			    user: gon.current_user
+			};
+			
+			myCamera.addVideoData(js_object);
+
+		});
+		
+});

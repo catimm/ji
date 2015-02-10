@@ -10,7 +10,7 @@ class AuthenticationsController < ApplicationController
     omni2 = omni['extra']['raw_info']
      Rails.logger.debug("My omni2 object: #{omni2.inspect}")
 
-    if registered # this section logs in a user who has authenticated with LI before or will first add their LI info to the authentications table before logging in
+    if registered # this section logs in a user who has authenticated with LI before or for the first time will add their LI info to the authentications table before logging in
       authenticated = Authentication.find_by_user_id(registered.id)
       if authenticated
         sign_in_and_redirect User.find(registered.id)

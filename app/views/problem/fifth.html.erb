@@ -1,0 +1,26 @@
+<div class="intro-header"></div>
+<div id="section wrap">
+	<%= render 'layouts/header' %> 
+	<div class="container mainBody">
+		<div class="row">
+			<div class="page-header">
+			  <h2>Step 5 of 8: Finding a craft beer you like</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-5">
+				<camera id='jithree' data-app-id='a-c4599770-83f9-0132-1095-22000a8c0328' data-sources='record,upload' data-maxlength='300' style='width:480px;height:270px;' data-poll-for-processed='true'></camera>
+			</div>
+			<div class="col-sm-5">
+				<div class="row textArea">
+					<h5 class="specialFontSize">How often when you order/buy beer do you end up with something you like? Do you do anything to help make sure you are happy with your beer choice?  Why or why not?</h5>
+				</div>
+				<div class="row buttonArea">
+					<%= link_to "Take me to Step 6", step6_path, :method => "get", class: "btn btn-success inputButton2", id: "step5Button", "disabled" =>"true"  %>
+				</div>	
+			</div>
+			<div class="col-sm-1"></div>
+		</div>
+	</div>
+</div>

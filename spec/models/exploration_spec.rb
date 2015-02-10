@@ -11,6 +11,8 @@
 #  explorer_id          :integer
 #  steps                :integer
 #  end_date             :datetime
+#  title                :string(255)
+#  description          :text
 #
 
 require 'rails_helper'

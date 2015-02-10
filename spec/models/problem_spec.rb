@@ -4,8 +4,6 @@
 #
 #  id             :integer          not null, primary key
 #  exploration_id :integer
-#  title          :string(255)
-#  description    :text
 #  problem_one    :text
 #  problem_two    :text
 #  problem_three  :text
