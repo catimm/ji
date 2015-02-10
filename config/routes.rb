@@ -13,7 +13,11 @@ Code::Application.routes.draw do
   post 'users/:id' => 'users#update'
   get  "/problem/first" => 'problem#first', :as => 'step1', :path => "/first"
   get  "/problem/second" => 'problem#second', :as => 'step2', :path => "/second"
-  post "/surveys/craft-beer-input" => 'surveyor#create', :as=> "craft_beer"
+  get  "/problem/fourth" => 'problem#fourth', :as => 'step4', :path => "/fourth"
+  get  "/problem/fifth" => 'problem#fifth', :as => 'step5', :path => "/fifth"
+  get  "/problem/sixth" => 'problem#sixth', :as => 'step6', :path => "/sixth"
+  get  "/problem/seventh" => 'problem#seventh', :as => 'step7', :path => "/seventh"
+  get  "/problem/ninth" => 'problem#ninth', :as => 'step9', :path => "/pthanks"
   
   post "/video_choice" => 'home#video_choice'
   post "/audio_choice" => 'home#audio_choice'

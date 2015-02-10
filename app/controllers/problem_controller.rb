@@ -11,4 +11,18 @@ class ProblemController < ApplicationController
     Rails.logger.debug("Gon current user is: #{gon.current_user.inspect}")
   end
   
+  def fourth
+  end
+  
+  def fifth
+  end
+  
+  def sixth
+  end
+  
+  def seventh
+  end
+  
+  def ninth
+  end
 end
