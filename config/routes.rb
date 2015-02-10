@@ -19,15 +19,6 @@ Code::Application.routes.draw do
   get  "/problem/seventh" => 'problem#seventh', :as => 'step7', :path => "/seventh"
   get  "/problem/ninth" => 'problem#ninth', :as => 'step9', :path => "/pthanks"
   
-  post "/video_choice" => 'home#video_choice'
-  post "/audio_choice" => 'home#audio_choice'
-  post "/text_choice" => 'home#text_choice'
-  
-  get "/input" => 'input#first'
-  post "/first_input_response" => 'input#first_input_response'
-  
-  match '/video/new' => 'input#video_url', :via => [:post]
-  get "/input/view_video_info" => 'input#view_video_info'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
