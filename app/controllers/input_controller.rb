@@ -1,22 +1,6 @@
 class InputController < ApplicationController
   skip_before_filter :verify_authenticity_token
   
-  def action
-    @current_user = current_user
-    gon.current_user = @current_user
-  
-  end
-  
-  def first  
-   
-  end
-  
-  def first_input_response 
-    respond_to do |format|               
-      format.js 
-    end 
-  end
-  
   def video_url
     information = request.raw_post
     data_parsed = JSON.parse(information)
