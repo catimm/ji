@@ -1,11 +1,10 @@
 require 'surveyor/helpers/surveyor_helper_methods'
 module SurveyorHelper
   include Surveyor::Helpers::SurveyorHelperMethods
+
+     # Layout: stylsheets and javascripts
      def surveyor_includes
-        if asset_pipeline_enabled?
-          stylesheet_link_tag('surveyor_all') + javascript_include_tag('surveyor_all')
-        else
-          stylesheet_link_tag('surveyor/reset',
+         stylesheet_link_tag('surveyor/reset',
                               'surveyor/jquery-ui-1.10.0.custom',
                               'surveyor/jquery-ui-timepicker-addon',
                               'surveyor/ui.slider.extras',
@@ -18,7 +17,6 @@ module SurveyorHelper
                                   'surveyor/jquery.selectToUISlider',
                                   'surveyor/jquery.surveyor',
                                   'surveyor/jquery.maskedinput')
-        end
       end
      
      def next_section
