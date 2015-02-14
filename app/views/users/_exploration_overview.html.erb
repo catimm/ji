@@ -1,0 +1,76 @@
+<% @exploration_user.each do |d| %>
+	<div class="row explorationOverview">
+			<div class="col-sm-4">
+				<div class="packageLeft" style="background-image: url(<%= d.exploration.picture %>)"></div>
+			</div>
+			<div class="col-sm-8">
+					<div class="row explorationTitle">
+						<div class="col-sm-12">
+							<h3><%= d.exploration.title %></h3>
+						</div>
+					</div>
+					<div class="row explorationExplorer">
+						<div class="col-sm-3">
+							<h6 class="gray"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <%= d.exploration.explorer.user.first_name %> <%= d.exploration.explorer.last_name %></h6>
+						</div>
+						<div class="col-sm-3">
+							<h6 class="gray"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <%= d.exploration.explorer.city %>, <%= d.exploration.explorer.state %></h6>
+						</div>
+						<div class="col-sm-6"></div>
+					</div>
+					<div class="row explorationDescription">
+						<h5 class="gray"><%= d.exploration.description %></h5>
+					</div>
+					<div class="row explorationStats">
+						<div class="col-sm-2">
+							<h3><%= @completed %>%</h3>
+							<h6 class="gray">complete</h6>
+						</div>
+						<div class="col-sm-2">
+							<h3><%= @people %></h3>
+							<h6 class="gray">participants</h6>
+						</div>
+						<div class="col-sm-2">
+							<h3><%= @days_left %></h3>
+							<h6 class="gray">days to go</h6>                                                                         
+						</div>
+						<div class="col-sm-5 show" id="buttonDiv1">
+							<%= form_for @start, url: {action: "update"} do |f| %>
+								<%= f.hidden_field :id, value: d.id %>
+								<%= f.submit id: "originalButton", value: "Provide input", class: "btn btn-success inputButton" %>
+							<% end %>
+						</div>
+						<div class="col-sm-5 hidden" id="buttonDiv2">
+							<form method="post" action="/surveys/craft-beer-input" accept-charset="UTF-8">
+								<input type="submit" id="step2Button" value="Continue with Step 3" name="commit" default="default" class="btn btn-success inputButton">
+								<input type="hidden" name="exploration_users_id" value=<%= d.id %> >
+							</form>
+						</div>
+						<div class="col-sm-5 hidden" id="buttonDiv3">
+							<%= link_to "Continue with Step 4", step4_path, :method => "get", class: "btn btn-success inputButton", id: "step3Button" %>
+						</div>
+						<div class="col-sm-5 hidden" id="buttonDiv4">
+							<%= link_to "Continue with Step 5", step5_path, :method => "get", class: "btn btn-success inputButton", id: "step4Button" %>
+						</div>
+						<div class="col-sm-5 hidden" id="buttonDiv5">
+							<%= link_to "Continue with Step 6", step6_path, :method => "get", class: "btn btn-success inputButton", id: "step5Button" %>
+						</div>
+						<div class="col-sm-5 hidden" id="buttonDiv6">
+							<%= link_to "Continue with Step 7", step7_path, :method => "get", class: "btn btn-success inputButton", id: "step6Button" %>
+						</div>
+						<div class="col-sm-5 hidden" id="buttonDiv7">
+							<form method="post" action="/surveys/craft-beer-demographics" accept-charset="UTF-8">
+								<input type="submit" id="step7Button" value="Finish last step" name="commit" default="default" class="btn btn-success inputButton">
+								<input type="hidden" name="exploration_users_id" value=<%= d.id %> 
+							</form>
+						</div>
+						<div class="col-sm-5 hidden" id="buttonDiv8">
+							<%= link_to "Invite others", step9_path, :method => "get", class: "btn btn-success inputButton", id: "step8Button" %>
+						</div>
+						<div class="col-sm-1"></div>
+					</div>
+				
+			</div>
+			<div class="col-sm-0"></div>
+		</div> 
+<% end %>

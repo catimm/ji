@@ -20,6 +20,7 @@
 				<div class="row buttonArea">
 					<form method="post" action="/surveys/craft-beer-demographics" accept-charset="UTF-8">
 						<input type="submit" value="Take me to the last step" name="commit" default="default" class="btn btn-success inputButton2">
+						<input type="hidden" name="exploration_users_id" value=<%= @sessions_info %> >
 					</form>
 				</div>	
 			</div>

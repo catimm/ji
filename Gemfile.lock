@@ -84,7 +84,7 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     eventmachine (1.0.5)
-    excon (0.44.1)
+    excon (0.44.2)
     execjs (2.3.0)
     ffi (1.9.6-x86-mingw32)
     figaro (1.1.0)

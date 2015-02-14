@@ -1,0 +1,30 @@
+$(document).ready(function(){
+	console.log("status is "+gon.status);
+	
+	if(gon.status == 1) {
+		$("#originalButton").val("Continue");
+	} else if (gon.status == 2) {
+		$("#buttonDiv1").removeClass("show").addClass("hidden");
+		$("#buttonDiv2").removeClass("hidden").addClass("show");
+	} else if (gon.status == 3) {
+		$("#buttonDiv1").removeClass("show").addClass("hidden");
+		$("#buttonDiv3").removeClass("hidden").addClass("show");
+	} else if (gon.status == 4) {
+		$("#buttonDiv1").removeClass("show").addClass("hidden");
+		$("#buttonDiv4").removeClass("hidden").addClass("show");
+	} else if (gon.status == 5) {
+		$("#buttonDiv1").removeClass("show").addClass("hidden");
+		$("#buttonDiv5").removeClass("hidden").addClass("show");
+	} else if (gon.status == 6) {
+		$("#buttonDiv1").removeClass("show").addClass("hidden");
+		$("#buttonDiv6").removeClass("hidden").addClass("show");
+	} else if (gon.status == 7) {
+		$("#buttonDiv1").removeClass("show").addClass("hidden");
+		$("#buttonDiv7").removeClass("hidden").addClass("show");
+	} else {
+		$("#buttonDiv1").removeClass("show").addClass("hidden");
+		$("#buttonDiv8").removeClass("hidden").addClass("show");
+	} 
+	
+});	
+	

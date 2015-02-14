@@ -1,61 +1,55 @@
 class UsersController < ApplicationController
+  before_filter :authenticate_user!
+  
   def show
     require 'date'
-    
+    @start = ExplorationUser.new
     @exploration_user = ExplorationUser.where(user_id: current_user)
-
+    Rails.logger.debug("Explorat User is: #{@exploration_user.inspect}")
     if @exploration_user.nil?
       redirect_to nothing_path
     else
       @exploration_user.each do |d|
+        user_status = d.status
+        gon.status = user_status
+        Rails.logger.debug("User Status is: #{user_status.inspect}")
         @explorations = Exploration.where(id: d.exploration_id).all.to_a
-        Rails.logger.debug("Explorations are: #{@explorations.inspect}")
+
         @explorations.each do |g|
           @time = Time.now
           asking = g.completions_required.to_f
           @completed = ((g.exploration_users.count(:completed) / asking)*100).round
           @people = g.exploration_users.count(:started) 
           @days_left = ((g.end_date - @time)/1.day).round
-
-          Rails.logger.debug("asking is: #{asking.inspect}")
-          Rails.logger.debug("completed is: #{@completed.inspect}")
-          Rails.logger.debug("people is: #{@people.inspect}")
-          Rails.logger.debug("finished is: #{@days_left.inspect}")
-  
+        end
+      
+        if user_status > 0
+          respond_to do |format|               
+            format.html
           end
         end
+      end
     end   
-
-    @start = ExplorationUser.new
     
   end
   
   def update
     exploration_user = ExplorationUser.where(id: params[:id]).all.to_a
     Rails.logger.debug("Exploration_user is: #{exploration_user.inspect}")
+    
+    session[:exploration_users_id] = params[:id]
+    cookies[:exploration_users_id] = params[:id]
+    Rails.logger.debug("ExUsID is: #{session[:exploration_users_id].inspect}")
+    Rails.logger.debug("CookID is: #{cookies[:exploration_users_id].inspect}")
     status = exploration_user.first.status
+    gon.status = status
     Rails.logger.debug("Status is: #{status.inspect}")
     if status == 0
       time = Time.now
-      ExplorationUser.update(params[:id], :status => '1', :started => time)
+      ExplorationUser.update(params[:id], :started => time)
       redirect_to step1_path
-    elsif status == 1
-      ExplorationUser.update(params[:id], :status => '2')
-    elsif status == 2
-      ExplorationUser.update(params[:id], :status => '3')
-    elsif status == 3
-      ExplorationUser.update(params[:id], :status => '4')
-    elsif status == 4
-      ExplorationUser.update(params[:id], :status => '5')
-    elsif status == 5
-      ExplorationUser.update(params[:id], :status => '6')
-    elsif status == 6
-      ExplorationUser.update(params[:id], :status => '7')
-    elsif status == 7        
-      ExplorationUser.update(params[:id], :status => '8')
-    else  
-      render :file => "public/404", :status => 404
+    else 
+      redirect_to step1_path
     end
-
   end
 end

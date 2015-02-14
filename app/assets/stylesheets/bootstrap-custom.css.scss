@@ -119,6 +119,32 @@ label {
     font-size: 1.25em;
     width: 100%;
 }
+.inputButton3 {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  font-size: 1.5em !important;
+  font-weight: 500 !important;
+  width: 100% !important;
+  background-color: #5cb85c !important;
+  border-color: #4cae4c !important;
+  color: #fff !important;
+  -moz-user-select: none !important;
+  background-image: none !important;
+  border: 1px solid transparent !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  display: inline-block !important;
+  line-height: 1.42857 !important;
+  margin-bottom: 0 !important;
+  padding: 8px 12px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+}
+.next_section {
+  width: 26.14em;
+  margin-right: 3.4em;
+  margin-bottom: 3em;
+}
 .gray {
    color: #606060;
 }
@@ -157,6 +183,10 @@ label {
 }
 .textArea {
   min-height: 225px;
+  margin-left: 1em;
+}
+.textAreaThanks {
+  min-height: 94px;
   margin-left: 1em;
 }
 .specialFontSize {

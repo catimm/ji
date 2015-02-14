@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-		CameraTag.observe('jione', "published", function(){			
+		CameraTag.observe('jione', "initialized", function(){			
 			myCamera = CameraTag.cameras['jione'];
 
 			var js_object = {
@@ -13,7 +13,7 @@ $(document).ready(function(){
 			$("#step2Button").removeAttr('disabled');
 		});
 		
-		CameraTag.observe('jitwo', "published", function(){			
+		CameraTag.observe('jitwo', "initialized", function(){			
 			myCamera = CameraTag.cameras['jitwo'];
 
 			var js_object = {
@@ -26,7 +26,7 @@ $(document).ready(function(){
 			$("#step4Button").removeAttr('disabled');
 		});
 		
-		CameraTag.observe('jithree', "published", function(){			
+		CameraTag.observe('jithree', "initialized", function(){			
 			myCamera = CameraTag.cameras['jithree'];
 
 			var js_object = {
@@ -39,7 +39,7 @@ $(document).ready(function(){
 			$("#step5Button").removeAttr('disabled');
 		});
 		
-		CameraTag.observe('jifour', "published", function(){			
+		CameraTag.observe('jifour', "initialized", function(){			
 			myCamera = CameraTag.cameras['jifour'];
 
 			var js_object = {
@@ -49,10 +49,10 @@ $(document).ready(function(){
 			
 			myCamera.addVideoData(js_object);
 			
-			$("#step5Button").removeAttr('disabled');
+			$("#step6Button").removeAttr('disabled');
 		});
 		
-		CameraTag.observe('jifive', "published", function(){			
+		CameraTag.observe('jifive', "initialized", function(){			
 			myCamera = CameraTag.cameras['jifive'];
 
 			var js_object = {

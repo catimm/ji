@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
       render :status => 401, :json => {:success => false, :errors => ["Unauthorized access"] }
     end
   end
-  
+
   
   def after_sign_in_path_for(resource)
     @user = current_user

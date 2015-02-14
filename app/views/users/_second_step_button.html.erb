@@ -1,0 +1,4 @@
+<%= form_for @start, url: {action: "/surveys/craft-beer-input"} do |f| %>
+	<%= f.hidden_field :id, value: d.id %>
+	<%= f.submit id: "originalButton", value: "Provide input", class: "btn btn-success inputButton" %>
+<% end %>
