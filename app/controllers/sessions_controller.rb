@@ -19,6 +19,6 @@ class SessionsController < Devise::SessionsController
   end
 
   def failure
-    render :status => 401, :json => {:success => false, :errors => ["Login failed"] }
+    redirect_to new_user_registration_path, :json => {:success => false, :errors => ["Login failed. Please sign up!"] }
   end
 end
