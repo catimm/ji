@@ -23,7 +23,7 @@ class UsersController < ApplicationController
           @days_left = ((g.end_date - @time)/1.day).round
         end
       
-        if user_status > 0
+        if user_status >= 1
           respond_to do |format|               
             format.html
           end

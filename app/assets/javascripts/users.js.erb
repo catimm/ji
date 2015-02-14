@@ -1,9 +1,11 @@
 $(document).ready(function(){
 	console.log("status is "+gon.status);
 	
-	if(gon.status == 1) {
+	if(gon.status == 0) {
+		$("#buttonDiv1").removeClass("hidden").addClass("show");
+	} else if (gon.status == 1) {
 		$("#originalButton").val("Continue");
-	} else if (gon.status == 2) {
+	}else if (gon.status == 2) {
 		$("#buttonDiv1").removeClass("show").addClass("hidden");
 		$("#buttonDiv2").removeClass("hidden").addClass("show");
 	} else if (gon.status == 3) {
