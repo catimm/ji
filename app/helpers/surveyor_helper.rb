@@ -1,23 +1,6 @@
 require 'surveyor/helpers/surveyor_helper_methods'
 module SurveyorHelper
   include Surveyor::Helpers::SurveyorHelperMethods
-
-     # Layout: stylsheets and javascripts
-     def surveyor_includes
-         stylesheet_link_tag('surveyor/reset',
-                              'surveyor/jquery-ui-1.10.0.custom',
-                              'surveyor/jquery-ui-timepicker-addon',
-                              'surveyor/ui.slider.extras',
-                              'surveyor/results',
-                              'surveyor',
-                              'bootstrap-custom') +
-          javascript_include_tag('surveyor/jquery-1.9.0',
-                                  'surveyor/jquery-ui-1.10.0.custom',
-                                  'surveyor/jquery-ui-timepicker-addon',
-                                  'surveyor/jquery.selectToUISlider',
-                                  'surveyor/jquery.surveyor',
-                                  'surveyor/jquery.maskedinput')
-      end
      
      def next_section
         # use copy in memory instead of making extra db calls
