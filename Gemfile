@@ -32,6 +32,7 @@ gem 'jquery-ui-rails'
 gem 'json'
 gem 'annotate'
 gem 'devise'
+gem 'devise_invitable'
 gem 'omniauth'
 gem 'omniauth-linkedin'
 gem 'figaro'
@@ -48,7 +49,7 @@ gem 'rest-client'
 gem 'surveyor', '~> 1.4.0', github: 'NUBIC/surveyor'
 gem 'tzinfo-data' 
 gem "Ziggeo", :git => "https://github.com/Ziggeo/ZiggeoRubySdk.git"
-gem 'mandrill-api'
+gem 'mandrill-api', require: "mandrill"
 gem 'gon'
 gem 'font-awesome-sass', '~> 4.3.0'
 

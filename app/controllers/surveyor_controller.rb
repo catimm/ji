@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 module SurveyorControllerCustomMethods
+  before_filter :authenticate_user!
   
   def self.included(base)
     # base.send :before_filter, :require_user   # AuthLogic
@@ -38,7 +39,7 @@ module SurveyorControllerCustomMethods
       @button_title = "surveyor.step3"
     end
     if step_title == "craft-beer-demographics"
-      @step = "Step 7 of 8: Your background"
+      @step = "Step 7 of 8: About you"
       @button_title = "surveyor.step7"
     end
     super

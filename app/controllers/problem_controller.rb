@@ -1,5 +1,6 @@
 class ProblemController < ApplicationController
-
+  before_filter :authenticate_user!
+  
   def first
     
   end

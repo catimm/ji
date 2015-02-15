@@ -166,6 +166,10 @@ label {
 .longButton {
   width: 100%;
 }
+.longButton2 {
+  width: 100%;
+  margin-bottom: 2em;
+}
 
 .videoCenter {
   
@@ -190,7 +194,7 @@ label {
   margin-left: 1em;
 }
 .specialFontSize {
-  font-size: 1.1em;
+  font-size: 1.15em;
 }
 .specialFontSize.intro {
   margin-left: 1.75em;
@@ -224,4 +228,6 @@ legend {
     color: #000;
   }
 }
-  
+#flash_notice {
+  margin-bottom: 0.5em;
+}  

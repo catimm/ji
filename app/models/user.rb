@@ -4,7 +4,7 @@
 #
 #  id                     :integer          not null, primary key
 #  email                  :string(255)      default(""), not null
-#  encrypted_password     :string(255)      default(""), not null
+#  encrypted_password     :string(255)      default("")
 #  reset_password_token   :string(255)
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
@@ -16,13 +16,23 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  first_name             :string(255)
+#  invitation_token       :string(255)
+#  invitation_created_at  :datetime
+#  invitation_sent_at     :datetime
+#  invitation_accepted_at :datetime
+#  invitation_limit       :integer
+#  invited_by_id          :integer
+#  invited_by_type        :string(255)
+#  invitations_count      :integer          default(0)
 #
 
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+         
+  after_create :send_welcome_email 
          
   has_many :authentications
   has_many :videos
@@ -50,4 +60,7 @@ class User < ActiveRecord::Base
     (authentications.empty? || !password.blank?) && super
   end
   
+  def send_welcome_email
+    UserMailer.welcome_email(self).deliver
+  end
 end
