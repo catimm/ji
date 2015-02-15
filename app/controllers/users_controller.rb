@@ -4,11 +4,18 @@ class UsersController < ApplicationController
   def show
     require 'date'
     @start = ExplorationUser.new
-    @exploration_user = ExplorationUser.where(user_id: current_user)
-    Rails.logger.debug("Explorat User is: #{@exploration_user.inspect}")
-    if @exploration_user.nil?
-      redirect_to nothing_path
-    else
+    
+    exploration_ids = Exploration.all.map(& :id)
+    Rails.logger.debug("Exploration IDs are: #{exploration_ids.inspect}")
+    @exploration_user_ids = ExplorationUser.where(user_id: current_user).pluck(:exploration_id)
+    Rails.logger.debug("Exploration User IDs are: #{@exploration_user_ids.inspect}")
+    @unexplored_exploration_ids = exploration_ids - @exploration_user_ids
+    Rails.logger.debug("Remaining IDs are: #{@unexplored_exploration_ids.inspect}")
+    
+    if !@exploration_user_ids.empty?
+      @exploration_user = ExplorationUser.where(user_id: current_user)
+      Rails.logger.debug("Explorat User is: #{@exploration_user.inspect}")
+
       @exploration_user.each do |d|
         user_status = d.status
         gon.status = user_status
@@ -31,25 +38,48 @@ class UsersController < ApplicationController
       end
     end   
     
+    if !@unexplored_exploration_ids.empty?
+      @unexplored_explorations = Exploration.where(id: @unexplored_exploration_ids)
+      Rails.logger.debug("Unexplored Explorations are: #{@unexplored_explorations.inspect}")
+    
+      @unexplored_explorations.each do |b|
+        @time = Time.now
+        asking = b.completions_required.to_f
+        @completed = ((b.exploration_users.count(:completed) / asking)*100).round
+        @people = b.exploration_users.count(:started) 
+        @days_left = ((b.end_date - @time)/1.day).round
+      end
+    end
+    
   end
   
   def update
-    exploration_user = ExplorationUser.where(id: params[:id]).all.to_a
-    Rails.logger.debug("Exploration_user is: #{exploration_user.inspect}")
+    if params[:commit] == "I'm interested!"
+      new_exploration_user = ExplorationUser.new(:exploration_id => params[:exploration_user][:exploration_id], :user_id => current_user.id, :status => 0)
     
-    session[:exploration_users_id] = params[:id]
-    cookies[:exploration_users_id] = params[:id]
-    Rails.logger.debug("ExUsID is: #{session[:exploration_users_id].inspect}")
-    Rails.logger.debug("CookID is: #{cookies[:exploration_users_id].inspect}")
-    status = exploration_user.first.status
-    gon.status = status
-    Rails.logger.debug("Status is: #{status.inspect}")
-    if status == 0
-      time = Time.now
-      ExplorationUser.update(params[:id], :started => time)
-      redirect_to step1_path
-    else 
-      redirect_to step1_path
+      if new_exploration_user.save
+        redirect_to user_session_path
+      end
+    else
+      exploration_user = ExplorationUser.where(id: params[:exploration_user][:id]).all.to_a
+      Rails.logger.debug("Exploration_user is: #{exploration_user.inspect}")
+      
+      session[:exploration_users_id] = params[:id]
+      cookies[:exploration_users_id] = params[:id]
+      Rails.logger.debug("ExUsID is: #{session[:exploration_users_id].inspect}")
+      Rails.logger.debug("CookID is: #{cookies[:exploration_users_id].inspect}")
+      status = exploration_user.first.status
+      gon.status = status
+      Rails.logger.debug("Status is: #{status.inspect}")
+      if status == 0
+        time = Time.now
+        ExplorationUser.update(params[:exploration_user][:id], :started => time)
+        redirect_to step1_path
+      else 
+        redirect_to step1_path
+      end
     end
+    
   end
+
 end

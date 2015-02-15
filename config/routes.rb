@@ -10,7 +10,9 @@ Code::Application.routes.draw do
   
   root :to => 'home#index'
   
+
   post 'users/:id' => 'users#update'
+  post 'users/new' => 'users#update'
   get  "/problem/first" => 'problem#first', :as => 'step1', :path => "/first"
   get  "/problem/second" => 'problem#second', :as => 'step2', :path => "/second"
   match "/surveys/craft-beer-input" => 'surveyor#create', :via => [:post], :as => 'craft_beer_input'

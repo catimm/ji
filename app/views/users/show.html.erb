@@ -10,9 +10,28 @@
 		<div class="row">
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10">
-				<%= render 'exploration_overview' %>
+				<% if !@exploration_user_ids.empty? %>
+					<%= render 'exploration_overview' %>
+				<% end %>
+				<% if @exploration_user_ids.empty? %>
+					<h3>You haven't chosen any interests yet! Choose an opportunity below to get started.</h3>
+				<% end %>
 			</div>
 			<div class="col-sm-1"></div>
 		</div>
+		<% if !@unexplored_exploration_ids.empty? %>
+			<div class="row moreOppty">
+				<div class="page-header">
+				  <h2>More opportunities</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-1"></div>
+				<div class="col-sm-10">
+					<%= render 'opportunity_overview' %>
+				</div>
+				<div class="col-sm-1"></div>
+			</div>
+		<% end %>
 	</div>
 </div>
