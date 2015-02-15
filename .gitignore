@@ -11,3 +11,4 @@
 log/
 tmp/
 .env
+config/application.yml
