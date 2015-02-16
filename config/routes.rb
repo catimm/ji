@@ -9,7 +9,7 @@ Code::Application.routes.draw do
   resources :explorations
   
   root :to => 'home#index'
-  
+  get 'input/record' => 'input#record', :as => 'record', :path => "/record"
 
   post 'users/:id' => 'users#update'
   post 'users/new' => 'users#update'

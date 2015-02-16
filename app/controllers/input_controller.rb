@@ -15,4 +15,8 @@ class InputController < ApplicationController
   def view_video_info
     @video = Video.find(1)
   end
+  
+  def record
+    
+  end
 end
