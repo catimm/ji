@@ -18,14 +18,23 @@ class ProblemController < ApplicationController
   end
   
   def fourth
+    if session[:exploration_users_id].nil?
+      session[:exploration_users_id] = params[:exploration_user][:id]
+    end
     ExplorationUser.update(session[:exploration_users_id], :status => '3')
   end
   
   def fifth
+    if session[:exploration_users_id].nil?
+      session[:exploration_users_id] = params[:exploration_user][:id]
+    end
     ExplorationUser.update(session[:exploration_users_id], :status => '4')
   end
   
   def sixth
+    if session[:exploration_users_id].nil?
+      session[:exploration_users_id] = params[:exploration_user][:id]
+    end
     ExplorationUser.update(session[:exploration_users_id], :status => '5')
   end
   
@@ -36,6 +45,9 @@ class ProblemController < ApplicationController
   
   def ninth
     time = Time.now
+    if session[:exploration_users_id].nil?
+      session[:exploration_users_id] = params[:exploration_user][:id]
+    end
     ExplorationUser.update(session[:exploration_users_id], :status => '8', :completed => time)
   end
 end

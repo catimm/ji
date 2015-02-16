@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def show
     require 'date'
     @start = ExplorationUser.new
+    @new = Exploration.new
     
     exploration_ids = Exploration.all.map(& :id)
     Rails.logger.debug("Exploration IDs are: #{exploration_ids.inspect}")
@@ -64,8 +65,8 @@ class UsersController < ApplicationController
       exploration_user = ExplorationUser.where(id: params[:exploration_user][:id]).all.to_a
       Rails.logger.debug("Exploration_user is: #{exploration_user.inspect}")
       
-      session[:exploration_users_id] = params[:id]
-      cookies[:exploration_users_id] = params[:id]
+      session[:exploration_users_id] = params[:exploration_user][:id]
+      cookies[:exploration_users_id] = params[:exploration_user][:id]
       Rails.logger.debug("ExUsID is: #{session[:exploration_users_id].inspect}")
       Rails.logger.debug("CookID is: #{cookies[:exploration_users_id].inspect}")
       status = exploration_user.first.status
@@ -82,4 +83,7 @@ class UsersController < ApplicationController
     
   end
 
+  def invite
+    User.invite!({:email => "new_user@example.com"}, current_user)
+  end
 end

@@ -27,12 +27,15 @@
 #
 
 class User < ActiveRecord::Base
+  after_create :send_welcome_email
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
          
-  after_create :send_welcome_email 
+  
+  after_invitation_accepted :send_welcome_email
          
   has_many :authentications
   has_many :videos
@@ -61,6 +64,9 @@ class User < ActiveRecord::Base
   end
   
   def send_welcome_email
-    UserMailer.welcome_email(self).deliver
+    if sign_in_count == 1 || invitation_accepted_at?
+      UserMailer.welcome_email(self).deliver
+    end
   end
+  
 end

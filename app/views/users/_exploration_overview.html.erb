@@ -47,25 +47,40 @@
 							</form>
 						</div>
 						<div class="col-sm-5 hidden" id="buttonDiv3">
-							<%= link_to "Continue with Step 4", step4_path, :method => "get", class: "btn btn-success inputButton", id: "step3Button" %>
+							<%= form_for @start, url: { :controller => "problem", :action => "fourth" } do |f| %>
+								<%= f.hidden_field :id, value: d.id %>
+								<%= f.submit id: "step3Button", value: "Continue with Step 4", class: "btn btn-success inputButton" %>
+							<% end %>
 						</div>
 						<div class="col-sm-5 hidden" id="buttonDiv4">
-							<%= link_to "Continue with Step 5", step5_path, :method => "get", class: "btn btn-success inputButton", id: "step4Button" %>
+							<%= form_for @start, url: { :controller => "problem", :action => "fifth" } do |f| %>
+								<%= f.hidden_field :id, value: d.id %>
+								<%= f.submit id: "step4Button", value: "Continue with Step 5", class: "btn btn-success inputButton" %>
+							<% end %>
 						</div>
 						<div class="col-sm-5 hidden" id="buttonDiv5">
-							<%= link_to "Continue with Step 6", step6_path, :method => "get", class: "btn btn-success inputButton", id: "step5Button" %>
+							<%= form_for @start, url: { :controller => "problem", :action => "sixth" } do |f| %>
+								<%= f.hidden_field :id, value: d.id %>
+								<%= f.submit id: "step5Button", value: "Continue with Step 6", class: "btn btn-success inputButton" %>
+							<% end %>
 						</div>
 						<div class="col-sm-5 hidden" id="buttonDiv6">
-							<%= link_to "Continue with Step 7", step7_path, :method => "get", class: "btn btn-success inputButton", id: "step6Button" %>
+							<%= form_for @start, url: { :controller => "problem", :action => "seventh" } do |f| %>
+								<%= f.hidden_field :id, value: d.id %>
+								<%= f.submit id: "step6Button", value: "Continue with Step 7", class: "btn btn-success inputButton" %>
+							<% end %>
 						</div>
 						<div class="col-sm-5 hidden" id="buttonDiv7">
 							<form method="post" action="/surveys/craft-beer-demographics" accept-charset="UTF-8">
 								<input type="submit" id="step7Button" value="Finish last step" name="commit" default="default" class="btn btn-success inputButton">
-								<input type="hidden" name="exploration_users_id" value=<%= d.id %> 
+								<input type="hidden" name="exploration_users_id" value=<%= d.id %> >
 							</form>
 						</div>
 						<div class="col-sm-5 hidden" id="buttonDiv8">
-							<%= link_to "Invite others", step9_path, :method => "get", class: "btn btn-success inputButton", id: "step8Button" %>
+							<%= form_for @new, url: new_user_invitation_path, method: :get  do |f| %>
+								<%= f.hidden_field :invited_for_exploration_id, value: d.exploration.id %>
+								<%= f.submit id: "inviteButton", value: "Invite others", class: "btn btn-success inputButton" %>
+							<% end %>
 						</div>
 						<div class="col-sm-1"></div>
 					</div>

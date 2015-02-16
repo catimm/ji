@@ -2,7 +2,7 @@ Code::Application.routes.draw do
   mount Surveyor::Engine => "/surveys", :as => "surveyor"
   
   devise_for :users, path_names: { sign_in: "login", sign_out: "logout", sign_up: "register" },
-  controllers: { omniauth_callbacks: "authentications", registrations: "registrations"  }
+  controllers: { omniauth_callbacks: "authentications", registrations: "registrations", invitations: "invitations"  }
 
   resources :users
   resources :exploration_users
@@ -21,8 +21,9 @@ Code::Application.routes.draw do
   get  "/problem/sixth" => 'problem#sixth', :as => 'step6', :path => "/sixth"
   get  "/problem/seventh" => 'problem#seventh', :as => 'step7', :path => "/seventh"
   match "/surveys/craft-beer-demographics" => 'surveyor#create', :via => [:post], :as => 'craft_beer_demographics'
-  get  "/problem/ninth" => 'problem#ninth', :as => 'step9', :path => "/pthanks"
-  
+  post  "/problem/ninth" => 'problem#ninth', :as => 'step9', :path => "/pthanks"
+  get   "/devise/invitations/new"
+    
   match '/video/new' => 'input#video_url', :via => [:post]
   get "/input/view_video_info" => 'input#view_video_info'
   

@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :first_name
+    devise_parameter_sanitizer.for(:invite) << :first_name
+    devise_parameter_sanitizer.for(:invite) << :invited_for_exploration_id
+    devise_parameter_sanitizer.for(:accept_invitation) << :first_name
+    devise_parameter_sanitizer.for(:accept_invitation) << :invited_for_exploration_id
   end
 
   
@@ -30,5 +34,6 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     @user = current_user
   end
+
   
 end
