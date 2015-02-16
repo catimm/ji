@@ -15,8 +15,12 @@ module SurveyorControllerCustomMethods
   end
   def create
     exploration_user_id = params[:exploration_users_id]
-    exploration_user = ExplorationUser.where(id: exploration_user_id).all.to_a
-    status = exploration_user.first.status
+    if session[:exploration_users_id].nil?
+      cookies[:exploration_users_id] = exploration_user_id
+    end
+    
+    exploration_user = ExplorationUser.where(id: exploration_user_id).pluck(:status)
+    status = exploration_user[0]
 
     if status == 1
       ExplorationUser.update(exploration_user_id, :status => '2')
@@ -25,8 +29,24 @@ module SurveyorControllerCustomMethods
     if status == 6
       ExplorationUser.update(exploration_user_id, :status => '7')
     end
-    Rails.logger.debug("Step is: #{@step.inspect}")
-    super
+    
+    surveys = Survey.where(:access_code => params[:survey_code]).order("survey_version DESC")
+      if params[:survey_version].blank?
+        @survey = surveys.first
+      else
+        @survey = surveys.where(:survey_version => params[:survey_version]).first
+      end
+      @response_set = ResponseSet.
+        create(:survey => @survey, :user_id => exploration_user_id) #using exploration_user_id instead of user_id, but exploration_user_id has the user_id
+      if (@survey && @response_set)
+        flash[:notice] = t('surveyor.survey_started_success')
+        redirect_to(surveyor.edit_my_survey_path(
+          :survey_code => @survey.access_code, :response_set_code  => @response_set.access_code))
+      else
+        flash[:notice] = t('surveyor.Unable_to_find_that_survey')
+        redirect_to surveyor_index
+      end
+
   end
   def show
     super
@@ -44,6 +64,7 @@ module SurveyorControllerCustomMethods
     super
   end
   def update
+    Rails.logger.debug("Surveyor Initial Update Sesssion is: #{session[:exploration_users_id].inspect}")
     step_title = params[:survey_code]
     if step_title == "craft-beer-input"
       session[:finish_path] = step4_path
@@ -52,6 +73,8 @@ module SurveyorControllerCustomMethods
       session[:finish_path] = step9_path
     end
     super
+    response_set = ResponseSet.where(access_code: params[:response_set_code]).pluck(:user_id)
+    session[:exploration_users_id] = response_set[0]
   end
 
   # Paths

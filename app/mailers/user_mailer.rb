@@ -1,6 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "welcome@ji.com"
-  
+
   def mandrill_client
     @mandrill_client ||= Mandrill::API.new ENV['MANDRILL_APIKEY']
   end
@@ -19,5 +18,5 @@ class UserMailer < ActionMailer::Base
       ]
     }
     mandrill_client.messages.send_template template_name, template_content, message
-  end
+  end  
 end

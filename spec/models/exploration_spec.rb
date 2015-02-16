@@ -13,6 +13,7 @@
 #  end_date             :datetime
 #  title                :string(255)
 #  description          :text
+#  short_description    :string(255)
 #
 
 require 'rails_helper'

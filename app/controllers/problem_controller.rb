@@ -48,6 +48,11 @@ class ProblemController < ApplicationController
     if session[:exploration_users_id].nil?
       session[:exploration_users_id] = params[:exploration_user][:id]
     end
+    
     ExplorationUser.update(session[:exploration_users_id], :status => '8', :completed => time)
+    exploration_id = ExplorationUser.where(id: session[:exploration_users_id]).pluck(:exploration_id)
+    @sessions_info = exploration_id[0]
+    @new = Exploration.new
+    
   end
 end

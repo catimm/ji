@@ -21,7 +21,7 @@ Code::Application.routes.draw do
   get  "/problem/sixth" => 'problem#sixth', :as => 'step6', :path => "/sixth"
   get  "/problem/seventh" => 'problem#seventh', :as => 'step7', :path => "/seventh"
   match "/surveys/craft-beer-demographics" => 'surveyor#create', :via => [:post], :as => 'craft_beer_demographics'
-  post  "/problem/ninth" => 'problem#ninth', :as => 'step9', :path => "/pthanks"
+  get  "/problem/ninth" => 'problem#ninth', :as => 'step9', :path => "/pthanks"
   get   "/devise/invitations/new"
     
   match '/video/new' => 'input#video_url', :via => [:post]

@@ -16,7 +16,10 @@
 			<div class="col-sm-5">
 				<div class="row textAreaThanks"></div>
 				<div class="row buttonArea">
-					<%= link_to "Invite others", new_user_invitation_path, :method => "get", class: "btn btn-success inputButton" %>
+					<%= form_for @new, url: new_user_invitation_path, method: :get  do |f| %>
+						<%= f.hidden_field :invited_for_exploration_id, value: @sessions_info %>
+						<%= f.submit id: "inviteButton", value: "Invite others", class: "btn btn-success inputButton" %>
+					<% end %>
 				</div>
 			</div>
 			<div class="col-sm-1"></div>
