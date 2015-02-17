@@ -7,11 +7,23 @@ class InvitationsController < Devise::InvitationsController
   end
   
   def create
-    super
+    description = Exploration.where(id: session[:exploration_id]).pluck(:short_description)
+    short_description = description[0]
+    @invited_user = User.invite!(invite_params, current_inviter) do |u|
+      # Skip sending the default Devise Invitable e-mail
+      u.skip_invitation = true
+    end
+
+    # Set the value for :invitation_sent_at because we skip calling the Devise Invitable method deliver_invitation which normally sets this value
+    @invited_user.update_attribute :invitation_sent_at, Time.now.utc unless @invited_user.invitation_sent_at
+    # Use our own mailer to send the invitation e-mail
+    UserMailer.invite_email(@invited_user, current_user, short_description).deliver
+    
     invited_user_email = params[:user][:email]
     invited_user_id = User.where(email: invited_user_email).pluck(:id)
     User.update(invited_user_id[0], invited_for_exploration_id: session[:exploration_id]) 
 
+    redirect_to user_session_path
   end
   
   def update

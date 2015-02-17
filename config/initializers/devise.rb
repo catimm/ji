@@ -2,7 +2,7 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
   # Set up for LinkedIn Omniauth
-  config.omniauth :linkedin, "77i4mg1pljcg9n", "Zo9KuQJp0Em8TT6M"
+  config.omniauth :linkedin, ENV['LINKEDIN_KEY'], ENV['Zo9KuQJp0Em8TT6M']
 
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
@@ -15,7 +15,7 @@ Devise.setup do |config|
   config.mailer_sender = 'hello@ji.com'
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'UserMailer'
+  config.mailer = 'UserMailer'
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
