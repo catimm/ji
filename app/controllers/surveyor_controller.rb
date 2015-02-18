@@ -14,13 +14,14 @@ module SurveyorControllerCustomMethods
     # @title = "You can take these surveys"
   end
   def create
+    # Keep the status updated in ExplorationUser
     exploration_user_id = params[:exploration_users_id]
     if session[:exploration_users_id].nil?
       cookies[:exploration_users_id] = exploration_user_id
     end
     
-    exploration_user = ExplorationUser.where(id: exploration_user_id).pluck(:status)
-    status = exploration_user[0]
+    exploration_user = ExplorationUser.where(id: exploration_user_id).all.to_a
+    status = exploration_user.first.status
 
     if status == 1
       ExplorationUser.update(exploration_user_id, :status => '2')
@@ -30,6 +31,20 @@ module SurveyorControllerCustomMethods
       ExplorationUser.update(exploration_user_id, :status => '7')
     end
     
+    # Insert written input if any exists
+    if !params[:textInputArea].nil?
+      exploration_id = exploration_user.first.exploration_id
+      user_id = exploration_user.first.user_id
+      Rails.logger.debug("THIS User ID is: #{user_id.inspect}")
+      Rails.logger.debug("THIS Exploration ID is: #{exploration_id.inspect}")
+      Rails.logger.debug("THIS Text Input is: #{params[:textInputArea].inspect}")
+      Rails.logger.debug("THIS Step is: #{params[:step].inspect}")
+      new_input = WrittenInput.new(:user_id => user_id, :exploration_id => exploration_id, :written_input => params[:textInputArea], :step => params[:step])
+      new_input.save!
+    
+    end
+    
+    # Original code from Surveyor
     surveys = Survey.where(:access_code => params[:survey_code]).order("survey_version DESC")
       if params[:survey_version].blank?
         @survey = surveys.first

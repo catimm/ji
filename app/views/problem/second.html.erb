@@ -7,11 +7,13 @@
 			  <h2>Step 2 of 8: Your initial thoughts</h2>
 			</div>
 		</div>
+		<form method="post" action="/surveys/craft-beer-input" accept-charset="UTF-8">
 		<div class="row">
 			<div class="col-sm-1"></div>
 			<div class="col-sm-5">
-				<div class="row">
-					<camera id='jione' data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' style='width:480px;height:270px;' data-poll-for-processed='true'></camera>
+				<div class="row inputArea">
+					<camera class="show" id='jione' data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' style='width:480px;height:270px;' data-poll-for-processed='true'></camera>
+					<input type="text" name="textInputArea" id="textInputArea2" class="textInputArea hidden" placeholder="Type input here">
 				</div>
 				<div class="row">
 					<h6 class="emailContact">Questions? Email me: ctiv@hotmail.com</h6>
@@ -19,7 +21,7 @@
 			</div>
 			<div class="col-sm-5">
 				<div class="row textArea">
-					<h5 class="specialFontSize">Here's what we're claiming:</h5>
+					<h5 class="specialFontSize">Here's what we think:</h5>
 					<% @problems.each do |d| %>
 					<ul>
 						<li class="specialFontSize"><%= d.problem_one %></li>
@@ -27,16 +29,18 @@
 						<li class="specialFontSize"><%= d.problem_three %></li>
 					</ul>
 					<% end %>
-					<h5 class="specialFontSize">Does any of this resonate with you? Please use the webcam to share your thoughts.</h5>
+					<h5 class="specialFontSize">Does any of this resonate with you? Please use the webcam to share your thoughts. <span id="noWebcam" class="noWebcam two">(<span>Wait! I don't have a webcam...</span>)</span></h5>
 				</div>
 				<div class="row buttonArea">
-					<form method="post" action="/surveys/craft-beer-input" accept-charset="UTF-8">
+
 						<input type="submit" id="step2Button" disabled="true" value="Take me to Step 3" name="commit" default="default" class="btn btn-success inputButton2">
 						<input type="hidden" name="exploration_users_id" value=<%= @sessions_info %> >
-					</form>
+						<input type="hidden" name="step" value=2 >
+					
 				</div>	
 			</div>
 			<div class="col-sm-1"></div>
 		</div>
+		</form>
 	</div>
 </div>

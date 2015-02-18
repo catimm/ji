@@ -2,7 +2,7 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
   # Set up for LinkedIn Omniauth
-  config.omniauth :linkedin, ENV['LINKEDIN_KEY'], ENV['Zo9KuQJp0Em8TT6M']
+  config.omniauth :linkedin, ENV['LINKEDIN_KEY'], ENV['LINKEDIN_SECRET']
 
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing

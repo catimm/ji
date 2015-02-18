@@ -1,67 +1,89 @@
 $(document).ready(function(){
 
-		CameraTag.observe('jione', "initialized", function(){			
-			myCamera = CameraTag.cameras['jione'];
+	//code to swap out video and add written functionality
+	$(".noWebcam").on("click", function(){
+	    
+	    if ($(this).hasClass("two")) {
+	    	if ($("#jione").hasClass("show")) {
+	    		$("#jione").removeClass("show").addClass("hidden");
+				$("#textInputArea2").removeClass("hidden").addClass("show");
+				$("#noWebcam").children("span").html("Ok, bring back the webcam option.");
+				$("#step2Button").removeAttr('disabled');
+	    	} else {
+	    		$("#jione").removeClass("hidden").addClass("show");
+	    		$("#textInputArea2").removeClass("show").addClass("hidden");
+	    		$("#noWebcam").children("span").html("Wait! I don't have a webcam...");
+	    		$("#step2Button").attr('disabled', true);
+	    	}
 
-			var js_object = {
-			    camera: "jione", 
-			    user: gon.current_user
-			};
-			
-			myCamera.addVideoData(js_object);
-			
-			$("#step2Button").removeAttr('disabled');
-		});
+		}
+	});	
 		
-		CameraTag.observe('jitwo', "initialized", function(){			
-			myCamera = CameraTag.cameras['jitwo'];
+	//code to keep Next Step buttons disabled until video is published
+	//code also sends extra information--camera name and user id--with each video to be stored in DB
+	CameraTag.observe('jione', "initialized", function(){			
+		myCamera = CameraTag.cameras['jione'];
 
-			var js_object = {
-			    camera: "jitwo", 
-			    user: gon.current_user
-			};
+		var js_object = {
+		    camera: "jione", 
+		    user: gon.current_user
+		};
 			
-			myCamera.addVideoData(js_object);
-			
-			$("#step4Button").removeAttr('disabled');
-		});
+		myCamera.addVideoData(js_object);
 		
-		CameraTag.observe('jithree', "initialized", function(){			
-			myCamera = CameraTag.cameras['jithree'];
-
-			var js_object = {
-			    camera: "jithree", 
-			    user: gon.current_user
-			};
-			
-			myCamera.addVideoData(js_object);
-			
-			$("#step5Button").removeAttr('disabled');
-		});
+		$("#step2Button").removeAttr('disabled');
+	});
 		
-		CameraTag.observe('jifour', "initialized", function(){			
-			myCamera = CameraTag.cameras['jifour'];
+	CameraTag.observe('jitwo', "initialized", function(){			
+		myCamera = CameraTag.cameras['jitwo'];
 
-			var js_object = {
-			    camera: "jifour", 
-			    user: gon.current_user
-			};
+		var js_object = {
+		    camera: "jitwo", 
+		    user: gon.current_user
+		};
 			
-			myCamera.addVideoData(js_object);
-			
-			$("#step6Button").removeAttr('disabled');
-		});
+		myCamera.addVideoData(js_object);
 		
-		CameraTag.observe('jifive', "initialized", function(){			
-			myCamera = CameraTag.cameras['jifive'];
+		$("#step4Button").removeAttr('disabled');
+	});
+		
+	CameraTag.observe('jithree', "initialized", function(){			
+		myCamera = CameraTag.cameras['jithree'];
 
-			var js_object = {
-			    camera: "jifive", 
-			    user: gon.current_user
-			};
+		var js_object = {
+		    camera: "jithree", 
+		    user: gon.current_user
+		};
+		
+		myCamera.addVideoData(js_object);
 			
-			myCamera.addVideoData(js_object);
+		$("#step5Button").removeAttr('disabled');
+	});
+		
+	CameraTag.observe('jifour', "initialized", function(){			
+		myCamera = CameraTag.cameras['jifour'];
 
-		});
+		var js_object = {
+		    camera: "jifour", 
+		    user: gon.current_user
+		};
+			
+		myCamera.addVideoData(js_object);
+		
+		$("#step6Button").removeAttr('disabled');
+	});
+	
+	// this last block doesn't keep the button inactive since the video submission is optional	
+	CameraTag.observe('jifive', "initialized", function(){			
+		myCamera = CameraTag.cameras['jifive'];
+
+		var js_object = {
+		    camera: "jifive", 
+		    user: gon.current_user
+		};
+			
+		myCamera.addVideoData(js_object);
+
+	});
 		
 });

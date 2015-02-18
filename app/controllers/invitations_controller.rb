@@ -34,10 +34,8 @@ class InvitationsController < Devise::InvitationsController
     exploration_id = User.where(id: user_id).pluck(:invited_for_exploration_id)
 
     new_exploration_user = ExplorationUser.new(:exploration_id => exploration_id[0], :user_id => user_id[0], :status => 0)
-    
-    if new_exploration_user.save
-      super
-    end
-    
+    new_exploration_user.save!
+  
+    super  
   end
 end

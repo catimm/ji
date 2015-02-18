@@ -194,10 +194,13 @@ label {
   margin-left: 1em;
 }
 .specialFontSize {
-  font-size: 1.15em;
+  font-size: 1.125em;
+  line-height: 1.2;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 .specialFontSize.intro {
-  margin-left: 1.75em;
+  margin-left: 1.85em;
 }
 #surveyor {
   background: #fff;
@@ -233,4 +236,15 @@ legend {
 }  
 .moreOppty {
   margin-top: 3em;
+}
+.textInputArea {
+  width: 480px;
+  height: 270px;
+}
+.noWebcam {
+  font-size: 0.75em;
+  span {
+    color: blue;
+    text-decoration: underline;
+  }
 }
