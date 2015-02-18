@@ -16,6 +16,59 @@ $(document).ready(function(){
 	    		$("#step2Button").attr('disabled', true);
 	    	}
 
+		} 
+		if ($(this).hasClass("four")) {
+	    	if ($("#jitwo").hasClass("show")) {
+	    		$("#jitwo").removeClass("show").addClass("hidden");
+				$("#textInputArea4").removeClass("hidden").addClass("show");
+				$("#noWebcam").children("span").html("Ok, bring back the webcam option.");
+				$("#step4Button").removeAttr('disabled');
+	    	} else {
+	    		$("#jitwo").removeClass("hidden").addClass("show");
+	    		$("#textInputArea4").removeClass("show").addClass("hidden");
+	    		$("#noWebcam").children("span").html("Wait! I don't have a webcam...");
+	    		$("#step4Button").attr('disabled', true);
+	    	}
+
+		} 
+		if ($(this).hasClass("five")) {
+	    	if ($("#jithree").hasClass("show")) {
+	    		$("#jithree").removeClass("show").addClass("hidden");
+				$("#textInputArea5").removeClass("hidden").addClass("show");
+				$("#noWebcam").children("span").html("Ok, bring back the webcam option.");
+				$("#step5Button").removeAttr('disabled');
+	    	} else {
+	    		$("#jithree").removeClass("hidden").addClass("show");
+	    		$("#textInputArea5").removeClass("show").addClass("hidden");
+	    		$("#noWebcam").children("span").html("Wait! I don't have a webcam...");
+	    		$("#step5Button").attr('disabled', true);
+	    	}
+
+		} 
+		if ($(this).hasClass("six")) {
+	    	if ($("#jifour").hasClass("show")) {
+	    		$("#jifour").removeClass("show").addClass("hidden");
+				$("#textInputArea6").removeClass("hidden").addClass("show");
+				$("#noWebcam").children("span").html("Ok, bring back the webcam option.");
+				$("#step6Button").removeAttr('disabled');
+	    	} else {
+	    		$("#jifour").removeClass("hidden").addClass("show");
+	    		$("#textInputArea6").removeClass("show").addClass("hidden");
+	    		$("#noWebcam").children("span").html("Wait! I don't have a webcam...");
+	    		$("#step6Button").attr('disabled', true);
+	    	}
+
+		} 
+		if ($(this).hasClass("seven")) {
+			if ($("#jifive").hasClass("show")) {
+	    		$("#jifive").removeClass("show").addClass("hidden");
+				$("#textInputArea7").removeClass("hidden").addClass("show");
+				$("#noWebcam").children("span").html("Ok, bring back the webcam option.");
+	    	} else {
+	    		$("#jifive").removeClass("hidden").addClass("show");
+	    		$("#textInputArea7").removeClass("show").addClass("hidden");
+	    		$("#noWebcam").children("span").html("Wait! I don't have a webcam...");
+	    	}
 		}
 	});	
 		

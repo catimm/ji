@@ -7,11 +7,13 @@
 			  <h2>Step 4 of 8: Choosing a craft beer</h2>
 			</div>
 		</div>
+		<%= form_for @written, url: step5_path  do |f| %>
 		<div class="row">
 			<div class="col-sm-1"></div>
 			<div class="col-sm-5">
-				<div class="row">
-					<camera id='jitwo' data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' style='width:480px;height:270px;' data-poll-for-processed='true'></camera>
+				<div class="row inputArea">
+					<camera id='jitwo' class="show" data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' style='width:480px;height:270px;' data-poll-for-processed='true'></camera>
+					<%= f.text_area :written_input, required: true, id: "textInputArea4", :class => "form-control textInputArea hidden", placeholder: "Type input here" %>
 				</div>
 				<div class="row">
 					<h6 class="emailContact">Questions? Email me: ctiv@hotmail.com</h6>
@@ -19,18 +21,20 @@
 			</div>
 			<div class="col-sm-5">
 				<div class="row textArea">
-					<h5 class="specialFontSize">Can you explain how you go about choosing a craft beer to drink?</h5> 
+					<h5 class="specialFontSize">Can you explain how you go about choosing a craft beer?</h5> 
 					<h5 class="specialFontSize">Do you find it complex or time consuming?</h5> 
 					<h5 class="specialFontSize">If so, what’s your solution to help minimize that?</h5>
 					</br>
 					</br>
-					<h5 class="specialFontSize">Please use the webcam to share your thoughts.</h5>
+					<h5 class="specialFontSize">Please use the webcam to share your thoughts. <span id="noWebcam" class="noWebcam four">(<span>Wait! I don't have a webcam...</span>)</span></h5>
 				</div>
 				<div class="row buttonArea">
-					<%= link_to "Take me to Step 5", step5_path, :method => "get", class: "btn btn-success inputButton2", id: "step4Button", "disabled" =>"true" %>
+					<%= f.hidden_field :step, value: 4 %>
+					<%= f.submit id: "step4Button", value: "Take me to Step 5", class: "btn btn-success inputButton2", disabled: "true" %>
 				</div>	
 			</div>
 			<div class="col-sm-1"></div>
 		</div>
+		<% end %>
 	</div>
 </div>

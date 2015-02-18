@@ -7,11 +7,13 @@
 			  <h2>Step 5 of 8: Finding a craft beer you like</h2>
 			</div>
 		</div>
+		<%= form_for @written, url: step6_path  do |f| %>
 		<div class="row">
 			<div class="col-sm-1"></div>
 			<div class="col-sm-5">
 				<div class="row">
-					<camera id='jithree' data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' style='width:480px;height:270px;' data-poll-for-processed='true'></camera>
+					<camera id='jithree' class="show" data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' style='width:480px;height:270px;' data-poll-for-processed='true'></camera>
+					<%= f.text_area :written_input, required: true, id: "textInputArea5", :class => "form-control textInputArea hidden", placeholder: "Type input here" %>
 				</div>
 				<div class="row">
 					<h6 class="emailContact">Questions? Email me: ctiv@hotmail.com</h6>
@@ -24,13 +26,15 @@
 					<h5 class="specialFontSize">Why or why not?</h5>
 					</br>
 					</br>
-					<h5 class="specialFontSize">Please use the webcam to share your thoughts.</h5>
+					<h5 class="specialFontSize">Please use the webcam to share your thoughts. <span id="noWebcam" class="noWebcam five">(<span>Wait! I don't have a webcam...</span>)</span></h5>
 				</div>
 				<div class="row buttonArea">
-					<%= link_to "Take me to Step 6", step6_path, :method => "get", class: "btn btn-success inputButton2", id: "step5Button", "disabled" =>"true"  %>
+					<%= f.hidden_field :step, value: 5 %>
+					<%= f.submit id: "step5Button", value: "Take me to Step 6", class: "btn btn-success inputButton2", disabled: "true" %>
 				</div>	
 			</div>
 			<div class="col-sm-1"></div>
 		</div>
+		<% end %>
 	</div>
 </div>

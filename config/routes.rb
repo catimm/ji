@@ -17,9 +17,9 @@ Code::Application.routes.draw do
   get  "/problem/second" => 'problem#second', :as => 'step2', :path => "/second"
   match "/surveys/craft-beer-input" => 'surveyor#create', :via => [:post], :as => 'craft_beer_input'
   get  "/problem/fourth" => 'problem#fourth', :as => 'step4', :path => "/fourth"
-  get  "/problem/fifth" => 'problem#fifth', :as => 'step5', :path => "/fifth"
-  get  "/problem/sixth" => 'problem#sixth', :as => 'step6', :path => "/sixth"
-  get  "/problem/seventh" => 'problem#seventh', :as => 'step7', :path => "/seventh"
+  post  "/problem/fifth" => 'problem#fifth', :as => 'step5', :path => "/fifth"
+  post  "/problem/sixth" => 'problem#sixth', :as => 'step6', :path => "/sixth"
+  post  "/problem/seventh" => 'problem#seventh', :as => 'step7', :path => "/seventh"
   match "/surveys/craft-beer-demographics" => 'surveyor#create', :via => [:post], :as => 'craft_beer_demographics'
   get  "/problem/ninth" => 'problem#ninth', :as => 'step9', :path => "/pthanks"
   get   "/devise/invitations/new"
