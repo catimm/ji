@@ -249,7 +249,7 @@ legend {
 .noWebcam {
   font-size: 0.75em;
   span {
-    color: blue;
+    color: #2E96F0;
     text-decoration: underline;
   }
 }
@@ -262,6 +262,9 @@ legend {
   width: 100%;
   padding-top: 1em;
   padding-bottom: 0.5em;
+  a {
+    color: #2E96F0;
+  }
 }
 .footer.alt {
   position: relative;
@@ -272,12 +275,15 @@ legend {
 .ui-state-hover {
   color: #fff;
 }
-a:hover, 
-a:focus {
-    color: #fff !important;
-    background: #268BE1 !important;
-    text-decoration: none !important;
+.navLinks:hover, 
+.navLinks:focus {
+    background: #2E96F0 !important; 
+    a {
+      color: #fff !important;
+      text-decoration: none !important; 
+    }   
 }
+
 #surveyor fieldset.q_default.q_dependent, 
 #surveyor fieldset.g_dependent {
     background-color: #f8f8f8;
