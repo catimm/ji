@@ -32,7 +32,7 @@ module SurveyorControllerCustomMethods
     end
     
     # Insert written input if any exists
-    if !params[:textInputArea].nil?
+    if !params[:textInputArea].empty?
       exploration_id = exploration_user.first.exploration_id
       user_id = exploration_user.first.user_id
       new_input = WrittenInput.new(:user_id => user_id, :exploration_id => exploration_id, :written_input => params[:textInputArea], :step => params[:step])

@@ -113,35 +113,7 @@ label {
       margin: 0;
     }
 }
-.inputButton {
-    font-size: 1.25em;
-    width: 100%;
-}
-.inputButton2 {
-    font-size: 1.25em;
-    width: 100%;
-}
-.inputButton3 {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
-  font-size: 1.5em !important;
-  font-weight: 500 !important;
-  width: 100% !important;
-  background-color: #5cb85c !important;
-  border-color: #4cae4c !important;
-  color: #fff !important;
-  -moz-user-select: none !important;
-  background-image: none !important;
-  border: 1px solid transparent !important;
-  border-radius: 4px !important;
-  cursor: pointer !important;
-  display: inline-block !important;
-  line-height: 1.42857 !important;
-  margin-bottom: 0 !important;
-  padding: 8px 12px !important;
-  text-align: center !important;
-  vertical-align: middle !important;
-  white-space: nowrap !important;
-}
+
 .next_section {
   width: 26.14em;
   margin-right: 3.4em;
@@ -172,20 +144,19 @@ label {
   width: 100%;
   margin-bottom: 2em;
 }
-
-.videoCenter {
-  
-}
 #introVideo {
   margin-left: auto;
   margin-right: auto;
   width: 80%;
 }
-.buttonArea {
-  font-size: 1.25em;
-  width: 80%;
-  margin-left: auto;
+.row.inputArea {
+  background: #000;
+  width: 480px;
+  height: 270px;
+}
+.camera {
   margin-right: auto;
+  margin-left: auto;
 }
 .textArea {
   min-height: 225px;
@@ -195,6 +166,73 @@ label {
   min-height: 74px;
   margin-left: 1em;
 }
+.textInputArea {
+  width: 360px;
+  height: 270px !important;
+  margin-right: auto;
+  margin-left: auto;
+}
+.extraInfoSpacing {
+  padding-left: 0 !important;
+  padding-right: 5px !important;
+}
+.altInput {
+  text-align: right;
+
+  a {
+    display: block;
+    color: #2E96F0;
+    font-size: 12px;
+    line-height: 1.1;
+    :hover {
+      text-decoration: underline;
+    }
+    :focus {
+      text-decoration: none !important;
+    }
+  }
+}
+.noWebcam {
+  font-size: 0.85em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.buttonArea {
+  font-size: 1.25em;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.inputButton {
+    font-size: 1.25em;
+    width: 100%;
+}
+.inputButton2 {
+    font-size: 1.25em;
+    width: 100%;
+}
+.inputButton3 {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  font-size: 1.5em !important;
+  font-weight: 500 !important;
+  width: 100% !important;
+  background-color: #5cb85c !important;
+  border-color: #4cae4c !important;
+  color: #fff !important;
+  -moz-user-select: none !important;
+  background-image: none !important;
+  border: 1px solid transparent !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  display: inline-block !important;
+  line-height: 1.42857 !important;
+  margin-bottom: 0 !important;
+  padding: 8px 12px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+}
+
 .specialFontSize {
   font-size: 1.125em;
   line-height: 1.2;
@@ -238,20 +276,6 @@ legend {
 }  
 .moreOppty {
   margin-top: 3em;
-}
-.textInputArea {
-  width: 480px;
-  height: 270px !important;
-}
-.altInput {
-  text-align: right;
-}
-.noWebcam {
-  font-size: 0.75em;
-  span {
-    color: #2E96F0;
-    text-decoration: underline;
-  }
 }
 .footer {
   background-color: #f8f8f8;

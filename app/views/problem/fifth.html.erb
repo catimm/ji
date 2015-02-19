@@ -9,16 +9,16 @@
 		<div class="row">
 			<div class="col-sm-1"></div>
 			<div class="col-sm-5">
-				<div class="row">
-					<camera id='problemFive' class="show" data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' style='width:360px;height:270px;' data-poll-for-processed='true'></camera>
+				<div class="row inputArea">
+					<camera id='problemFive' class="camera show" data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' style='width:360px;height:270px;' data-poll-for-processed='true'></camera>
 					<%= f.text_area :written_input, id: "textInputArea5", :class => "form-control textInputArea hidden", placeholder: "Type input here" %>
 				</div>
 				<div class="row">
-					<div class="col-sm-7">
+					<div class="col-sm-7 extraInfoSpacing">
 						<h6 class="emailContact">Questions? Email me: ctiv@hotmail.com</h6>
 					</div>
-					<div class="col-sm-5 altInput">
-						<h6 id="noWebcam" class="noWebcam five"><span>Provide written response instead.</span></h6>
+					<div class="col-sm-5 altInput extraInfoSpacing">
+						<%= link_to(raw("Provide written response instead."), "#", :class => "noWebcam five", :id => "noWebcam") %>
 					</div>
 				</div>
 			</div>
