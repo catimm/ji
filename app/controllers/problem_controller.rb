@@ -26,49 +26,66 @@ class ProblemController < ApplicationController
   end
   
   def fifth
+    # Make sure the exploration_user_id and the exploration_id is available
+    if session[:exploration_users_id].nil?
+      session[:exploration_users_id] = params[:exploration_user][:id]
+      if session[:exploration_id].nil?
+        exploration_user_info = ExplorationUser.where(id: session[:exploration_users_id]).pluck(:exploration_id)
+        session[:exploration_id] = exploration_user_info[0]
+      end
+    end
     # Check if params exist--in case where coming from Show view, there won't be params . . .
     if params.has_key?(:written_input)
       # Insert written input if any exists
       input = params[:written_input][:written_input]
-      if !input.nil?
-        new_input = WrittenInput.new(:user_id => current_user.id, :exploration_id => session[:exploration_users_id], :written_input => input, :step => params[:written_input][:step])
+      if !input.empty?
+        new_input = WrittenInput.new(:user_id => current_user.id, :exploration_id => session[:exploration_id], :written_input => input, :step => params[:written_input][:step])
         new_input.save!
       end
     end
      
-    if session[:exploration_users_id].nil?
-      session[:exploration_users_id] = params[:exploration_user][:id]
-    end
     ExplorationUser.update(session[:exploration_users_id], :status => '4')
     @written = WrittenInput.new
   end
   
   def sixth
+    # Make sure the exploration_user_id and the exploration_id is available
+    if session[:exploration_users_id].nil?
+      session[:exploration_users_id] = params[:exploration_user][:id]
+      if session[:exploration_id].nil?
+        exploration_user_info = ExplorationUser.where(id: session[:exploration_users_id]).pluck(:exploration_id)
+        session[:exploration_id] = exploration_user_info[0]
+      end
+    end
     # Check if params exist--in case where coming from Show view, there won't be params . . .
     if params.has_key?(:written_input)
       # Insert written input if any exists
       input = params[:written_input][:written_input]
-      if !input.nil?
-        new_input = WrittenInput.new(:user_id => current_user.id, :exploration_id => session[:exploration_users_id], :written_input => input, :step => params[:written_input][:step])
+      if !input.empty?
+        new_input = WrittenInput.new(:user_id => current_user.id, :exploration_id => session[:exploration_id], :written_input => input, :step => params[:written_input][:step])
         new_input.save!
       end
     end
-    
-    
-    if session[:exploration_users_id].nil?
-      session[:exploration_users_id] = params[:exploration_user][:id]
-    end
+
     ExplorationUser.update(session[:exploration_users_id], :status => '5')
     @written = WrittenInput.new
   end
   
   def seventh
+    # Make sure the exploration_user_id and the exploration_id is available
+    if session[:exploration_users_id].nil?
+      session[:exploration_users_id] = params[:exploration_user][:id]
+      if session[:exploration_id].nil?
+        exploration_user_info = ExplorationUser.where(id: session[:exploration_users_id]).pluck(:exploration_id)
+        session[:exploration_id] = exploration_user_info[0]
+      end
+    end
     # Check if params exist--in case where coming from Show view, there won't be params . . .
     if params.has_key?(:written_input)
       # Insert written input if any exists
       input = params[:written_input][:written_input]
-      if !input.nil?
-        new_input = WrittenInput.new(:user_id => current_user.id, :exploration_id => session[:exploration_users_id], :written_input => input, :step => params[:written_input][:step])
+      if !input.empty?
+        new_input = WrittenInput.new(:user_id => current_user.id, :exploration_id => session[:exploration_id], :written_input => input, :step => params[:written_input][:step])
         new_input.save!
       end
     end

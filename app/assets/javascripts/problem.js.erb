@@ -74,7 +74,7 @@ $(document).ready(function(){
 		
 	//code to keep Next Step buttons disabled until video is published
 	//code also sends extra information--camera name and user id--with each video to be stored in DB
-	CameraTag.observe('jione', "initialized", function(){			
+	CameraTag.observe('jione', "published", function(){			
 		myCamera = CameraTag.cameras['jione'];
 
 		var js_object = {
@@ -87,7 +87,7 @@ $(document).ready(function(){
 		$("#step2Button").removeAttr('disabled');
 	});
 		
-	CameraTag.observe('jitwo', "initialized", function(){			
+	CameraTag.observe('jitwo', "published", function(){			
 		myCamera = CameraTag.cameras['jitwo'];
 
 		var js_object = {
@@ -100,7 +100,7 @@ $(document).ready(function(){
 		$("#step4Button").removeAttr('disabled');
 	});
 		
-	CameraTag.observe('jithree', "initialized", function(){			
+	CameraTag.observe('jithree', "published", function(){			
 		myCamera = CameraTag.cameras['jithree'];
 
 		var js_object = {
@@ -113,7 +113,7 @@ $(document).ready(function(){
 		$("#step5Button").removeAttr('disabled');
 	});
 		
-	CameraTag.observe('jifour', "initialized", function(){			
+	CameraTag.observe('jifour', "published", function(){			
 		myCamera = CameraTag.cameras['jifour'];
 
 		var js_object = {
@@ -127,7 +127,7 @@ $(document).ready(function(){
 	});
 	
 	// this last block doesn't keep the button inactive since the video submission is optional	
-	CameraTag.observe('jifive', "initialized", function(){			
+	CameraTag.observe('jifive', "published", function(){			
 		myCamera = CameraTag.cameras['jifive'];
 
 		var js_object = {

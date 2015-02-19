@@ -66,6 +66,7 @@ class UsersController < ApplicationController
       Rails.logger.debug("Exploration_user is: #{exploration_user.inspect}")
       
       session[:exploration_users_id] = params[:exploration_user][:id]
+      session[:exploration_id] = exploration_user.first.exploration_id
       cookies[:exploration_users_id] = params[:exploration_user][:id]
       Rails.logger.debug("ExUsID is: #{session[:exploration_users_id].inspect}")
       Rails.logger.debug("CookID is: #{cookies[:exploration_users_id].inspect}")
