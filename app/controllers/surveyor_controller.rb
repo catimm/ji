@@ -35,10 +35,6 @@ module SurveyorControllerCustomMethods
     if !params[:textInputArea].nil?
       exploration_id = exploration_user.first.exploration_id
       user_id = exploration_user.first.user_id
-      Rails.logger.debug("THIS User ID is: #{user_id.inspect}")
-      Rails.logger.debug("THIS Exploration ID is: #{exploration_id.inspect}")
-      Rails.logger.debug("THIS Text Input is: #{params[:textInputArea].inspect}")
-      Rails.logger.debug("THIS Step is: #{params[:step].inspect}")
       new_input = WrittenInput.new(:user_id => user_id, :exploration_id => exploration_id, :written_input => params[:textInputArea], :step => params[:step])
       new_input.save!
     
@@ -82,7 +78,7 @@ module SurveyorControllerCustomMethods
     Rails.logger.debug("Surveyor Initial Update Sesssion is: #{session[:exploration_users_id].inspect}")
     step_title = params[:survey_code]
     if step_title == "craft-beer-input"
-      session[:finish_path] = step4_path
+      session[:finish_path] = step4alt_path
     end
     if step_title == "craft-beer-demographics"
       session[:finish_path] = step9_path

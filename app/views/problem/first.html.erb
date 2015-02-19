@@ -1,7 +1,5 @@
-<div class="intro-header"></div>
-<div id="section wrap">
-	<%= render 'layouts/header' %> 
-	<div class="container mainBody">
+<%= render 'layouts/header' %> 
+<div class="container">
 		<div class="row">
 			<div class="page-header">
 			  <h2>Step 1 of 8: Intro</h2>
@@ -14,7 +12,7 @@
 			</div>
 			<div class="col-sm-5">
 				<div class="row textArea">
-					<h5 class="specialFontSize intro">Play the video to hear the background on our project.</h5>
+					<h4 class="introMessage">Play the video to hear the background on our project.</h4>
 				</div>
 				<div class="row buttonArea">
 					<%= link_to "Take me to Step 2", step2_path, :method => "get", class: "btn btn-success inputButton2" %>
@@ -22,5 +20,5 @@
 			</div>
 			<div class="col-sm-1"></div>
 		</div>
-	</div>
 </div>
+<%= render 'layouts/footer' %>

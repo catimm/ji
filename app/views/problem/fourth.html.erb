@@ -1,7 +1,5 @@
-<div class="intro-header"></div>
-<div id="section wrap">
-	<%= render 'layouts/header' %> 
-	<div class="container mainBody">
+<%= render 'layouts/header' %> 
+<div class="container">
 		<div class="row">
 			<div class="page-header">
 			  <h2>Step 4 of 8: Choosing a craft beer</h2>
@@ -13,20 +11,25 @@
 			<div class="col-sm-5">
 				<div class="row inputArea">
 					<camera id='jitwo' class="show" data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' style='width:480px;height:270px;' data-poll-for-processed='true'></camera>
-					<%= f.text_area :written_input, required: true, id: "textInputArea4", :class => "form-control textInputArea hidden", placeholder: "Type input here" %>
+					<%= f.text_area :written_input, id: "textInputArea4", :class => "form-control textInputArea hidden", placeholder: "Type input here" %>
 				</div>
 				<div class="row">
-					<h6 class="emailContact">Questions? Email me: ctiv@hotmail.com</h6>
+					<div class="col-sm-7">
+						<h6 class="emailContact">Questions? Email me: ctiv@hotmail.com</h6>
+					</div>
+					<div class="col-sm-5 altInput">
+						<h6 id="noWebcam" class="noWebcam four"><span>Provide written response instead.</span></h6>
+					</div>
 				</div>
 			</div>
 			<div class="col-sm-5">
 				<div class="row textArea">
-					<h5 class="specialFontSize">Can you explain how you go about choosing a craft beer?</h5> 
-					<h5 class="specialFontSize">Do you find it complex or time consuming?</h5> 
-					<h5 class="specialFontSize">If so, what’s your solution to help minimize that?</h5>
-					</br>
-					</br>
-					<h5 class="specialFontSize">Please use the webcam to share your thoughts. <span id="noWebcam" class="noWebcam four">(<span>Wait! I don't have a webcam...</span>)</span></h5>
+					<h5 class="specialFontSize">Please use the webcam to share your thoughts on the following questions:</h5>
+					<ul>
+						<li class="specialFontSize">Can you explain how you go about choosing a craft beer?</li>
+						<li class="specialFontSize">Do you find the process overwhelming or too complex?</li>
+						<li class="specialFontSize">If so, what do you do to help simplify?</li>
+					</ul>
 				</div>
 				<div class="row buttonArea">
 					<%= f.hidden_field :step, value: 4 %>
@@ -36,5 +39,5 @@
 			<div class="col-sm-1"></div>
 		</div>
 		<% end %>
-	</div>
 </div>
+<%= render 'layouts/footer' %>

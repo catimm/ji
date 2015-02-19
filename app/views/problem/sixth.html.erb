@@ -13,19 +13,25 @@
 			<div class="col-sm-5">
 				<div class="row">
 					<camera id='jifour' data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' style='width:480px;height:270px;' data-poll-for-processed='true'></camera>
-					<%= f.text_area :written_input, required: true, id: "textInputArea6", :class => "form-control textInputArea hidden", placeholder: "Type input here" %>
+					<%= f.text_area :written_input, id: "textInputArea6", :class => "form-control textInputArea hidden", placeholder: "Type input here" %>
 				</div>
 				<div class="row">
-					<h6 class="emailContact">Questions? Email me: ctiv@hotmail.com</h6>
+					<div class="col-sm-7">
+						<h6 class="emailContact">Questions? Email me: ctiv@hotmail.com</h6>
+					</div>
+					<div class="col-sm-5 altInput">
+						<h6 id="noWebcam" class="noWebcam six"><span>Provide written response instead.</span></h6>
+					</div>
 				</div>
 			</div>
 			<div class="col-sm-5">
 				<div class="row textArea">
-					<h5 class="specialFontSize">Do you ever find sometimes going out with friends for beer can turn into being more about the beer than about the friends?</h5> 
-					<h5 class="specialFontSize">If so, how do you deal with that?</h5>
-					</br>
-					</br>
-					<h5 class="specialFontSize">Please use the webcam to share your thoughts. <span id="noWebcam" class="noWebcam six">(<span>Wait! I don't have a webcam...</span>)</span></h5>
+					<h5 class="specialFontSize">Please use the webcam to share your thoughts on the following questions:</h5>
+					<ul>
+						<li class="specialFontSize">When going out with friends for beer, do you ever find you spend too much time focused on beer in hopes of finding a good one?</li>
+						<li class="specialFontSize">Do you have any friends who get too absored in the beer choosing process?</li>
+						<li class="specialFontSize">If so--either for you or your friends, how do you deal with that?</li>
+					</ul>
 				</div>
 				<div class="row buttonArea">
 					<%= f.hidden_field :step, value: 6 %>
@@ -37,3 +43,4 @@
 		<% end %>
 	</div>
 </div>
+<%= render 'layouts/footer' %>

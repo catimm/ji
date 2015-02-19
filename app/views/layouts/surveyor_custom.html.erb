@@ -6,23 +6,21 @@
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <%= surveyor_includes %>
 <body>
-	<div class="intro-header"></div>
-	<div id="section wrap">
-		<%= render 'layouts/header' %> 
-		<div class="container mainBody">
-			<div class="row">
-				<div class="page-header">
-				  <h2><%= @step %></h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-1"></div>
-				<div class="col-sm-10">
-	  				<%= yield %>
-	  			</div>
-	  			<div class="col-sm-1"></div>
-	  		</div>
-	  	</div>
+<%= render 'layouts/header' %> 
+<div class="container">
+	<div class="row">
+		<div class="page-header">
+			<h2><%= @step %></h2>
+		</div>
 	</div>
+	<div class="row">
+		<div class="col-sm-1"></div>
+		<div class="col-sm-10">
+			<%= yield %>
+	  	</div>
+	  	<div class="col-sm-1"></div>
+	</div>
+</div>
+<%= render 'layouts/alt_footer' %>
 </body>
 </html>

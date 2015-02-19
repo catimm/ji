@@ -9,6 +9,8 @@ Code::Application.routes.draw do
   resources :explorations
   
   root :to => 'home#index'
+  get 'privacy' => 'home#privacy'
+  get 'terms' => 'home#terms'
   get 'input/record' => 'input#record', :as => 'record', :path => "/record"
 
   post 'users/:id' => 'users#update'
@@ -16,7 +18,8 @@ Code::Application.routes.draw do
   get  "/problem/first" => 'problem#first', :as => 'step1', :path => "/first"
   get  "/problem/second" => 'problem#second', :as => 'step2', :path => "/second"
   match "/surveys/craft-beer-input" => 'surveyor#create', :via => [:post], :as => 'craft_beer_input'
-  get  "/problem/fourth" => 'problem#fourth', :as => 'step4', :path => "/fourth"
+  get  "/problem/fourth" => 'problem#fourth', :as => 'step4alt', :path => "/fourth"
+  post  "/problem/fourth" => 'problem#fourth', :as => 'step4', :path => "/fourth"
   post  "/problem/fifth" => 'problem#fifth', :as => 'step5', :path => "/fifth"
   post  "/problem/sixth" => 'problem#sixth', :as => 'step6', :path => "/sixth"
   post  "/problem/seventh" => 'problem#seventh', :as => 'step7', :path => "/seventh"

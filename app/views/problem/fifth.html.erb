@@ -13,20 +13,25 @@
 			<div class="col-sm-5">
 				<div class="row">
 					<camera id='jithree' class="show" data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' style='width:480px;height:270px;' data-poll-for-processed='true'></camera>
-					<%= f.text_area :written_input, required: true, id: "textInputArea5", :class => "form-control textInputArea hidden", placeholder: "Type input here" %>
+					<%= f.text_area :written_input, id: "textInputArea5", :class => "form-control textInputArea hidden", placeholder: "Type input here" %>
 				</div>
 				<div class="row">
-					<h6 class="emailContact">Questions? Email me: ctiv@hotmail.com</h6>
+					<div class="col-sm-7">
+						<h6 class="emailContact">Questions? Email me: ctiv@hotmail.com</h6>
+					</div>
+					<div class="col-sm-5 altInput">
+						<h6 id="noWebcam" class="noWebcam five"><span>Provide written response instead.</span></h6>
+					</div>
 				</div>
 			</div>
 			<div class="col-sm-5">
 				<div class="row textArea">
-					<h5 class="specialFontSize">How often when you order/buy beer do you end up with something you like?</h5> 
-					<h5 class="specialFontSize">Do you do anything to help make sure you are happy with your beer choice?</h5>  
-					<h5 class="specialFontSize">Why or why not?</h5>
-					</br>
-					</br>
-					<h5 class="specialFontSize">Please use the webcam to share your thoughts. <span id="noWebcam" class="noWebcam five">(<span>Wait! I don't have a webcam...</span>)</span></h5>
+					<h5 class="specialFontSize">Please use the webcam to share your thoughts on the following questions:</h5>
+					<ul>
+						<li class="specialFontSize">When you buy/order craft beer, how often do you end up with something you like?</li>
+						<li class="specialFontSize">Do you do anything to help make sure you are happy with your beer choice?</li>
+						<li class="specialFontSize">If so, what? If not, why not?</li>
+					</ul>
 				</div>
 				<div class="row buttonArea">
 					<%= f.hidden_field :step, value: 5 %>
@@ -38,3 +43,4 @@
 		<% end %>
 	</div>
 </div>
+<%= render 'layouts/footer' %>
