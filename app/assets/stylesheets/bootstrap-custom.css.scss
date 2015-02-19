@@ -192,7 +192,7 @@ label {
   margin-left: 1em;
 }
 .textAreaThanks {
-  min-height: 94px;
+  min-height: 74px;
   margin-left: 1em;
 }
 .specialFontSize {
@@ -265,4 +265,33 @@ legend {
 }
 .footer.alt {
   position: relative;
+}
+.ui-widget-content {
+  background: #f8f8f8;
+}
+.ui-state-hover {
+  color: #fff;
+}
+a:hover, 
+a:focus {
+    color: #fff !important;
+    background: #268BE1 !important;
+    text-decoration: none !important;
+}
+#surveyor fieldset.q_default.q_dependent, 
+#surveyor fieldset.g_dependent {
+    background-color: #f8f8f8;
+    padding: 0;
+    legend {
+      background: #f8f8f8;
+      display: inline;
+      padding-top: 0.5em;
+      padding-left: 0.5em;
+    }
+    ol {
+      padding-bottom: 0.5em;
+      li > input {
+        width: 33%;
+      }
+    }
 }

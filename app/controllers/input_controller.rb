@@ -10,6 +10,7 @@ class InputController < ApplicationController
     video.video_url = data_parsed['formats'][0]['video_url']
     video.user_id = data_parsed['metadata']['user']
     video.camera = data_parsed['metadata']['camera']
+    video.save!
   end
   
   def view_video_info

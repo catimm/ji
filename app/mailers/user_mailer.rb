@@ -26,7 +26,8 @@ class UserMailer < ActionMailer::Base
   end
   
   def welcome_email(user)
-    url = root_url+"users/"+user.id
+    Rails.logger.debug("User info is: #{user.inspect}")
+    url = root_url+"users/"
     template_name = "welcome-email"
     template_content = []
     message = {
@@ -35,7 +36,8 @@ class UserMailer < ActionMailer::Base
         {rcpt: user.email,
          vars: [
            {name: "user", content: user.first_name},
-           {name: "link", content: url}
+           {name: "link", content: url},
+           {name: "id", content: user.id}
          ]}
       ]
     }

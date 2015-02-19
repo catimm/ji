@@ -1,7 +1,5 @@
-<div class="intro-header"></div>
-<div id="section wrap">
-	<%= render 'layouts/header' %> 
-	<div class="container mainBody">
+<%= render 'layouts/header' %> 
+<div class="container">
 		<div class="row">
 			<div class="page-header">
 			  <h2>Step 7 of 8: Additional thoughts (optional)</h2>
@@ -13,19 +11,25 @@
 			<div class="col-sm-5">
 				<div class="row inputArea">
 					<camera id='jifive' class="show" data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' style='width:480px;height:270px;' data-poll-for-processed='true'></camera>
-					<input type="text" name="textInputArea" id="textInputArea7" class="textInputArea hidden" placeholder="Type input here">
+					<textarea name="textInputArea" id="textInputArea7" class="textInputArea hidden" placeholder="Type input here"></textarea>
 				</div>
 				<div class="row">
-					<h6 class="emailContact">Questions? Email me: ctiv@hotmail.com</h6>
+					<div class="col-sm-7">
+						<h6 class="emailContact">Questions? Email me: ctiv@hotmail.com</h6>
+					</div>
+					<div class="col-sm-5 altInput">
+						<h6 id="noWebcam" class="noWebcam seven"><span>Provide written response instead.</span></h6>
+					</div>
 				</div>
 			</div>
 			<div class="col-sm-5">
 				<div class="row textArea">
-					<h5 class="specialFontSize">If you mentioned other annoyances related to drinking craft beer, how do you currently deal with those?</h5>
-					<h5 class="specialFontSize">Also, is there anything else we haven't touched on that you'd like to mention?</h5>
-					</br>
-					</br>
-					<h5 class="specialFontSize">Please use the webcam to share your thoughts. <span id="noWebcam" class="noWebcam seven">(<span>Wait! I don't have a webcam...</span>)</span></h5>
+					<h5 class="specialFontSize">Please use the webcam to share your thoughts on the following questions:</h5>
+					<ul>
+						<li class="specialFontSize">Do you think there are any other annoyances related to finding a good craft beer?</li>
+						<li class="specialFontSize">If so, how do you currently deal with those?</li>
+						<li class="specialFontSize">Is there anything else we haven't touched on that you'd like to mention?</li>
+					</ul>
 				</div>
 				<div class="row buttonArea">
 					<input type="submit" value="Take me to the last step" name="commit" default="default" class="btn btn-success inputButton2">
@@ -36,6 +40,5 @@
 			<div class="col-sm-1"></div>
 		</div>
 		</form>
-	</div>
 </div>
 <%= render 'layouts/footer' %>
