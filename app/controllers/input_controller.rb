@@ -10,14 +10,10 @@ class InputController < ApplicationController
     video.video_url = data_parsed['formats'][0]['video_url']
     video.user_id = data_parsed['metadata']['user']
     video.camera = data_parsed['metadata']['camera']
+    video.exploration_id = data_parsed['metadata']['exploration_id']
     video.save!
   end
   
-  def view_video_info
-    @video = Video.find(1)
-  end
-  
-  def record
-    
+  def record 
   end
 end

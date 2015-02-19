@@ -4,13 +4,13 @@ $(document).ready(function(){
 	$(".noWebcam").on("click", function(){
 	    
 	    if ($(this).hasClass("two")) {
-	    	if ($("#jione").hasClass("show")) {
-	    		$("#jione").removeClass("show").addClass("hidden");
+	    	if ($("#problemTwo").hasClass("show")) {
+	    		$("#problemTwo").removeClass("show").addClass("hidden");
 				$("#textInputArea2").removeClass("hidden").addClass("show");
 				$("#noWebcam").children("span").html("Use webcam option.");
 				$("#step2Button").removeAttr('disabled');
 	    	} else {
-	    		$("#jione").removeClass("hidden").addClass("show");
+	    		$("#problemTwo").removeClass("hidden").addClass("show");
 	    		$("#textInputArea2").removeClass("show").addClass("hidden");
 	    		$("#noWebcam").children("span").html("Provide written response instead.");
 	    		$("#step2Button").attr('disabled', true);
@@ -18,13 +18,13 @@ $(document).ready(function(){
 
 		} 
 		if ($(this).hasClass("four")) {
-	    	if ($("#jitwo").hasClass("show")) {
-	    		$("#jitwo").removeClass("show").addClass("hidden");
+	    	if ($("#problemFour").hasClass("show")) {
+	    		$("#problemFour").removeClass("show").addClass("hidden");
 				$("#textInputArea4").removeClass("hidden").addClass("show");
 				$("#noWebcam").children("span").html("Use webcam option.");
 				$("#step4Button").removeAttr('disabled');
 	    	} else {
-	    		$("#jitwo").removeClass("hidden").addClass("show");
+	    		$("#problemFour").removeClass("hidden").addClass("show");
 	    		$("#textInputArea4").removeClass("show").addClass("hidden");
 	    		$("#noWebcam").children("span").html("Provide written response instead.");
 	    		$("#step4Button").attr('disabled', true);
@@ -32,13 +32,13 @@ $(document).ready(function(){
 
 		} 
 		if ($(this).hasClass("five")) {
-	    	if ($("#jithree").hasClass("show")) {
-	    		$("#jithree").removeClass("show").addClass("hidden");
+	    	if ($("#problemFive").hasClass("show")) {
+	    		$("#problemFive").removeClass("show").addClass("hidden");
 				$("#textInputArea5").removeClass("hidden").addClass("show");
 				$("#noWebcam").children("span").html("Use webcam option.");
 				$("#step5Button").removeAttr('disabled');
 	    	} else {
-	    		$("#jithree").removeClass("hidden").addClass("show");
+	    		$("#problemFive").removeClass("hidden").addClass("show");
 	    		$("#textInputArea5").removeClass("show").addClass("hidden");
 	    		$("#noWebcam").children("span").html("Provide written response instead.");
 	    		$("#step5Button").attr('disabled', true);
@@ -46,13 +46,13 @@ $(document).ready(function(){
 
 		} 
 		if ($(this).hasClass("six")) {
-	    	if ($("#jifour").hasClass("show")) {
-	    		$("#jifour").removeClass("show").addClass("hidden");
+	    	if ($("#problemSix").hasClass("show")) {
+	    		$("#problemSix").removeClass("show").addClass("hidden");
 				$("#textInputArea6").removeClass("hidden").addClass("show");
 				$("#noWebcam").children("span").html("Use webcam option.");
 				$("#step6Button").removeAttr('disabled');
 	    	} else {
-	    		$("#jifour").removeClass("hidden").addClass("show");
+	    		$("#problemSix").removeClass("hidden").addClass("show");
 	    		$("#textInputArea6").removeClass("show").addClass("hidden");
 	    		$("#noWebcam").children("span").html("Provide written response instead.");
 	    		$("#step6Button").attr('disabled', true);
@@ -60,12 +60,12 @@ $(document).ready(function(){
 
 		} 
 		if ($(this).hasClass("seven")) {
-			if ($("#jifive").hasClass("show")) {
-	    		$("#jifive").removeClass("show").addClass("hidden");
+			if ($("#problemSeven").hasClass("show")) {
+	    		$("#problemSeven").removeClass("show").addClass("hidden");
 				$("#textInputArea7").removeClass("hidden").addClass("show");
 				$("#noWebcam").children("span").html("Use webcam option.");
 	    	} else {
-	    		$("#jifive").removeClass("hidden").addClass("show");
+	    		$("#problemSeven").removeClass("hidden").addClass("show");
 	    		$("#textInputArea7").removeClass("show").addClass("hidden");
 	    		$("#noWebcam").children("span").html("Provide written response instead.");
 	    	}
@@ -74,12 +74,13 @@ $(document).ready(function(){
 		
 	//code to keep Next Step buttons disabled until video is published
 	//code also sends extra information--camera name and user id--with each video to be stored in DB
-	CameraTag.observe('jione', "published", function(){			
+	CameraTag.observe('problemTwo', "published", function(){			
 		myCamera = CameraTag.cameras['jione'];
 
 		var js_object = {
-		    camera: "jione", 
-		    user: gon.current_user
+		    camera: "problemTwo", 
+		    user: gon.current_user,
+		    exploration_id: gon.exploration_id
 		};
 			
 		myCamera.addVideoData(js_object);
@@ -87,12 +88,13 @@ $(document).ready(function(){
 		$("#step2Button").removeAttr('disabled');
 	});
 		
-	CameraTag.observe('jitwo', "published", function(){			
+	CameraTag.observe('problemFour', "published", function(){			
 		myCamera = CameraTag.cameras['jitwo'];
 
 		var js_object = {
-		    camera: "jitwo", 
-		    user: gon.current_user
+		    camera: "problemFour", 
+		    user: gon.current_user,
+		    exploration_id: gon.exploration_id
 		};
 			
 		myCamera.addVideoData(js_object);
@@ -100,12 +102,13 @@ $(document).ready(function(){
 		$("#step4Button").removeAttr('disabled');
 	});
 		
-	CameraTag.observe('jithree', "published", function(){			
+	CameraTag.observe('problemFive', "published", function(){			
 		myCamera = CameraTag.cameras['jithree'];
 
 		var js_object = {
-		    camera: "jithree", 
-		    user: gon.current_user
+		    camera: "problemFive", 
+		    user: gon.current_user,
+		    exploration_id: gon.exploration_id
 		};
 		
 		myCamera.addVideoData(js_object);
@@ -113,12 +116,13 @@ $(document).ready(function(){
 		$("#step5Button").removeAttr('disabled');
 	});
 		
-	CameraTag.observe('jifour', "published", function(){			
+	CameraTag.observe('problemSix', "published", function(){			
 		myCamera = CameraTag.cameras['jifour'];
 
 		var js_object = {
-		    camera: "jifour", 
-		    user: gon.current_user
+		    camera: "problemSix", 
+		    user: gon.current_user,
+		    exploration_id: gon.exploration_id
 		};
 			
 		myCamera.addVideoData(js_object);
@@ -127,12 +131,13 @@ $(document).ready(function(){
 	});
 	
 	// this last block doesn't keep the button inactive since the video submission is optional	
-	CameraTag.observe('jifive', "published", function(){			
+	CameraTag.observe('problemSeven', "published", function(){			
 		myCamera = CameraTag.cameras['jifive'];
 
 		var js_object = {
-		    camera: "jifive", 
-		    user: gon.current_user
+		    camera: "problemSeven", 
+		    user: gon.current_user,
+		    exploration_id: gon.exploration_id
 		};
 			
 		myCamera.addVideoData(js_object);
