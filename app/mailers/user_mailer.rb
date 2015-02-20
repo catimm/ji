@@ -5,12 +5,13 @@ class UserMailer < ActionMailer::Base
   end
   
   def invite_email(invited, inviter, description)
-    url = root_url+"users/invitation/accept?invitation_token="+invited.raw_invitation_token
+    url = root_url+"users/invitation/accept?invitation_token="
     Rails.logger.debug("Raw token is: #{url.inspect}")
     template_name = "invitation-email"
     template_content = []
     message = {
       to: [{email: invited.email}],
+      inline_css: true,
       merge_vars: [
         {rcpt: invited.email,
          vars: [
@@ -18,7 +19,8 @@ class UserMailer < ActionMailer::Base
            {name: "inviter", content: inviter.first_name},
            {name: "inviter_email", content: inviter.email},
            {name: "link", content: url},
-           {name: "description", content: description},
+           {name: "token", content: invited.raw_invitation_token},
+           {name: "description", content: description}
          ]}
       ]
     }
@@ -32,6 +34,7 @@ class UserMailer < ActionMailer::Base
     template_content = []
     message = {
       to: [{email: user.email}],
+      inline_css: true,
       merge_vars: [
         {rcpt: user.email,
          vars: [

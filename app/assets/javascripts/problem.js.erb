@@ -75,7 +75,7 @@ $(document).ready(function(){
 	//code to keep Next Step buttons disabled until video is published
 	//code also sends extra information--camera name and user id--with each video to be stored in DB
 	CameraTag.observe('problemTwo', "published", function(){			
-		myCamera = CameraTag.cameras['jione'];
+		myCamera = CameraTag.cameras['problemTwo'];
 
 		var js_object = {
 		    camera: "problemTwo", 
@@ -89,7 +89,7 @@ $(document).ready(function(){
 	});
 		
 	CameraTag.observe('problemFour', "published", function(){			
-		myCamera = CameraTag.cameras['jitwo'];
+		myCamera = CameraTag.cameras['problemFour'];
 
 		var js_object = {
 		    camera: "problemFour", 
@@ -103,7 +103,7 @@ $(document).ready(function(){
 	});
 		
 	CameraTag.observe('problemFive', "published", function(){			
-		myCamera = CameraTag.cameras['jithree'];
+		myCamera = CameraTag.cameras['problemFive'];
 
 		var js_object = {
 		    camera: "problemFive", 
@@ -117,7 +117,7 @@ $(document).ready(function(){
 	});
 		
 	CameraTag.observe('problemSix', "published", function(){			
-		myCamera = CameraTag.cameras['jifour'];
+		myCamera = CameraTag.cameras['problemSix'];
 
 		var js_object = {
 		    camera: "problemSix", 
@@ -132,7 +132,7 @@ $(document).ready(function(){
 	
 	// this last block doesn't keep the button inactive since the video submission is optional	
 	CameraTag.observe('problemSeven', "published", function(){			
-		myCamera = CameraTag.cameras['jifive'];
+		myCamera = CameraTag.cameras['problemSeven'];
 
 		var js_object = {
 		    camera: "problemSeven", 
