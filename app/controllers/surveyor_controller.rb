@@ -31,13 +31,15 @@ module SurveyorControllerCustomMethods
       ExplorationUser.update(exploration_user_id, :status => '7')
     end
     
-    # Insert written input if any exists
-    if !params[:textInputArea].empty?
-      exploration_id = exploration_user.first.exploration_id
-      user_id = exploration_user.first.user_id
-      new_input = WrittenInput.new(:user_id => user_id, :exploration_id => exploration_id, :written_input => params[:textInputArea], :step => params[:step])
-      new_input.save!
-    
+    # Check if params exist--in case where coming from Show view, there won't be params . . .
+    if params.has_key?(:written_input)
+      # Insert written input if any exists
+      if !params[:textInputArea].empty?
+        exploration_id = exploration_user.first.exploration_id
+        user_id = exploration_user.first.user_id
+        new_input = WrittenInput.new(:user_id => user_id, :exploration_id => exploration_id, :written_input => params[:textInputArea], :step => params[:step])
+        new_input.save!
+      end
     end
     
     # Original code from Surveyor
