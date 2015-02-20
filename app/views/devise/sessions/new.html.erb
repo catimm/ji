@@ -1,41 +1,41 @@
 <%= render 'layouts/header' %> 
 <div class="container">
 	<div class="row topRow"> 
-		<div class="col-sm-4"></div>
-		<div class="col-sm-4 box">
+		<div class="col-xs-0 col-sm-3 col-md-4"></div>
+		<div class="col-xs-12 col-sm-6 col-md-4 box">
 			<div class="row">
-				<div class="col-sm-12">
+				<div class="col-md-12">
 						<h2 class="formSpace">Log in</h2>
 					    <%= form_for(resource, :class => "input-group", :as => resource_name, :url => session_path(resource_name)) do |f| %> 
 					      <%- flash.each do |name, msg| -%>
 						    <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
 						  <%- end -%>
 							<div class="row formSpace"> 
-								<div class="col-sm-1"></div>
-								<div class="col-sm-10">
+								<div class="col-md-1"></div>
+								<div class="col-md-10">
 						      		<%= f.email_field :email, :class => "form-control", placeholder: "Email", autofocus: true %> 
 								</div>
-								<div class="col-sm-1"></div>
+								<div class="col-md-1"></div>
 							</div>
 							<div class="row"> 
-								<div class="col-sm-1"></div>
-								<div class="col-sm-10 forgot">
+								<div class="col-md-1"></div>
+								<div class="col-md-10 forgot">
 							 		<%= f.password_field :password, :class => "form-control", placeholder: "Password" %> 
 							 		<%= render "devise/shared/forgot" %>
 								</div>
-								<div class="col-sm-1"></div>
+								<div class="col-md-1"></div>
 							</div>
 							<div class="row formSpace">
-								<div class="col-sm-1"></div>
-								<div class="col-sm-5">
+								<div class="col-xs-0 col-md-1"></div>
+								<div class="col-xs-12 col-md-5">
+					      			<%= f.submit "Login", class: "btn btn-default btn-success onRight" %> 
+					      		</div>
+								<div class="col-xs-12 col-md-5 rememberMe">
 							      <% if devise_mapping.rememberable? %>
 								    <%= f.check_box :remember_me %> <%= f.label :remember_me %>
 								  <% end %>
 						  		</div>
-						  		<div class="col-sm-5">
-					      			<%= f.submit "Login", class: "btn btn-default btn-success onRight" %> 
-					      		</div>
-					      		<div class="col-sm-1"></div>
+					      		<div class="col-xs-0 col-md-1"></div>
 					      	</div>
 					    <% end %> 
 				</div> 
@@ -49,11 +49,11 @@
 						<div class="col-sm-1"></div>
 			</div>
 			<div class="row">
-						<div class="col-sm-1"></div>
-						<div class="col-sm-10">
+						<div class="col-xs-0 col-md-1"></div>
+						<div class="col-xs-12 col-md-10">
 							<%= render "devise/shared/linkedin" %>
 						</div>
-						<div class="col-sm-1"></div>
+						<div class="col-xs-0 col-md-1"></div>
 			</div>
 			<div class="row formSpace">
 						<div class="col-sm-3"></div>
@@ -64,13 +64,13 @@
 			</div>
 			<div class="row signupBox">
 						<div class="col-sm-1"></div>
-						<div class="col-sm-10">
-							<h5 class="signupOffer">New to ji? </h5> <%= render "devise/shared/signup" %>
+						<div class="col-sm-10 signUpRedirect">
+							<h5>New to ji? <%= render "devise/shared/signup" %></h5> 
 						</div>
 						<div class="col-sm-1"></div>
 			</div>
 		</div>
-		<div class="col-sm-4"></div>
+		<div class="col-xs-0 col-sm-3 col-md-4"></div>
 	</div>
 </div>
-<%= render 'layouts/footer' %>
+<%= render 'layouts/alt_footer' %>

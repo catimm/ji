@@ -4,7 +4,6 @@
 #
 #  id                   :integer          not null, primary key
 #  category             :string(255)
-#  picture              :string(255)
 #  completions_required :integer
 #  created_at           :datetime
 #  updated_at           :datetime
@@ -14,6 +13,9 @@
 #  title                :string(255)
 #  description          :text
 #  short_description    :string(255)
+#  picture_xs           :string(255)
+#  picture_sm           :string(255)
+#  picture_lg           :string(255)
 #
 
 class Exploration < ActiveRecord::Base

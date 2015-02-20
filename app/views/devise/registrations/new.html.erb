@@ -1,59 +1,57 @@
-<div class="intro-header"></div>
-<div id="section wrap">
-	<%= render 'layouts/header' %> 
-	<div class="intro-header"></div>
-	<div class="row"> 
-		<div class="col-sm-4"></div>
-		<div class="col-sm-4 box">
+<%= render 'layouts/header' %> 
+<div class="container">
+	<div class="row topRow"> 
+		<div class="col-xs-0 col-sm-3 col-md-4"></div>
+		<div class="col-xs-12 col-sm-6 col-md-4 box">
 			<div class="row">
-				<div class="col-sm-12">
+				<div class="col-md-12">
 						<h2 class="formSpace">Sign up</h2>
 					    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 							<%- flash.each do |name, msg| -%>
 							    <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
 							  <%- end -%>
 							<div class="row formSpace"> 
-								<div class="col-sm-1"></div>
-								<div class="col-sm-10">
+								<div class="col-md-1"></div>
+								<div class="col-md-10">
 						      		<%= f.text_field :first_name, required: true, :class => "form-control", autofocus: true, placeholder: "First name" %>
 								</div>
-								<div class="col-sm-1"></div>
+								<div class="col-md-1"></div>
 							</div>
 							<div class="row formSpace"> 
-								<div class="col-sm-1"></div>
-								<div class="col-sm-10">
+								<div class="col-md-1"></div>
+								<div class="col-md-10">
 							 		<%= f.email_field :email, :class => "form-control", required: true, placeholder: "Email" %>
 								</div>
-								<div class="col-sm-1"></div>
+								<div class="col-md-1"></div>
 							</div>
 							<div class="row formSpace"> 
-								<div class="col-sm-1"></div>
-								<div class="col-sm-10">
+								<div class="col-md-1"></div>
+								<div class="col-md-10">
 							 		 <%= f.password_field :password, :class => "form-control", required: true, placeholder: "Password", hint: ("#{@minimum_password_length} characters minimum" if @validatable) %>
 								</div>
-								<div class="col-sm-1"></div>
+								<div class="col-md-1"></div>
 							</div>
 							<div class="row formSpace"> 
-								<div class="col-sm-1"></div>
-								<div class="col-sm-10">
+								<div class="col-md-1"></div>
+								<div class="col-md-10">
 							 		<%= f.password_field :password_confirmation, :class => "form-control", required: true, placeholder: "Confirm password" %>
 								</div>
-								<div class="col-sm-1"></div>
+								<div class="col-md-1"></div>
 							</div>
 							<div class="row formSpace2"> 
-								<div class="col-sm-1"></div>
-								<div class="col-sm-10">
+								<div class="col-md-1"></div>
+								<div class="col-md-10">
 							 		<%= f.submit "Sign up", class: "btn btn-default btn-success longButton" %> 
 								</div>
-								<div class="col-sm-1"></div>
+								<div class="col-md-1"></div>
 							</div>
 					    <% end %> 
 					  		<div class="row formSpace">
-								<div class="col-sm-2"></div>
-								<div class="col-sm-8">
+								<div class="col-md-2"></div>
+								<div class="col-md-8">
 									<h6 class="liStatement">By signing up you agree to our Terms of Use and Privacy Policy</h6>
 								</div>
-								<div class="col-sm-2"></div>
+								<div class="col-md-2"></div>
 							</div>
 					  </div> 
 					</div>
@@ -66,29 +64,28 @@
 						<div class="col-sm-1"></div>
 					</div>
 					<div class="row">
-						<div class="col-sm-1"></div>
-						<div class="col-sm-10">
+						<div class="col-md-1"></div>
+						<div class="col-md-10">
 							<%= render "devise/shared/linkedinSignup" %>
 						</div>
-						<div class="col-sm-1"></div>
+						<div class="col-md-1"></div>
 					</div>
 					<div class="row formSpace">
-						<div class="col-sm-3"></div>
-						<div class="col-sm-6">
+						<div class="col-xs-0 col-md-1"></div>
+						<div class="col-xs-12 col-md-10">
 							<h6 class="liStatement">We'll never post anything to LinkedIn on your behalf</h6>
 						</div>
-						<div class="col-sm-3"></div>
+						<div class="col-xs-0 col-md-1"></div>
 					</div>
 					<div class="row signupBox">
 						<div class="col-sm-1"></div>
-						<div class="col-sm-10">
-							<h5 class="signupOffer">Have an account? </h5> <%= render "devise/shared/login" %>
+						<div class="col-sm-10 signUpRedirect">
+							<h5>Have an account? <%= render "devise/shared/login" %></h5> 
 						</div>
 						<div class="col-sm-1"></div>
 					</div>
 			</div>
 		</div>
-		<div class="col-sm-4"></div>
-	</div>
+		<div class="col-xs-0 col-sm-3 col-md-4"></div>
 </div>
-<%= render 'layouts/footer' %>
+<%= render 'layouts/alt_footer' %>

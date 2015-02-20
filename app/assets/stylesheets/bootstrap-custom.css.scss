@@ -11,6 +11,9 @@ body {
 .topRow {
   padding-top: 50px;
 }
+.colNoMargin {
+  padding: 0;
+}
 .hidden {
   display: none;
 }
@@ -28,9 +31,9 @@ body {
 }
 .formSpace {
   margin-bottom: 0.75em;
-}
-.formSpace2 {
-  margin-top: 1.25em;
+  h2 {
+    font-size: 0.9em;
+  }
 }
 .formSpace2 {
   margin-top: 2.25em;
@@ -40,29 +43,31 @@ body {
   font-size: 0.9em;
   color: #909090;
 }
-label {
-  font-weight: normal;
-  font-size: 0.9em;
-  color: #909090;
-  margin-right: 0.5em;
-}
 .onRight {
-  float: right;
+  width: 100%;
+}
+.rememberMe {
+  text-align: right;
+  input {
+    margin-top: 0.5em;
+  }
+  label {
+    font-weight: normal;
+    font-size: 0.8em;
+    color: #909090;
+    padding-bottom: 0.5em;
+  }
 }
 .signupBox {
   background: #f8f8f8;
   margin-top: 1em;
   border-top: 1px solid #e7e7e7;
-  height: 4.5em;
-  .col-sm-10 {
-    padding-top: 1.5em;
-    text-align: center;
-  }
 }
-.signupOffer {
-  display: inline;
+.signUpRedirect {
+  text-align: center;
+  margin-top: 1em;
+  margin-bottom: 1em; 
 }
-
 .forgot a {
   font-size: 0.75em;
    position: relative;
@@ -77,15 +82,13 @@ label {
   height: 35px;
 }
 .explorationOverview {
-  height: 240px;
   border: 1px solid #e7e7e7;
   margin: 1em 0;
 }
 .packageLeft {
     background-repeat: no-repeat;
-    width: 320px;
+    width: 100%;
     height: 240px;
-    float: right;
 }
 .explorationTitle {
     margin-top: 0.5em;
@@ -99,7 +102,7 @@ label {
   }
 }
 .explorationDescription {
-    margin: 1.25em 0 3em 0;
+    margin: 1.25em 0 2em 0;
     h5 {
       font-size: 1.1em;
     }
@@ -111,6 +114,9 @@ label {
     }
     h6 {
       margin: 0;
+    }
+    div {
+      margin-bottom: 0.5em;
     }
 }
 
