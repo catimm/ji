@@ -1,40 +1,42 @@
 <% @unexplored_explorations.each do |b| %>
 	<div class="row explorationOverview">
-			<div class="col-sm-4">
-				<div class="packageLeft" style="background-image: url(<%= b.picture %>)"></div>
+			<div class="col-xs-12 col-sm-4 colNoMargin">
+				<div class="packageLeft img-responsive visible-xs" alt="Responsive image" style="background-image: url(<%= b.exploration.picture_xs %>)"></div>
+				<div class="packageLeft img-responsive visible-sm visible-md" alt="Responsive image" style="background-image: url(<%= b.exploration.picture_sm %>)"></div>
+				<div class="packageLeft img-responsive visible-lg" alt="Responsive image" style="background-image: url(<%= b.exploration.picture_lg %>)"></div>
 			</div>
-			<div class="col-sm-8">
+			<div class="col-xs-12 col-sm-8">
 					<div class="row explorationTitle">
 						<div class="col-sm-12">
 							<h3><%= b.title %></h3>
 						</div>
 					</div>
 					<div class="row explorationExplorer">
-						<div class="col-sm-3">
+						<div class="col-xs-4 col-sm-3">
 							<h6 class="gray"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <%= b.explorer.user.first_name %> <%= b.explorer.last_name %></h6>
 						</div>
-						<div class="col-sm-3">
+						<div class="col-xs-4 col-sm-3">
 							<h6 class="gray"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <%= b.explorer.city %>, <%= b.explorer.state %></h6>
 						</div>
-						<div class="col-sm-6"></div>
+						<div class="col-xs-4 col-sm-6"></div>
 					</div>
 					<div class="row explorationDescription">
 						<h5 class="gray"><%= b.description %></h5>
 					</div>
 					<div class="row explorationStats">
-						<div class="col-sm-2">
+						<div class="col-xs-4 col-sm-3">
 							<h3><%= @completed %>%</h3>
 							<h6 class="gray">complete</h6>
 						</div>
-						<div class="col-sm-2">
+						<div class="col-xs-4 col-sm-3">
 							<h3><%= @people %></h3>
 							<h6 class="gray">participants</h6>
 						</div>
-						<div class="col-sm-2">
+						<div class="col-xs-4 col-sm-3">
 							<h3><%= @days_left %></h3>
 							<h6 class="gray">days to go</h6>                                                                         
 						</div>
-						<div class="col-sm-5">
+						<div class="col-xs-12 col-sm-5">
 							<%= form_for @start, url: {action: "new"} do |h| %>
 								<%= h.hidden_field :exploration_id, value: b.id %>
 								<%= h.submit id: "originalButton", value: "I'm interested!", class: "btn btn-success inputButton" %>
