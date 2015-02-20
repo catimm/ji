@@ -3,6 +3,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <%= surveyor_includes %>
 <body>
@@ -14,13 +15,13 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-1"></div>
-		<div class="col-sm-10">
+		<div class="col-xs-0 col-md-1"></div>
+		<div class="col-xs-12 col-md-10">
 			<%= yield %>
 	  	</div>
-	  	<div class="col-sm-1"></div>
+	  	<div class="col-xs-0 col-md-1"></div>
 	</div>
 </div>
-<%= render 'layouts/alt_footer' %>
+<%= render 'layouts/footer' %>
 </body>
 </html>

@@ -7,12 +7,12 @@ $(document).ready(function(){
 	    	if ($("#problemTwo").hasClass("show")) {
 	    		$("#problemTwo").removeClass("show").addClass("hidden");
 				$("#textInputArea2").removeClass("hidden").addClass("show");
-				$("#noWebcam").html("Use webcam option.");
+				$(".noWebcam").html("Use webcam option.");
 				$("#step2Button").removeAttr('disabled');	
 	    	} else {
 	    		$("#problemTwo").removeClass("hidden").addClass("show");
 	    		$("#textInputArea2").removeClass("show").addClass("hidden");
-	    		$("#noWebcam").html("Provide written response instead.");
+	    		$(".noWebcam").html("Provide written response instead.");
 	    		$("#step2Button").attr('disabled', true);
 	    	}
 
@@ -21,12 +21,12 @@ $(document).ready(function(){
 	    	if ($("#problemFour").hasClass("show")) {
 	    		$("#problemFour").removeClass("show").addClass("hidden");
 				$("#textInputArea4").removeClass("hidden").addClass("show");
-				$("#noWebcam").html("Use webcam option.");
+				$(".noWebcam").html("Use webcam option.");
 				$("#step4Button").removeAttr('disabled');
 	    	} else {
 	    		$("#problemFour").removeClass("hidden").addClass("show");
 	    		$("#textInputArea4").removeClass("show").addClass("hidden");
-	    		$("#noWebcam").html("Provide written response instead.");
+	    		$(".noWebcam").html("Provide written response instead.");
 	    		$("#step4Button").attr('disabled', true);
 	    	}
 
@@ -35,12 +35,12 @@ $(document).ready(function(){
 	    	if ($("#problemFive").hasClass("show")) {
 	    		$("#problemFive").removeClass("show").addClass("hidden");
 				$("#textInputArea5").removeClass("hidden").addClass("show");
-				$("#noWebcam").html("Use webcam option.");
+				$(".noWebcam").html("Use webcam option.");
 				$("#step5Button").removeAttr('disabled');
 	    	} else {
 	    		$("#problemFive").removeClass("hidden").addClass("show");
 	    		$("#textInputArea5").removeClass("show").addClass("hidden");
-	    		$("#noWebcam").html("Provide written response instead.");
+	    		$(".noWebcam").html("Provide written response instead.");
 	    		$("#step5Button").attr('disabled', true);
 	    	}
 
@@ -49,12 +49,12 @@ $(document).ready(function(){
 	    	if ($("#problemSix").hasClass("show")) {
 	    		$("#problemSix").removeClass("show").addClass("hidden");
 				$("#textInputArea6").removeClass("hidden").addClass("show");
-				$("#noWebcam").html("Use webcam option.");
+				$(".noWebcam").html("Use webcam option.");
 				$("#step6Button").removeAttr('disabled');
 	    	} else {
 	    		$("#problemSix").removeClass("hidden").addClass("show");
 	    		$("#textInputArea6").removeClass("show").addClass("hidden");
-	    		$("#noWebcam").html("Provide written response instead.");
+	    		$(".noWebcam").html("Provide written response instead.");
 	    		$("#step6Button").attr('disabled', true);
 	    	}
 
@@ -63,11 +63,11 @@ $(document).ready(function(){
 			if ($("#problemSeven").hasClass("show")) {
 	    		$("#problemSeven").removeClass("show").addClass("hidden");
 				$("#textInputArea7").removeClass("hidden").addClass("show");
-				$("#noWebcam").html("Use webcam option.");
+				$(".noWebcam").html("Use webcam option.");
 	    	} else {
 	    		$("#problemSeven").removeClass("hidden").addClass("show");
 	    		$("#textInputArea7").removeClass("show").addClass("hidden");
-	    		$("#noWebcam").html("Provide written response instead.");
+	    		$(".noWebcam").html("Provide written response instead.");
 	    	}
 		}
 	});	

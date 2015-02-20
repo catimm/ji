@@ -6,24 +6,40 @@
 			</div>
 		</div>
 		<form method="post" action="/surveys/craft-beer-demographics" accept-charset="UTF-8">
-		<div class="row">
-			<div class="col-sm-1"></div>
-			<div class="col-sm-5">
+		<div class="row bottomRow">
+			<div class="col-xs-0 col-sm-0 col-md-1"></div>
+			<div class="col-xs-12 col-sm-6 col-md-5">
 				<div class="row inputArea">
-					<camera id='problemSeven' class="camera show" data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' style='width:360px;height:270px;' data-poll-for-processed='true'></camera>
+					<camera id='problemSeven' class="camera show img-responsive" data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' data-poll-for-processed='true'></camera>
 					<textarea name="textInputArea" id="textInputArea7" class="textInputArea hidden" placeholder="Type input here"></textarea>
 				</div>
-				<div class="row">
-					<div class="col-sm-7 extraInfoSpacing">
+				<div class="row visible-xs visible-lg">
+					<div class="col-xs-7 extraInfoSpacing">
 						<h6 class="emailContact">Questions? Email me: ctiv@hotmail.com</h6>
 					</div>
-					<div class="col-sm-5 altInput extraInfoSpacing">
+					<div class="col-xs-5 altInput extraInfoSpacing">
+						<%= link_to(raw("Provide written response instead."), "#", :class => "noWebcam seven", :id => "noWebcam") %>
+					</div>
+				</div>
+				<div class="row visible-sm visible-md">
+					<div class="col-xs-7 extraInfoSpacing two">
+						<h6 class="emailContact">Questions? Email me: ctiv@hotmail.com</h6>
+					</div>
+					<div class="col-xs-5 altInput extraInfoSpacing two">
 						<%= link_to(raw("Provide written response instead."), "#", :class => "noWebcam seven", :id => "noWebcam") %>
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-5">
-				<div class="row textArea">
+			<div class="col-xs-12 col-sm-6 col-md-5">
+				<div class="row textAreaToXS hidden-xs"> <!--Using class tags to change height of div based on device viewing-->
+					<h5 class="specialFontSize">Please use the webcam to share your thoughts on the following questions:</h5>
+					<ul>
+						<li class="specialFontSize">Do you think there are any other annoyances related to finding a good craft beer?</li>
+						<li class="specialFontSize">If so, how do you currently deal with those?</li>
+						<li class="specialFontSize">Is there anything else we haven't touched on that you'd like to mention?</li>
+					</ul>
+				</div>
+				<div class="row textAreaXS visible-xs"> <!--Using class tags to change height of div based on device viewing-->
 					<h5 class="specialFontSize">Please use the webcam to share your thoughts on the following questions:</h5>
 					<ul>
 						<li class="specialFontSize">Do you think there are any other annoyances related to finding a good craft beer?</li>
@@ -37,7 +53,7 @@
 					<input type="hidden" name="step" value=7 >
 				</div>	
 			</div>
-			<div class="col-sm-1"></div>
+			<div class="col-xs-0 col-sm-0 col-md-1"></div>
 		</div>
 		</form>
 </div>

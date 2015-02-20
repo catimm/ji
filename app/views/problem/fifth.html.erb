@@ -6,24 +6,40 @@
 			</div>
 		</div>
 		<%= form_for @written, url: step6_path  do |f| %>
-		<div class="row">
-			<div class="col-sm-1"></div>
-			<div class="col-sm-5">
+		<div class="row  bottomRow">
+			<div class="col-xs-0 col-sm-0 col-md-1"></div>
+			<div class="col-xs-12 col-sm-6 col-md-5">
 				<div class="row inputArea">
-					<camera id='problemFive' class="camera show" data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' style='width:360px;height:270px;' data-poll-for-processed='true'></camera>
+					<camera id='problemFive' class="camera show img-responsive" data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' data-poll-for-processed='true'></camera>
 					<%= f.text_area :written_input, id: "textInputArea5", :class => "form-control textInputArea hidden", placeholder: "Type input here" %>
 				</div>
-				<div class="row">
-					<div class="col-sm-7 extraInfoSpacing">
+				<div class="row visible-xs visible-lg">
+					<div class="col-xs-7 extraInfoSpacing">
 						<h6 class="emailContact">Questions? Email me: ctiv@hotmail.com</h6>
 					</div>
-					<div class="col-sm-5 altInput extraInfoSpacing">
+					<div class="col-xs-5 altInput extraInfoSpacing">
+						<%= link_to(raw("Provide written response instead."), "#", :class => "noWebcam five", :id => "noWebcam") %>
+					</div>
+				</div>
+				<div class="row visible-sm visible-md">
+					<div class="col-xs-7 extraInfoSpacing two">
+						<h6 class="emailContact">Questions? Email me: ctiv@hotmail.com</h6>
+					</div>
+					<div class="col-xs-5 altInput extraInfoSpacing two">
 						<%= link_to(raw("Provide written response instead."), "#", :class => "noWebcam five", :id => "noWebcam") %>
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-5">
-				<div class="row textArea">
+			<div class="col-xs-12 col-sm-6 col-md-5">
+				<div class="row textAreaToXS hidden-xs"> <!--Using class tags to change height of div based on device viewing-->
+					<h5 class="specialFontSize">Please use the webcam to share your thoughts on the following questions:</h5>
+					<ul>
+						<li class="specialFontSize">When you buy/order craft beer, how often do you end up with something you like?</li>
+						<li class="specialFontSize">Do you do anything to help make sure you are happy with your beer choice?</li>
+						<li class="specialFontSize">If so, what? If not, why not?</li>
+					</ul>
+				</div>
+				<div class="row textAreaXS visible-xs"> <!--Using class tags to change height of div based on device viewing-->
 					<h5 class="specialFontSize">Please use the webcam to share your thoughts on the following questions:</h5>
 					<ul>
 						<li class="specialFontSize">When you buy/order craft beer, how often do you end up with something you like?</li>
@@ -36,7 +52,7 @@
 					<%= f.submit id: "step5Button", value: "Take me to Step 6", class: "btn btn-success inputButton2", disabled: "true" %>
 				</div>	
 			</div>
-			<div class="col-sm-1"></div>
+			<div class="col-xs-0 col-sm-0 col-md-1"></div>
 		</div>
 		<% end %>
 </div>
