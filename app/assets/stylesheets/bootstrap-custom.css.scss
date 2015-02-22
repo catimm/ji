@@ -5,13 +5,108 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+
+@font-face {
+    font-family: 'ai_kelsor';
+    src: url('Kelson_Regular-webfont.eot');
+    src: url('Kelson_Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Kelson_Regular-webfont.woff2') format('woff2'),
+         url('Kelson_Regular-webfont.woff') format('woff'),
+         url('Kelson_Regular-webfont.ttf') format('truetype'),
+         url('Kelson_Regular-webfont.svg#ai_kelsor') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 html {
   position: relative;
   min-height: 100%;
 }
+.homeImage {
+    background: url("https://s3-us-west-2.amazonaws.com/jiproblemtest/road.jpg") no-repeat fixed center center / cover transparent;
+    background-clip: border-box;
+    background-origin: padding-box;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
 body {
   padding-top: 50px;
   margin-bottom: 78px;
+  overflow-x: hidden;
+}
+section {
+  margin: 0;
+  width: 100%;
+}
+.homeNavbar {
+  background: #47504D !important;
+  border-color: #47504D;
+}
+.navbar {
+  a {
+    color: #fff !important;
+  }
+  .navbar-header {
+    a { 
+      font-size: 24px;
+      line-height: 1.1;
+      padding: 0;
+      margin-left: 40px !important;
+    }
+    .logo {
+      font-family: "ai_kelsor";
+      text-align: center;
+      width: 12px;
+    }
+    .logo.B {
+     border-bottom: 1px solid #fff; 
+    }
+    .logo.U {
+      margin-top: -5px;
+      padding-top: 0;
+    }
+  }
+}
+.homeBody {
+  background: transparent;
+}
+
+.valueStatement {
+  padding-top: 10%;
+  height:100vh;
+  color: #fff;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  h1 {
+    font-size: 3.25em;
+  }
+}
+section {
+  padding-bottom: 3em;
+  h2 {
+    margin-top: 25px;
+    margin-bottom: 20px;
+  }
+  div {
+    text-align: center;
+  }
+  h4 {
+    span {
+      font-weight: 600;
+    }
+  }
+}
+.homeSecond {
+  background: #f7fAfA;
+  margin-top: -60px;
+}
+.valueDesc {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+.homeThird {
+  background: #fff; 
 }
 .topRow {
   padding-top: 50px;
@@ -88,6 +183,7 @@ body {
   margin: 0;
   padding: 17px 15px 15px 15px;
   height: 35px;
+  color: #fff;
 }
 .explorationOverview {
   border: 1px solid #e7e7e7;
@@ -321,7 +417,7 @@ legend {
   margin-top: 3em;
 }
 .footer {
-  background-color: #f8f8f8;
+  background-color: #f7fAfA;
   border-color: #e7e7e7;
   border-width: 1px 0 0 0;
   bottom: 0;
@@ -334,9 +430,6 @@ legend {
     color: #2E96F0;
   }
 }
-.footer.alt {
-  position: relative;
-}
 .ui-widget-content {
   background: #f8f8f8;
 }
@@ -345,9 +438,9 @@ legend {
 }
 .navLinks:hover, 
 .navLinks:focus {
-    background: #2E96F0 !important; 
+    background: #f7fAfA !important; 
     a {
-      color: #fff !important;
+      color: #47504D !important;
       text-decoration: none !important; 
     }   
 }

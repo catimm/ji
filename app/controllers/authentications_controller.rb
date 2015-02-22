@@ -32,7 +32,7 @@ class AuthenticationsController < ApplicationController
       end
       
       
-    else # this section is for a user who has not yet registered for ji and is using LI to do so
+    else # this section is for a user who has not yet registered and is using LI to do so
       user = User.new
       user.first_name = omni['info']['first_name']
       user.email = omni['info']['email']
