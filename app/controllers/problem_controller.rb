@@ -20,15 +20,15 @@ class ProblemController < ApplicationController
   end
   
   def fourth
-    # Make sure the exploration_user_id and the exploration_id is available
+    # Make sure the exploration_user_id is available
     if session[:exploration_users_id].nil?
       session[:exploration_users_id] = params[:exploration_user][:id]
-      if session[:exploration_id].nil?
-        exploration_user_info = ExplorationUser.where(id: session[:exploration_users_id]).pluck(:exploration_id)
-        session[:exploration_id] = exploration_user_info[0]
-      end
     end
-    
+    # Make sure the exploration_id is available
+    if session[:exploration_id].nil?
+      exploration_user_info = ExplorationUser.where(id: session[:exploration_users_id]).pluck(:exploration_id)
+      session[:exploration_id] = exploration_user_info[0]
+    end
     # Pass variables to problem.js.erb
     gon.current_user = current_user.id
     gon.exploration_id = session[:exploration_id]
@@ -38,13 +38,14 @@ class ProblemController < ApplicationController
   end
   
   def fifth
-    # Make sure the exploration_user_id and the exploration_id is available
+    # Make sure the exploration_user_id is available
     if session[:exploration_users_id].nil?
       session[:exploration_users_id] = params[:exploration_user][:id]
-      if session[:exploration_id].nil?
-        exploration_user_info = ExplorationUser.where(id: session[:exploration_users_id]).pluck(:exploration_id)
-        session[:exploration_id] = exploration_user_info[0]
-      end
+    end
+    # Make sure the exploration_id is available
+    if session[:exploration_id].nil?
+      exploration_user_info = ExplorationUser.where(id: session[:exploration_users_id]).pluck(:exploration_id)
+      session[:exploration_id] = exploration_user_info[0]
     end
     
     # Pass variables to problem.js.erb
@@ -66,13 +67,14 @@ class ProblemController < ApplicationController
   end
   
   def sixth
-    # Make sure the exploration_user_id and the exploration_id is available
+    # Make sure the exploration_user_id is available
     if session[:exploration_users_id].nil?
       session[:exploration_users_id] = params[:exploration_user][:id]
-      if session[:exploration_id].nil?
-        exploration_user_info = ExplorationUser.where(id: session[:exploration_users_id]).pluck(:exploration_id)
-        session[:exploration_id] = exploration_user_info[0]
-      end
+    end
+    # Make sure the exploration_id is available
+    if session[:exploration_id].nil?
+      exploration_user_info = ExplorationUser.where(id: session[:exploration_users_id]).pluck(:exploration_id)
+      session[:exploration_id] = exploration_user_info[0]
     end
     
     # Pass variables to problem.js.erb
@@ -94,13 +96,14 @@ class ProblemController < ApplicationController
   end
   
   def seventh
-    # Make sure the exploration_user_id and the exploration_id is available
+    # Make sure the exploration_user_id is available
     if session[:exploration_users_id].nil?
       session[:exploration_users_id] = params[:exploration_user][:id]
-      if session[:exploration_id].nil?
-        exploration_user_info = ExplorationUser.where(id: session[:exploration_users_id]).pluck(:exploration_id)
-        session[:exploration_id] = exploration_user_info[0]
-      end
+    end
+    # Make sure the exploration_id is available
+    if session[:exploration_id].nil?
+      exploration_user_info = ExplorationUser.where(id: session[:exploration_users_id]).pluck(:exploration_id)
+      session[:exploration_id] = exploration_user_info[0]
     end
     
     # Pass variables to problem.js.erb

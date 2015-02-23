@@ -4,6 +4,9 @@ Code::Application.routes.draw do
   devise_for :users, path_names: { sign_in: "login", sign_out: "logout", sign_up: "register" },
   controllers: { omniauth_callbacks: "authentications", registrations: "registrations", invitations: "invitations"  }
 
+  devise_scope :user do
+    delete "/logout" => "devise/sessions#destroy"
+  end
   resources :users
   resources :exploration_users
   resources :explorations

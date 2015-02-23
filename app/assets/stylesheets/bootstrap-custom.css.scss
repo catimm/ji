@@ -460,5 +460,32 @@ legend {
       li > input {
         width: 33%;
       }
+      li > textarea {
+        width: 100% !important;
+        height: 90px !important;
+      }
     }
+}
+.ui-datepicker-calendar {
+  td > a:hover {
+    color: #fff;
+  }
+}
+#flash_notice {
+  color: red;
+  font-size: 12px;
+}
+#flash_alert {
+  color: red;
+  font-size: 12px;
+  padding-bottom: 0.5em;
+}
+#error_explanation {
+  color: red;
+  h2 {
+    font-size: 0.5em;
+  }
+  ul {
+    list-style-type: none;
+  }
 }
