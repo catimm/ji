@@ -16,9 +16,6 @@ module SurveyorControllerCustomMethods
   def create
     # Keep the status updated in ExplorationUser
     exploration_user_id = params[:exploration_users_id]
-    if session[:exploration_users_id].nil?
-      cookies[:exploration_users_id] = exploration_user_id
-    end
     
     exploration_user = ExplorationUser.where(id: exploration_user_id).all.to_a
     status = exploration_user.first.status
@@ -32,7 +29,7 @@ module SurveyorControllerCustomMethods
     end
     
     # Check if params exist--in case where coming from Show view, there won't be params . . .
-    if params.has_key?(:written_input)
+    if params.has_key?(:textInputArea)
       # Insert written input if any exists
       if !params[:textInputArea].empty?
         exploration_id = exploration_user.first.exploration_id
