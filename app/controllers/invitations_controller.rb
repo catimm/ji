@@ -27,7 +27,7 @@ class InvitationsController < Devise::InvitationsController
   end
   
   def update
-    
+    super
     raw_token = params[:user][:invitation_token]
     invitation_token = Devise.token_generator.digest(User, :invitation_token, raw_token)
     user_id = User.where(invitation_token: invitation_token).pluck(:id)
@@ -36,6 +36,6 @@ class InvitationsController < Devise::InvitationsController
     new_exploration_user = ExplorationUser.new(:exploration_id => exploration_id[0], :user_id => user_id[0], :status => 0)
     new_exploration_user.save!
   
-    super  
+      
   end
 end

@@ -459,10 +459,14 @@ legend {
       padding-bottom: 0.5em;
       li > input {
         width: 33%;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 12px;
       }
       li > textarea {
-        width: 100% !important;
+        width: 90% !important;
         height: 90px !important;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 12px;
       }
     }
 }
@@ -483,9 +487,10 @@ legend {
 #error_explanation {
   color: red;
   h2 {
-    font-size: 0.5em;
+    display: none;
   }
   ul {
     list-style-type: none;
+    margin-left: -1.5em;
   }
 }

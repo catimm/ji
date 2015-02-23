@@ -4,7 +4,7 @@ class InputController < ApplicationController
   def video_url
     information = request.raw_post
     data_parsed = JSON.parse(information)
-    
+
     video = Video.new
     video.uuid = data_parsed['uuid']
     video.video_url = data_parsed['formats'][0]['video_url']
