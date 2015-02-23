@@ -27,15 +27,18 @@ class InvitationsController < Devise::InvitationsController
   end
   
   def update
-    super
+    # First grab raw token
     raw_token = params[:user][:invitation_token]
     invitation_token = Devise.token_generator.digest(User, :invitation_token, raw_token)
-    user_id = User.where(invitation_token: invitation_token).pluck(:id)
-    exploration_id = User.where(id: user_id).pluck(:invited_for_exploration_id)
+    user = User.where(invitation_token: invitation_token).all.to_a
+    # Process update--swap token for encrytped password
+    super
+    # Making sure password was set appropriately before inserting new ExplorationUser
+    if user.first.invitation_token.empty?
+      exploration_id = User.where(id: user_id).pluck(:invited_for_exploration_id)
 
-    new_exploration_user = ExplorationUser.new(:exploration_id => exploration_id[0], :user_id => user_id[0], :status => 0)
-    new_exploration_user.save!
-  
-      
+      new_exploration_user = ExplorationUser.new(:exploration_id => exploration_id[0], :user_id => user_id[0], :status => 0)
+      new_exploration_user.save! 
+    end
   end
 end
