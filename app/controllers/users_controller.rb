@@ -6,13 +6,32 @@ class UsersController < ApplicationController
     @start = ExplorationUser.new
     @new = Exploration.new
     
+    # Create array of all Exploration IDs
     exploration_ids = Exploration.all.map(& :id)
-    Rails.logger.debug("Exploration IDs are: #{exploration_ids.inspect}")
+    Rails.logger.debug("All exploration IDs are: #{exploration_ids.inspect}")
+    # Create array of all Exploration IDs where current user is exploring
     @exploration_user_ids = ExplorationUser.where(user_id: current_user).pluck(:exploration_id)
-    Rails.logger.debug("Exploration User IDs are: #{@exploration_user_ids.inspect}")
+    Rails.logger.debug("Explorations User is exploring: #{@exploration_user_ids.inspect}")
+    # Create array of all Exploration IDs where current user is NOT exploring
     @unexplored_exploration_ids = exploration_ids - @exploration_user_ids
-    Rails.logger.debug("Remaining IDs are: #{@unexplored_exploration_ids.inspect}")
+    Rails.logger.debug("Explorations User is not exploring: #{@unexplored_exploration_ids.inspect}")
+
+    # If current user is NOT exploring any Explorations that are available, loop through them to show them here
+    if !@unexplored_exploration_ids.empty?
+      Rails.logger.debug("Unexplored Explorations IDs are: #{@unexplored_exploration_ids.inspect}")
+      @unexplored_explorations = Exploration.where(id: @unexplored_exploration_ids)
+      Rails.logger.debug("Unexplored Explorations are: #{@unexplored_explorations.inspect}")
     
+      @unexplored_explorations.each do |b|
+        @time = Time.now
+        asking = b.completions_required.to_f
+        @completed = b.exploration_users.count(:completed)
+        @people = b.exploration_users.count(:started) 
+        @days_left = ((b.end_date - @time)/1.day).round
+      end
+    end
+    
+    # If current user is exploring any Explorations, loop through them to show them here 
     if !@exploration_user_ids.empty?
       @exploration_user = ExplorationUser.where(user_id: current_user)
       Rails.logger.debug("Explorat User is: #{@exploration_user.inspect}")
@@ -26,7 +45,7 @@ class UsersController < ApplicationController
         @explorations.each do |g|
           @time = Time.now
           asking = g.completions_required.to_f
-          @completed = ((g.exploration_users.count(:completed) / asking)*100).round
+          @completed = g.exploration_users.count(:completed)
           @people = g.exploration_users.count(:started) 
           @days_left = ((g.end_date - @time)/1.day).round
         end
@@ -37,21 +56,7 @@ class UsersController < ApplicationController
           end
         end
       end
-    end   
-    
-    if !@unexplored_exploration_ids.empty?
-      @unexplored_explorations = Exploration.where(id: @unexplored_exploration_ids)
-      Rails.logger.debug("Unexplored Explorations are: #{@unexplored_explorations.inspect}")
-    
-      @unexplored_explorations.each do |b|
-        @time = Time.now
-        asking = b.completions_required.to_f
-        @completed = ((b.exploration_users.count(:completed) / asking)*100).round
-        @people = b.exploration_users.count(:started) 
-        @days_left = ((b.end_date - @time)/1.day).round
-      end
-    end
-    
+    end      
   end
   
   def update

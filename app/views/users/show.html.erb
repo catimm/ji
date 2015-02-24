@@ -2,7 +2,7 @@
 <div class="container">
 		<div class="row">
 			<div class="page-header">
-			  <h2>Interests</h2>
+			  <h2>Current explorations</h2>
 			</div>
 		</div>
 		<div class="row">
@@ -12,7 +12,7 @@
 					<%= render 'exploration_overview' %>
 				<% end %>
 				<% if @exploration_user_ids.empty? %>
-					<h3>You haven't chosen any interests yet! Choose an opportunity below to get started.</h3>
+					<h3>You aren't exploring anything yet! Choose an opportunity below to get started.</h3>
 				<% end %>
 			</div>
 			<div class="col-xs-0 col-md-1"></div>
@@ -20,7 +20,7 @@
 		<% if !@unexplored_exploration_ids.empty? %>
 			<div class="row moreOppty">
 				<div class="page-header">
-				  <h2>Opportunities</h2>
+				  <h2>Exploration opportunities</h2>
 				</div>
 			</div>
 			<div class="row">

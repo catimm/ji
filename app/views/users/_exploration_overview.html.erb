@@ -7,18 +7,26 @@
 			</div>
 			<div class="col-xs-12 col-sm-8">
 					<div class="row explorationTitle">
-						<div class="col-sm-12">
+						<div class="col-sm-10">
 							<h3><%= d.exploration.title %></h3>
 						</div>
 					</div>
 					<div class="row explorationExplorer">
-						<div class="col-xs-5 col-sm-3">
-							<h6 class="gray"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <%= d.exploration.explorer.user.first_name %> <%= d.exploration.explorer.last_name %></h6>
+						<div class="col-xs-4 col-sm-3">
+							<h6 class="gray"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> by <%= d.exploration.explorer.user.first_name %> <%= d.exploration.explorer.last_name %></h6>
 						</div>
-						<div class="col-xs-5 col-sm-3">
+						<div class="col-xs-4 col-sm-3">
 							<h6 class="gray"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <%= d.exploration.explorer.city %>, <%= d.exploration.explorer.state %></h6>
 						</div>
-						<div class="col-xs-2 col-sm-6"></div>
+						<div class="col-xs-4 col-sm-3">
+							<% if d.exploration.category == "Problem" %>
+						        <h6 class="gray"><i class="fa fa-exclamation-triangle"></i> <%= d.exploration.short_description %></h6>
+						    <% end %>
+							<% if d.exploration.category == "Solution" %>
+						        <h6 class="gray"><i class="fa fa-lightbulb-o"></i> <%= d.exploration.short_description %></h6>
+						    <% end %>
+						</div>
+						<div class="col-xs-0 col-sm-3"></div>
 					</div>
 					<div class="row explorationDescription">
 						<h5 class="gray"><%= d.exploration.description %></h5>
@@ -26,14 +34,16 @@
 					<div class="row explorationStats">
 						<div class="col-xs-4 col-sm-2">
 							<h3><%= d.exploration.completions_required %></h3>
-							<h6 class="gray">responders wanted</h6>
+							<h6 class="gray">desired</h6>
 						</div>
 						<div class="col-xs-4 col-sm-2">
-							<h3><%= @completed %>%</h3>
-							<h6 class="gray">complete</h6>
+							<% completed = d.exploration.exploration_users.count(:completed) %>
+							<h3><%= completed %></h3>
+							<h6 class="gray">provided</h6>
 						</div>
 						<div class=" col-xs-4 col-sm-2">
-							<h3><%= @days_left %></h3>
+							<% days_left = ((d.exploration.end_date - @time)/1.day).round %>
+							<h3><%= days_left %></h3>
 							<h6 class="gray">days to go</h6>                                                                         
 						</div>
 						<div class="col-xs-12 col-sm-5 show" id="buttonDiv1">
