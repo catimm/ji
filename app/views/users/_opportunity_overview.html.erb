@@ -19,11 +19,11 @@
 							<h6 class="gray"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <%= b.explorer.city %>, <%= b.explorer.state %></h6>
 						</div>
 						<div class="col-xs-4 col-sm-3">
-							<% if b.category == "Problem" %>
-						        <h6 class="gray"><i class="fa fa-exclamation-triangle"></i> <%= b.short_description %></h6>
+							<% if b.exploration_phase == "Problem" %>
+						        <h6 class="gray"><i class="fa fa-exclamation-triangle"></i> <%= b.exploration_category %></h6>
 						    <% end %>
-							<% if b.category == "Solution" %>
-						        <h6 class="gray"><i class="fa fa-lightbulb-o"></i> <%= b.short_description %></h6>
+							<% if b.exploration_phase == "Solution" %>
+						        <h6 class="gray"><i class="fa fa-lightbulb-o"></i> <%= b.exploration_category %></h6>
 						    <% end %>
 						</div>
 						<div class="col-xs-0 col-sm-3"></div>
@@ -49,7 +49,7 @@
 						<div class="col-xs-12 col-sm-5">
 							<%= form_for @start, url: {action: "new"} do |h| %>
 								<%= h.hidden_field :exploration_id, value: b.id %>
-								<%= h.submit id: "originalButton", value: "I'm interested!", class: "btn btn-success inputButton" %>
+								<%= h.submit id: "originalButton", value: "I'll share!", class: "btn btn-success inputButton" %>
 							<% end %>
 						</div>
 						<div class="col-sm-1"></div>

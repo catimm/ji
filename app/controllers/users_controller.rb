@@ -6,51 +6,45 @@ class UsersController < ApplicationController
     @start = ExplorationUser.new
     @new = Exploration.new
     
+    
+    Rails.logger.debug("Exploration & users info: #{@explorations_test.inspect}")
+    # Use the below to reset the counters in Exploration
+    # Exploration.find_each { |exploration| Exploration.reset_counters(exploration.id, :exploration_users) }
+    
+    
+    
     # Create array of all Exploration IDs
     exploration_ids = Exploration.all.map(& :id)
     Rails.logger.debug("All exploration IDs are: #{exploration_ids.inspect}")
     # Create array of all Exploration IDs where current user is exploring
-    @exploration_user_ids = ExplorationUser.where(user_id: current_user).pluck(:exploration_id)
-    Rails.logger.debug("Explorations User is exploring: #{@exploration_user_ids.inspect}")
+    @exploration_ids = current_user.exploration_ids
+    Rails.logger.debug("IDs of User explorations: #{@exploration_ids.inspect}")
     # Create array of all Exploration IDs where current user is NOT exploring
-    @unexplored_exploration_ids = exploration_ids - @exploration_user_ids
+    @unexplored_exploration_ids = exploration_ids - @exploration_ids
     Rails.logger.debug("Explorations User is not exploring: #{@unexplored_exploration_ids.inspect}")
 
     # If current user is NOT exploring any Explorations that are available, loop through them to show them here
     if !@unexplored_exploration_ids.empty?
-      Rails.logger.debug("Unexplored Explorations IDs are: #{@unexplored_exploration_ids.inspect}")
       @unexplored_explorations = Exploration.where(id: @unexplored_exploration_ids)
-      Rails.logger.debug("Unexplored Explorations are: #{@unexplored_explorations.inspect}")
     
       @unexplored_explorations.each do |b|
         @time = Time.now
-        asking = b.completions_required.to_f
-        @completed = b.exploration_users.count(:completed)
-        @people = b.exploration_users.count(:started) 
-        @days_left = ((b.end_date - @time)/1.day).round
       end
     end
     
     # If current user is exploring any Explorations, loop through them to show them here 
-    if !@exploration_user_ids.empty?
-      @exploration_user = ExplorationUser.where(user_id: current_user)
-      Rails.logger.debug("Explorat User is: #{@exploration_user.inspect}")
-
-      @exploration_user.each do |d|
-        user_status = d.status
-        gon.status = user_status
-        Rails.logger.debug("User Status is: #{user_status.inspect}")
-        @explorations = Exploration.where(id: d.exploration_id).all.to_a
-
-        @explorations.each do |g|
-          @time = Time.now
-          asking = g.completions_required.to_f
-          @completed = g.exploration_users.count(:completed)
-          @people = g.exploration_users.count(:started) 
-          @days_left = ((g.end_date - @time)/1.day).round
-        end
+    if !@exploration_ids.empty?
+      # Get explorations that the current user is exploring
+      @explorations = current_user.explorations
+      Rails.logger.debug("Explorations User is active: #{@explorations.inspect}")
+   
+      # Loop through each exploration to create an overview View
+      @explorations.each do |d|
+        @time = Time.now
+        user_status = d.exploration_users.where(user_id: current_user).pluck(:status)[0]
       
         if user_status >= 1
+          gon.status = user_status
           respond_to do |format|               
             format.html
           end
@@ -60,7 +54,7 @@ class UsersController < ApplicationController
   end
   
   def update
-    if params[:commit] == "I'm interested!"
+    if params[:commit] == "I'll share!"
       new_exploration_user = ExplorationUser.new(:exploration_id => params[:exploration_user][:exploration_id], :user_id => current_user.id, :status => 0)
     
       if new_exploration_user.save
@@ -68,13 +62,10 @@ class UsersController < ApplicationController
       end
     else
       exploration_user = ExplorationUser.where(id: params[:exploration_user][:id]).all.to_a
-      Rails.logger.debug("Exploration_user is: #{exploration_user.inspect}")
       
       session[:exploration_users_id] = params[:exploration_user][:id]
       session[:exploration_id] = exploration_user.first.exploration_id
-      cookies[:exploration_users_id] = params[:exploration_user][:id]
-      Rails.logger.debug("ExUsID is: #{session[:exploration_users_id].inspect}")
-      Rails.logger.debug("CookID is: #{cookies[:exploration_users_id].inspect}")
+      
       status = exploration_user.first.status
       gon.status = status
       Rails.logger.debug("Status is: #{status.inspect}")

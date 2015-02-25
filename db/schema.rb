@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150220015831) do
+ActiveRecord::Schema.define(version: 20150225004104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,15 +92,6 @@ ActiveRecord::Schema.define(version: 20150220015831) do
     t.integer  "column_id"
   end
 
-  create_table "exploration_invitations", force: true do |t|
-    t.integer  "user_id"
-    t.string   "friend_email"
-    t.string   "accept"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "exploration_id"
-  end
-
   create_table "exploration_users", force: true do |t|
     t.integer  "exploration_id"
     t.integer  "user_id"
@@ -112,7 +103,7 @@ ActiveRecord::Schema.define(version: 20150220015831) do
   end
 
   create_table "explorations", force: true do |t|
-    t.string   "category"
+    t.string   "exploration_category"
     t.integer  "completions_required"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -125,6 +116,8 @@ ActiveRecord::Schema.define(version: 20150220015831) do
     t.string   "picture_xs"
     t.string   "picture_sm"
     t.string   "picture_lg"
+    t.integer  "exploration_users_count"
+    t.string   "exploration_phase"
   end
 
   create_table "explorers", force: true do |t|

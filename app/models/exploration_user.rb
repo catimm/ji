@@ -14,6 +14,6 @@
 
 class ExplorationUser < ActiveRecord::Base
   belongs_to :user
-  belongs_to :exploration
+  belongs_to :exploration, counter_cache: true
   
 end

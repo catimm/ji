@@ -40,9 +40,10 @@ class User < ActiveRecord::Base
          
   has_many :authentications
   has_many :videos
+  has_many :written_inputs
   has_many :explorers
   has_many :exploration_users
-  has_many :exploration_invitations
+  has_many :explorations, through: :exploration_users
   
   def apply_omniauth(omni)
     authentications.build(:provider => omni['provider'],

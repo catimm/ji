@@ -2,17 +2,16 @@
 <div class="container">
 		<div class="row">
 			<div class="page-header">
-			  <h2>Current explorations</h2>
+			  <h2>Activity</h2>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-0 col-md-1"></div>
 			<div class="col-xs-12 col-md-10">
-				<% if !@exploration_user_ids.empty? %>
+				<% if !@exploration_ids.empty? %>
 					<%= render 'exploration_overview' %>
-				<% end %>
-				<% if @exploration_user_ids.empty? %>
-					<h3>You aren't exploring anything yet! Choose an opportunity below to get started.</h3>
+				<% else %>
+					<h3>You haven't chosen to share any thoughts yet! Choose an opportunity below to get started.</h3>
 				<% end %>
 			</div>
 			<div class="col-xs-0 col-md-1"></div>
