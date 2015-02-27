@@ -8,7 +8,7 @@
 #  started        :datetime
 #  created_at     :datetime
 #  updated_at     :datetime
-#  status         :integer
+#  status         :string(255)
 #  completed      :datetime
 #
 

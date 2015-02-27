@@ -5,7 +5,7 @@
 			  <h2>Step 4 of 8: Choosing a craft beer</h2>
 			</div>
 		</div>
-		<%= form_for @written, url: step5_path  do |f| %>
+		<%= form_for @written, url: pstep5_path(@exploration_user_id.id), method: :get  do |f| %>
 		<div class="row bottomRow">
 			<div class="col-xs-0 col-sm-0 col-md-1"></div>
 			<div class="col-xs-12 col-sm-6 col-md-5">
@@ -48,7 +48,6 @@
 					</ul>
 				</div>
 				<div class="row buttonArea">
-					<%= f.hidden_field :step, value: 4 %>
 					<%= f.submit id: "step4Button", value: "Take me to Step 5", class: "btn btn-success inputButton2", disabled: "true" %>
 				</div>	
 			</div>

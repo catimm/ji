@@ -20,7 +20,7 @@
 			</div>
 			<div class="col-xs-12 col-sm-6 col-md-5">
 				<%= form_for @new, url: new_user_invitation_path, method: :get  do |f| %>
-					<%= f.hidden_field :invited_for_exploration_id, value: @sessions_info %>
+					<%= f.hidden_field :invited_for_exploration_id, value: @exploration_user_id.exploration_id %>
 					<%= f.submit id: "inviteButtonThanks", value: "Invite others", class: "btn btn-success inputButton" %>
 				<% end %>
 			</div>

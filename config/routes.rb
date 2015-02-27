@@ -7,9 +7,12 @@ Code::Application.routes.draw do
   devise_scope :user do
     delete "/logout" => "devise/sessions#destroy"
   end
+  
   resources :users
-  resources :exploration_users
-  resources :explorations
+
+  resources :exploration_users, :path => "exploring" do
+    resources :problems, :path => "issues"  
+  end
   
   root :to => 'home#index'
   get 'privacy' => 'home#privacy'
@@ -18,16 +21,16 @@ Code::Application.routes.draw do
 
   post 'users/:id' => 'users#update'
   post 'users/new' => 'users#update'
-  get  "/problem/first" => 'problem#first', :as => 'step1', :path => "/first"
-  get  "/problem/second" => 'problem#second', :as => 'step2', :path => "/second"
+  get  "/problems/intro" => 'problems#show', :as => 'pintro', :path => "exploring/:exploration_user_id/issues/intro"
+  get  "/problems/first" => 'problems#show', :as => 'pstep1', :path => "exploring/:exploration_user_id/issues/first"
+  get  "/problems/second" => 'problems#show', :as => 'pstep2', :path => "exploring/:exploration_user_id/issues/second"
   match "/surveys/craft-beer-input" => 'surveyor#create', :via => [:post], :as => 'craft_beer_input'
-  get  "/problem/fourth" => 'problem#fourth', :as => 'step4alt', :path => "/fourth"
-  post  "/problem/fourth" => 'problem#fourth', :as => 'step4', :path => "/fourth"
-  post  "/problem/fifth" => 'problem#fifth', :as => 'step5', :path => "/fifth"
-  post  "/problem/sixth" => 'problem#sixth', :as => 'step6', :path => "/sixth"
-  post  "/problem/seventh" => 'problem#seventh', :as => 'step7', :path => "/seventh"
+  get  "/problems/fourth" => 'problems#show', :as => 'pstep4', :path => "exploring/:exploration_user_id/issues/fourth"
+  get  "/problems/fifth" => 'problem#show', :as => 'pstep5', :path => "exploring/:exploration_user_id/issues/fifth"
+  get  "/problems/sixth" => 'problem#show', :as => 'pstep6', :path => "exploring/:exploration_user_id/issues/sixth"
+  get  "/problems/seventh" => 'problem#show', :as => 'pstep7', :path => "exploring/:exploration_user_id/issues/seventh"
   match "/surveys/craft-beer-demographics" => 'surveyor#create', :via => [:post], :as => 'craft_beer_demographics'
-  get  "/problem/ninth" => 'problem#ninth', :as => 'step9', :path => "/pthanks"
+  get  "/problems/ninth" => 'problem#show', :as => 'pstep9', :path => "exploring/:exploration_user_id/issues/pthanks"
   get   "/devise/invitations/new"
     
   match '/video/new' => 'input#video_url', :via => [:post]

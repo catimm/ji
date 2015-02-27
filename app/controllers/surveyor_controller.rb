@@ -15,26 +15,24 @@ module SurveyorControllerCustomMethods
   end
   def create
     # Keep the status updated in ExplorationUser
-    exploration_user_id = params[:exploration_users_id]
-    
-    exploration_user = ExplorationUser.where(id: exploration_user_id).all.to_a
-    status = exploration_user.first.status
+    @exploration_user_id = ExplorationUser.find(params[:exploration_user_id])
+    Rails.logger.debug("Surveyor Initial Create Sesssion ID is: #{@exploration_user_id.inspect}")
+    status = params[:status]
+    Rails.logger.debug("Surveyor Initial Create Sesssion Status is: #{status.inspect}")
 
-    if status == 1
-      ExplorationUser.update(exploration_user_id, :status => '2')
+    if status == "second"
+      ExplorationUser.update(@exploration_user_id.id, :status => 'third')
     end
     
-    if status == 6
-      ExplorationUser.update(exploration_user_id, :status => '7')
+    if status == "seventh"
+      ExplorationUser.update(@exploration_user_id.id, :status => 'eighth')
     end
     
     # Check if params exist--in case where coming from Show view, there won't be params . . .
     if params.has_key?(:textInputArea)
       # Insert written input if any exists
       if !params[:textInputArea].empty?
-        exploration_id = exploration_user.first.exploration_id
-        user_id = exploration_user.first.user_id
-        new_input = WrittenInput.new(:user_id => user_id, :exploration_id => exploration_id, :written_input => params[:textInputArea], :step => params[:step])
+        new_input = WrittenInput.new(:user_id => @exploration_user_id.user_id, :exploration_id => @exploration_user_id.exploration_id, :written_input => params[:textInputArea], :step => status)
         new_input.save!
       end
     end
@@ -47,7 +45,7 @@ module SurveyorControllerCustomMethods
         @survey = surveys.where(:survey_version => params[:survey_version]).first
       end
       @response_set = ResponseSet.
-        create(:survey => @survey, :user_id => exploration_user_id) #using exploration_user_id instead of user_id, but exploration_user_id has the user_id
+        create(:survey => @survey, :user_id => @exploration_user_id.id) #using exploration_user_id instead of user_id, but exploration_user_id has the user_id
       if (@survey && @response_set)
         flash[:notice] = t('surveyor.survey_started_success')
         redirect_to(surveyor.edit_my_survey_path(
@@ -74,17 +72,16 @@ module SurveyorControllerCustomMethods
     super
   end
   def update
-    Rails.logger.debug("Surveyor Initial Update Sesssion is: #{session[:exploration_users_id].inspect}")
+    exploration_user_id = ResponseSet.where(access_code: params[:response_set_code]).pluck(:user_id)
+    Rails.logger.debug("Surveyor Initial Update User ID is: #{exploration_user_id.inspect}")
     step_title = params[:survey_code]
     if step_title == "craft-beer-input"
-      session[:finish_path] = step4alt_path
+      session[:finish_path] = pstep4_path(exploration_user_id)
     end
     if step_title == "craft-beer-demographics"
-      session[:finish_path] = step9_path
+      session[:finish_path] = pstep9_path(exploration_user_id)
     end
     super
-    response_set = ResponseSet.where(access_code: params[:response_set_code]).pluck(:user_id)
-    session[:exploration_users_id] = response_set[0]
   end
 
   # Paths

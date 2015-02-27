@@ -10,6 +10,7 @@
 #  user_id        :integer
 #  camera         :string(255)
 #  exploration_id :integer
+#  step           :string(255)
 #
 
 class Video < ActiveRecord::Base

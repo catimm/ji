@@ -6,7 +6,7 @@
 #  user_id        :integer
 #  exploration_id :integer
 #  written_input  :text
-#  step           :integer
+#  step           :string(255)
 #  created_at     :datetime
 #  updated_at     :datetime
 #

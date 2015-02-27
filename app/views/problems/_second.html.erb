@@ -1,5 +1,4 @@
-<%= render 'layouts/header' %> 
-<div class="container">
+
 		<div class="row">
 			<div class="page-header">
 			  <h2>Step 2 of 8: Your initial thoughts</h2>
@@ -55,12 +54,10 @@
 				</div>
 				<div class="row buttonArea">
 					<input type="submit" id="step2Button" disabled="true" value="Take me to Step 3" name="commit" default="default" class="btn btn-success inputButton2">
-					<input type="hidden" name="exploration_users_id" value=<%= @sessions_info %> >
-					<input type="hidden" name="step" value=2 >
+					<input type="hidden" name="exploration_user_id" value=<%= @exploration_user_id.id %> >
+					<input type="hidden" name="status" value="second" >
 				</div>	
 			</div>
 			<div class="col-xs-0 col-sm-0 col-md-1"></div>
 		</div>
 		</form>
-</div>
-<%= render 'layouts/footer' %>

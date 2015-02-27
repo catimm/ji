@@ -1,97 +1,73 @@
 <% @explorations.each do |d| %>
 	<div class="row explorationOverview">
 			<div class="col-xs-12 col-sm-4 colNoMargin">
-				<div class="packageLeft img-responsive visible-xs" alt="Responsive image" style="background-image: url(<%= d.picture_xs %>)"></div>
-				<div class="packageLeft img-responsive visible-sm visible-md" alt="Responsive image" style="background-image: url(<%= d.picture_sm %>)"></div>
-				<div class="packageLeft img-responsive visible-lg" alt="Responsive image" style="background-image: url(<%= d.picture_lg %>)"></div>
+				<div class="packageLeft img-responsive visible-xs" alt="Responsive image" style="background-image: url(<%= d.exploration.picture_xs %>)"></div>
+				<div class="packageLeft img-responsive visible-sm visible-md" alt="Responsive image" style="background-image: url(<%= d.exploration.picture_sm %>)"></div>
+				<div class="packageLeft img-responsive visible-lg" alt="Responsive image" style="background-image: url(<%= d.exploration.picture_lg %>)"></div>
 			</div>
 			<div class="col-xs-12 col-sm-8">
 					<div class="row explorationTitle">
 						<div class="col-sm-10">
-							<h3><%= d.title %></h3>
+							<h3><%= d.exploration.title %></h3>
 						</div>
 					</div>
 					<div class="row explorationExplorer">
 						<div class="col-xs-4 col-sm-3">
-							<h6 class="gray"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> by <%= d.explorer.user.first_name %> <%= d.explorer.last_name %></h6>
+							<h6 class="gray"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> by <%= d.exploration.explorer.user.first_name %> <%= d.exploration.explorer.last_name %></h6>
 						</div>
 						<div class="col-xs-4 col-sm-3">
-							<h6 class="gray"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <%= d.explorer.city %>, <%= d.explorer.state %></h6>
+							<h6 class="gray"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <%= d.exploration.explorer.city %>, <%= d.exploration.explorer.state %></h6>
 						</div>
 						<div class="col-xs-4 col-sm-3">
-							<% if d.exploration_phase == "Problem" %>
-						        <h6 class="gray"><i class="fa fa-exclamation-triangle"></i> <%= d.exploration_category %></h6>
+							<% if d.exploration.exploration_phase == "Problem" %>
+						        <h6 class="gray"><i class="fa fa-exclamation-triangle"></i> <%= d.exploration.exploration_category %></h6>
 						    <% end %>
-							<% if d.exploration_phase == "Solution" %>
-						        <h6 class="gray"><i class="fa fa-lightbulb-o"></i> <%= d.exploration_category %></h6>
+							<% if d.exploration.exploration_phase == "Solution" %>
+						        <h6 class="gray"><i class="fa fa-lightbulb-o"></i> <%= d.exploration.exploration_category %></h6>
 						    <% end %>
 						</div>
 						<div class="col-xs-0 col-sm-3"></div>
 					</div>
 					<div class="row explorationDescription">
-						<h5 class="gray"><%= d.description %></h5>
+						<h5 class="gray"><%= d.exploration.description %></h5>
 					</div>
 					<div class="row explorationStats">
 						<div class="col-xs-4 col-sm-2">
-							<h3><%= d.completions_required %></h3>
+							<h3><%= d.exploration.completions_required %></h3>
 							<h6 class="gray">desired</h6>
 						</div>
 						<div class="col-xs-4 col-sm-2">
-							<% completed = d.exploration_users.count(:completed) %>
+							<% completed = d.exploration.exploration_users.count(:completed) %>
 							<h3><%= completed %></h3>
 							<h6 class="gray">provided</h6>
 						</div>
 						<div class=" col-xs-4 col-sm-2">
-							<% days_left = ((d.end_date - @time)/1.day).round %>
+							<% days_left = ((d.exploration.end_date - @time)/1.day).round %>
 							<h3><%= days_left %></h3>
 							<h6 class="gray">days to go</h6>                                                                         
 						</div>
-						<div class="col-xs-12 col-sm-5 show" id="buttonDiv1">
-							<%= form_for @start, url: {action: "update"} do |f| %>
-								<%= f.hidden_field :id, value: d.exploration_users.pluck(:id)[0] %>
-								<%= f.submit id: "originalButton", value: "Share thoughts", class: "btn btn-success inputButton" %>
-							<% end %>
-						</div>
-						<div class="col-xs-12 col-sm-5 hidden" id="buttonDiv2">
-							<form method="post" action="/surveys/craft-beer-input" accept-charset="UTF-8">
-								<input type="submit" id="step2Button" value="Continue with Step 3" name="commit" default="default" class="btn btn-success inputButton">
-								<input type="hidden" name="exploration_users_id" value=<%= d.exploration_users.pluck(:id)[0] %> >
-							</form>
-						</div>
-						<div class="col-xs-12 col-sm-5 hidden" id="buttonDiv3">
-							<%= form_for @start, url: { :controller => "problem", :action => "fourth" } do |f| %>
-								<%= f.hidden_field :id, value: d.exploration_users.pluck(:id)[0] %>
-								<%= f.submit id: "step3Button", value: "Continue with Step 4", class: "btn btn-success inputButton" %>
-							<% end %>
-						</div>
-						<div class="col-xs-12 col-sm-5 hidden" id="buttonDiv4">
-							<%= form_for @start, url: { :controller => "problem", :action => "fifth" } do |f| %>
-								<%= f.hidden_field :id, value: d.exploration_users.pluck(:id)[0] %>
-								<%= f.submit id: "step4Button", value: "Continue with Step 5", class: "btn btn-success inputButton" %>
-							<% end %>
-						</div>
-						<div class="col-xs-12 col-sm-5 hidden" id="buttonDiv5">
-							<%= form_for @start, url: { :controller => "problem", :action => "sixth" } do |f| %>
-								<%= f.hidden_field :id, value: d.exploration_users.pluck(:id)[0] %>
-								<%= f.submit id: "step5Button", value: "Continue with Step 6", class: "btn btn-success inputButton" %>
-							<% end %>
-						</div>
-						<div class="col-xs-12 col-sm-5 hidden" id="buttonDiv6">
-							<%= form_for @start, url: { :controller => "problem", :action => "seventh" } do |f| %>
-								<%= f.hidden_field :id, value: d.exploration_users.pluck(:id)[0] %>
-								<%= f.submit id: "step6Button", value: "Continue with Step 7", class: "btn btn-success inputButton" %>
-							<% end %>
-						</div>
-						<div class="col-xs-12 col-sm-5 hidden" id="buttonDiv7">
-							<form method="post" action="/surveys/craft-beer-demographics" accept-charset="UTF-8">
-								<input type="submit" id="step7Button" value="Finish last step" name="commit" default="default" class="btn btn-success inputButton">
-								<input type="hidden" name="exploration_users_id" value=<%= d.exploration_users.pluck(:id)[0] %> >
-							</form>
-						</div>
-						<div class="col-xs-12 col-sm-5 hidden" id="buttonDiv8">
-							<%= form_for @new, url: new_user_invitation_path, method: :get  do |f| %>
-								<%= f.hidden_field :invited_for_exploration_id, value: d.id %>
-								<%= f.submit id: "inviteButton", value: "Invite others", class: "btn btn-success inputButton" %>
+						<div class="col-xs-12 col-sm-5">
+							<% if d.status == "third" %>
+								<form method="post" action="/surveys/craft-beer-input" accept-charset="UTF-8">
+									<input type="submit" id="step2Button" value="Continue sharing" name="commit" default="default" class="btn btn-success inputButton">
+									<input type="hidden" name="exploration_user_id" value=<%= d.id %> >
+								</form>
+							<% elsif d.status == "eighth" %>
+								<form method="post" action="/surveys/craft-beer-demographics" accept-charset="UTF-8">
+									<input type="submit" id="step7Button" value="Finish sharing" name="commit" default="default" class="btn btn-success inputButton">
+									<input type="hidden" name="exploration_user_id" value=<%= d.id %> >
+								</form>
+							<% elsif d.status == "ninth" %>
+								<%= form_for @new, url: new_user_invitation_path, method: :get  do |f| %>
+									<%= f.hidden_field :invited_for_exploration_id, value: d.exploration.id %>
+									<%= f.submit id: "inviteButton", value: "Invite others", class: "btn btn-success inputButton" %>
+								<% end %>
+							<% else %>
+								<% if d.status == "0" %>
+									<%= link_to "Share thoughts", pintro_path(d.id), :class => "btn btn-success inputButton"  %>
+								<% else %>
+									<%= link_to "Continue sharing", exploration_user_problem_path(d.id, d.status), :class => "btn btn-success inputButton"  %>									
+								<% end %>
 							<% end %>
 						</div>
 						<div class="col-sm-1"></div>

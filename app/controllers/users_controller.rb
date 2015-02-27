@@ -35,48 +35,36 @@ class UsersController < ApplicationController
     # If current user is exploring any Explorations, loop through them to show them here 
     if !@exploration_ids.empty?
       # Get explorations that the current user is exploring
-      @explorations = current_user.explorations
+      @explorations = current_user.exploration_users
       Rails.logger.debug("Explorations User is active: #{@explorations.inspect}")
    
       # Loop through each exploration to create an overview View
-      @explorations.each do |d|
+     # @explorations.each do |d|
+      #  Rails.logger.debug("This exploration is: #{@explorations.inspect}")
         @time = Time.now
-        user_status = d.exploration_users.where(user_id: current_user).pluck(:status)[0]
-      
-        if user_status >= 1
-          gon.status = user_status
-          respond_to do |format|               
-            format.html
-          end
-        end
-      end
+       # @exploration_user_id = d.exploration_users.pluck(:id)[0]
+        
+      #  Rails.logger.debug("Exploration User ID: #{@exploration_user_id.inspect}")
+      #  @status = d.exploration_users.where(user_id: current_user).pluck(:status)[0]
+      #  Rails.logger.debug("User status: #{@status.inspect}")
+        # gon.status = user_status
+        # Get correct text for button
+        # if !user_status.empty?
+        #  respond_to do |format|               
+        #    format.html
+        #  end
+        # end
+     # end
     end      
   end
   
   def update
-    if params[:commit] == "I'll share!"
+
       new_exploration_user = ExplorationUser.new(:exploration_id => params[:exploration_user][:exploration_id], :user_id => current_user.id, :status => 0)
     
       if new_exploration_user.save
         redirect_to user_session_path
       end
-    else
-      exploration_user = ExplorationUser.where(id: params[:exploration_user][:id]).all.to_a
-      
-      session[:exploration_users_id] = params[:exploration_user][:id]
-      session[:exploration_id] = exploration_user.first.exploration_id
-      
-      status = exploration_user.first.status
-      gon.status = status
-      Rails.logger.debug("Status is: #{status.inspect}")
-      if status == 0
-        time = Time.now
-        ExplorationUser.update(params[:exploration_user][:id], :started => time)
-        redirect_to step1_path
-      else 
-        redirect_to step1_path
-      end
-    end
     
   end
 
