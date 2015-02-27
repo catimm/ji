@@ -2,7 +2,7 @@
 <div class="container">
 		<div class="row">
 			<div class="page-header">
-			  <h2>Step 7 of 8: Additional thoughts (optional)</h2>
+			  <h2>Step 7 of 8: Any additional thoughts?</h2>
 			</div>
 		</div>
 		<form method="post" action="/surveys/craft-beer-demographics" accept-charset="UTF-8">
@@ -10,7 +10,7 @@
 			<div class="col-xs-0 col-sm-0 col-md-1"></div>
 			<div class="col-xs-12 col-sm-6 col-md-5">
 				<div class="row inputArea">
-					<camera id='problemSeven' class="camera show img-responsive" data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' data-poll-for-processed='true'></camera>
+					<camera id='problemSeven' class="camera show img-responsive" data-app-id=<%= @problems.camera_seven_id %> data-sources='record,upload' data-maxlength='300' data-poll-for-processed='true'></camera>
 					<textarea name="textInputArea" id="textInputArea7" class="textInputArea hidden" placeholder="Type input here"></textarea>
 				</div>
 				<div class="row visible-xs visible-lg">
@@ -32,20 +32,14 @@
 			</div>
 			<div class="col-xs-12 col-sm-6 col-md-5">
 				<div class="row textAreaToXS hidden-xs"> <!--Using class tags to change height of div based on device viewing-->
-					<h5 class="specialFontSize">Please use the webcam to share your thoughts on the following questions:</h5>
-					<ul>
-						<li class="specialFontSize">Do you think there are any other annoyances related to finding a good craft beer?</li>
-						<li class="specialFontSize">If so, how do you currently deal with those?</li>
-						<li class="specialFontSize">Is there anything else we haven't touched on that you'd like to mention?</li>
-					</ul>
+					<h5 class="specialFontSize">Are there any other annoyances related to <%= @exploration.short_description %> 
+						that we haven't touched on yet?</h5>
+					<h5 class="specialFontSize">If so, how annoying are they?  And how do you currently deal with them?</h5>
 				</div>
 				<div class="row textAreaXS visible-xs"> <!--Using class tags to change height of div based on device viewing-->
-					<h5 class="specialFontSize">Please use the webcam to share your thoughts on the following questions:</h5>
-					<ul>
-						<li class="specialFontSize">Do you think there are any other annoyances related to finding a good craft beer?</li>
-						<li class="specialFontSize">If so, how do you currently deal with those?</li>
-						<li class="specialFontSize">Is there anything else we haven't touched on that you'd like to mention?</li>
-					</ul>
+					<h5 class="specialFontSize">Are there any other annoyances related to <%= @exploration.short_description %> 
+						that we haven't touched on yet?</h5>
+					<h5 class="specialFontSize">If so, how annoying are they?  And how do you currently deal with them?</h5>
 				</div>
 				<div class="row buttonArea">
 					<input type="submit" value="Take me to the last step" name="commit" default="default" class="btn btn-success inputButton2">

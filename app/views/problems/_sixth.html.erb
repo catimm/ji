@@ -2,7 +2,7 @@
 <div class="container">
 		<div class="row">
 			<div class="page-header">
-			  <h2>Step 6 of 8: Spending time with friends</h2>
+			  <h2>Step 6 of 8: 3rd topic thoughts</h2>
 			</div>
 		</div>
 		<%= form_for @written, url: pstep7_path(@exploration_user_id.id), method: :get  do |f| %>
@@ -10,7 +10,7 @@
 			<div class="col-xs-0 col-sm-0 col-md-1"></div>
 			<div class="col-xs-12 col-sm-6 col-md-5">
 				<div class="row inputArea">
-					<camera id='problemSix' class="camera show img-responsive" data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' data-poll-for-processed='true'></camera>
+					<camera id='problemSix' class="camera show img-responsive" data-app-id=<%= @problems.camera_six_id %> data-sources='record,upload' data-maxlength='300' data-poll-for-processed='true'></camera>
 					<%= f.text_area :written_input, id: "textInputArea6", :class => "form-control textInputArea hidden", placeholder: "Type input here" %>
 				</div>
 				<div class="row visible-xs visible-lg">
@@ -32,19 +32,23 @@
 			</div>
 			<div class="col-xs-12 col-sm-6 col-md-5">
 				<div class="row textAreaToXS hidden-xs"> <!--Using class tags to change height of div based on device viewing-->
-					<h5 class="specialFontSize">Please use the webcam to share your thoughts on the following questions:</h5>
+					<h5 class="specialFontSize">Please use the webcam to share how you <%= @problems.third_topic %>.</h5>
+					<h5 class="specialFontSize">If it helps, below are some questions to consider, but don't feel restricted 
+						by these if you have other thoughts in mind...</h5>
 					<ul>
-						<li class="specialFontSize">When going out with friends, do you ever find you spend too much time trying to find a good beer?</li>
-						<li class="specialFontSize">Do you have any friends who get too absored in the beer choosing process?</li>
-						<li class="specialFontSize">If so--in either case, how do you deal with that?</li>
+						<li class="specialFontSize"><%= @problems.third_topic_q1 %></li>
+						<li class="specialFontSize"><%= @problems.third_topic_q2 %></li>
+						<li class="specialFontSize"><%= @problems.third_topic_q3 %></li>
 					</ul>
 				</div>
 				<div class="row textAreaXS visible-xs"> <!--Using class tags to change height of div based on device viewing-->
-					<h5 class="specialFontSize">Please use the webcam to share your thoughts on the following questions:</h5>
+					<h5 class="specialFontSize">Please use the webcam to share how you <%= @problems.third_topic %>.</h5>
+					<h5 class="specialFontSize">If it helps, below are some questions to consider, but don't feel restricted 
+						by these if you have other thoughts in mind...</h5>
 					<ul>
-						<li class="specialFontSize">When going out with friends, do you ever find you spend too much time trying to find a good beer?</li>
-						<li class="specialFontSize">Do you have any friends who get too absored in the beer choosing process?</li>
-						<li class="specialFontSize">If so--in either case, how do you deal with that?</li>
+						<li class="specialFontSize"><%= @problems.third_topic_q1 %></li>
+						<li class="specialFontSize"><%= @problems.third_topic_q2 %></li>
+						<li class="specialFontSize"><%= @problems.third_topic_q3 %></li>
 					</ul>
 				</div>
 				<div class="row buttonArea">

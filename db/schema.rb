@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150226170847) do
+ActiveRecord::Schema.define(version: 20150227031450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,6 +136,26 @@ ActiveRecord::Schema.define(version: 20150226170847) do
     t.text     "problem_three"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "time_to_take"
+    t.string   "intro_message"
+    t.string   "intro_video_id"
+    t.string   "camera_two_id"
+    t.string   "camera_four_id"
+    t.string   "camera_five_id"
+    t.string   "camera_six_id"
+    t.string   "first_topic"
+    t.text     "first_topic_q1"
+    t.text     "first_topic_q2"
+    t.text     "first_topic_q3"
+    t.string   "second_topic"
+    t.text     "second_topic_q1"
+    t.text     "second_topic_q2"
+    t.text     "second_topic_q3"
+    t.string   "third_topic"
+    t.text     "third_topic_q1"
+    t.text     "third_topic_q2"
+    t.text     "third_topic_q3"
+    t.string   "camera_seven_id"
   end
 
   create_table "question_groups", force: true do |t|
