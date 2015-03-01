@@ -47,6 +47,14 @@ class InvitationsController < Devise::InvitationsController
     # Grab User model info of new invitee
     invited_user = User.where(email: params[:user][:email]).all.to_a[0]
     Rails.logger.debug("Invited User: #{invited_user.inspect}")
+    # Add Exploration User model instance for new invitee if they aren't already in Exploration User model for this Exploration
+    exploration_user_check = ExplorationUser.where(user_id: invited_user.id, exploration_id: params[:user][:invited_for_exploration_id])
+    Rails.logger.debug("Exploration User Check: #{exploration_user_check.inspect}")
+    if exploration_user_check.empty?
+      new_exploration_user = ExplorationUser.new(:exploration_id => params[:user][:invited_for_exploration_id], 
+      :user_id => invited_user.id, :status => 0, :invited_by_user_id => current_user.id, :user_chosen => "no")
+      new_exploration_user.save! 
+    end
     # Send appropriate callback link to invitee--to either login or set password, based on whether invitee is already in User model
     if invited_user.encrypted_password.empty?
       link = root_url+"users/invitation/accept?invitation_token="+@invited_user.raw_invitation_token
@@ -67,15 +75,7 @@ class InvitationsController < Devise::InvitationsController
       # Send invitation e-mail using version non-connected, interested person
       UserMailer.general_invite_email(@invited_user, current_user, description, time, link).deliver
     end  
-    # Add the exploration id to the invited person's data
-    User.update(invited_user.id, invited_for_exploration_id: params[:user][:invited_for_exploration_id]) 
-    # Add Exploration User model instance for new invitee if they aren't already in Exploration User model for this Exploration
-    exploration_user_check = ExplorationUser.where(user_id: invited_user.id)
-    if exploration_user_check.nil?
-      new_exploration_user = ExplorationUser.new(:exploration_id => params[:user][:invited_for_exploration_id], 
-      :user_id => invited_user.id, :status => 0, :invited_by_user_id => current_user.id, :user_chosen => "no")
-      new_exploration_user.save! 
-    end
+    
     # Redirect current user back to Invitation view and send the exploration id through to be referenced again
     flash[:success] = "You've successfully sent the invite!"
     redirect_to new_user_invitation_path(params[:user][:invited_for_exploration_id])
