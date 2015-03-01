@@ -9,6 +9,7 @@ Code::Application.routes.draw do
   end
   
   resources :users
+  resources :explorations
 
   resources :exploration_users, :path => "exploring" do
     resources :problems, :path => "issues"  

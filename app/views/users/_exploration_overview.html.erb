@@ -12,11 +12,12 @@
 						</div>
 					</div>
 					<div class="row explorationExplorer">
+						<% @explorer_lead = Explorer.where(exploration_id: d.exploration.id, lead_explorer: "yes").all.to_a[0] %>
 						<div class="col-xs-4 col-sm-3">
-							<h6 class="gray"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> by <%= d.exploration.explorer.user.first_name %> <%= d.exploration.explorer.last_name %></h6>
+							<h6 class="gray"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> by <%= @explorer_lead.user.first_name %> <%= @explorer_lead.last_name %></h6>
 						</div>
 						<div class="col-xs-4 col-sm-3">
-							<h6 class="gray"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <%= d.exploration.explorer.city %>, <%= d.exploration.explorer.state %></h6>
+							<h6 class="gray"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <%= @explorer_lead.city %>, <%= @explorer_lead.state %></h6>
 						</div>
 						<div class="col-xs-4 col-sm-3">
 							<% if d.exploration.exploration_phase == "Problem" %>
@@ -71,8 +72,17 @@
 							<% end %>
 						</div>
 						<div class="col-sm-1"></div>
+					</div>	
+					<% if d.status == "0" %>
+					<div class="row timeInvolved">
+						<div class="col-xs-12 col-sm-6"></div>
+						<div class="col-xs-12 col-sm-5">
+							<% @time_to_take = Problem.where(exploration_id: d.exploration.id).all.to_a[0] %>
+							<h6 class="timeLeft">(Takes ~<%= @time_to_take.time_to_take %> minutes to complete)</h6>
+						</div>
+						<div class="col-sm-1"></div>
 					</div>
-				
+					<% end %>	
 			</div>
 		</div> 
 <% end %>

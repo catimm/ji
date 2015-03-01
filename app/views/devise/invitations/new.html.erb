@@ -1,50 +1,69 @@
 <%= render 'layouts/header' %> 
 <div class="container">
 	<div class="row topRow"> 
-		<div class="col-xs-0 col-sm-3 col-md-4"></div>
-		<div class="col-xs-12 col-sm-6 col-md-4 box">
-			<div class="row">
+		<div class="col-xs-0 col-sm-3 col-md-3"></div>
+		<div class="col-xs-12 col-sm-6 col-md-6 box">
+			<div class="row invitationForm">
 				<div class="col-sm-12">
-						<h2 class="formSpace">Share the love. Invite others!</h2>
+						<h2 class="formSpace">Invite others to share thoughts on this <%= @project_description%> project.</h2>
 					    <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
-  							<%= devise_error_messages! %>
-							<%= f.hidden_field :invited_for_exploration_id %>
-							<% resource.class.invite_key_fields.each do |field| -%>
-								<div class="row formSpace"> 
-									<div class="col-sm-1"></div>
-									<div class="col-sm-10">
-							      		<%= f.text_field :first_name, required: true, :class => "form-control", autofocus: true, placeholder: "First name" %>
-									</div>
-									<div class="col-sm-1"></div>
+  							<%- flash.each do |name, msg| -%>
+							    <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+							  <%- end -%>
+							<%= f.hidden_field :invited_for_exploration_id, :value => @exploration_id %>
+							<% if @owner == "yes" %>
+								<%= f.hidden_field :email_option, :value => "owner" %>
+							<% else %>
 								</div>
 								<div class="row formSpace"> 
-									<div class="col-sm-1"></div>
-									<div class="col-sm-10">
+									<div class="col-sm-2"></div>
+									<div class="col-sm-8">
+										<%= f.select(:email_option, options_for_select([["I have a friend working on this project", "friend"], 
+										["I have a friend of a friend working on this project", "friend-of-friend"], 
+										["I don't know anyone working on this project", "none"]]), 
+										{:prompt => 'Choose how you know about this project',  
+										:class => 'form-control selectBox'},
+										:requierd => true)  %>									
+									</div>
+									<div class="col-sm-2"></div>
+								</div>
+							<% end %>
+							<% resource.class.invite_key_fields.each do |field| -%>
+								<div class="row formSpace"> 
+									<div class="col-sm-2"></div>
+									<div class="col-sm-8">
+							      		<%= f.text_field :first_name, required: true, :class => "form-control", autofocus: true, placeholder: "First name" %>
+									</div>
+									<div class="col-sm-2"></div>
+								</div>
+								<div class="row formSpace"> 
+									<div class="col-sm-2"></div>
+									<div class="col-sm-8">
 								 		<%= f.email_field :email, :class => "form-control", required: true, placeholder: "Email" %>
 									</div>
-									<div class="col-sm-1"></div>
+									<div class="col-sm-2"></div>
 								</div>
 							<% end -%>
 							
 							<div class="row formSpace2"> 
-								<div class="col-sm-1"></div>
-								<div class="col-sm-10">
+								<div class="col-sm-2"></div>
+								<div class="col-sm-8">
 							 		<%= f.submit "Send the invitation", class: "btn btn-default btn-success longButton" %> 
 								</div>
-								<div class="col-sm-1"></div>
+								<div class="col-sm-2"></div>
 							</div>
 					    <% end %> 
 					  		<div class="row formSpace">
-								<div class="col-sm-1"></div>
-								<div class="col-sm-10">
+								<div class="col-sm-2"></div>
+								<div class="col-sm-8">
 									<h6 class="liStatement">Don't worry we won't spam your friend. We'll just send this invite, as you wish...</h6>
 								</div>
-								<div class="col-sm-1"></div>
+								<div class="col-sm-2"></div>
 							</div>
 					</div> 
 			</div>		
 		</div>
-		<div class="col-xs-0 col-sm-3 col-md-4"></div>
+		<div class="col-xs-0 col-sm-3 col-md-3"></div>
 	</div>
 </div>
 <%= render 'layouts/footer' %>

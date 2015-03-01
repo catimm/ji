@@ -1,46 +1,90 @@
 class InvitationsController < Devise::InvitationsController
   
   def new
-    session[:exploration_id] = params[:exploration][:invited_for_exploration_id]
-    Rails.logger.debug("New Exploration ID is: #{session[:exploration_id].inspect}")
+    if params.has_key?(:exploration)
+      @exploration_id = params[:exploration][:invited_for_exploration_id]
+    else
+      @exploration_id = params[:format]
+    end
+    # Get projection description
+    exploration_info = Exploration.find(@exploration_id)
+    @project_description = exploration_info.short_description
+    # Find out if current user is project owner
+    @project_owners = Explorer.where(exploration_id: @exploration_id).pluck(:user_id)
+    Rails.logger.debug("Project owners: #{@project_owners.inspect}")
+    # If current user is project owner, set variable to "yes"
+    if @project_owners.include? current_user.id
+      @owner = "yes"
+    else
+      @owner = "no"
+    end
+    Rails.logger.debug("Current user is project owner: #{@owner.inspect}")
+    # Set session id to equal exploration id
+    session[:exploration_id] = @exploration_id
+    # Run original devise invitable code
     super
   end
   
   def create
-    description = Exploration.where(id: session[:exploration_id]).pluck(:short_description)
-    short_description = description[0]
+    # Get project description
+    description = Exploration.where(id: params[:user][:invited_for_exploration_id]).pluck(:short_description)[0]
+    # Get time to provide input
+    time = Problem.where(exploration_id: params[:user][:invited_for_exploration_id]).pluck(:time_to_take)[0]
+    # Find out relationship of current user to project owner
+    project_relationship = params[:user][:email_option]
+    # Make sure project relationship is not empty. If it is empty, send user back to page with an error.
+    if project_relationship.empty?
+      flash[:failure] = "Please choose an option from the drop down"
+      redirect_to new_user_invitation_path(params[:user][:invited_for_exploration_id]) and return
+    end
+    # add invited person to User model
     @invited_user = User.invite!(invite_params, current_inviter) do |u|
       # Skip sending the default Devise Invitable e-mail
       u.skip_invitation = true
     end
-
     # Set the value for :invitation_sent_at because we skip calling the Devise Invitable method deliver_invitation which normally sets this value
     @invited_user.update_attribute :invitation_sent_at, Time.now.utc unless @invited_user.invitation_sent_at
-    # Use our own mailer to send the invitation e-mail
-    UserMailer.invite_email(@invited_user, current_user, short_description).deliver
+    # Grab User model info of new invitee
+    invited_user = User.where(email: params[:user][:email]).all.to_a[0]
+    Rails.logger.debug("Invited User: #{invited_user.inspect}")
+    # Send appropriate callback link to invitee--to either login or set password, based on whether invitee is already in User model
+    if invited_user.encrypted_password.empty?
+      link = root_url+"users/invitation/accept?invitation_token="+@invited_user.raw_invitation_token
+    else
+      link = root_url+"/users/login"
+    end
+    # send different mail based on project_relationship value
+    if project_relationship == "owner"
+      # Send invitation e-mail using version sent from project owner
+      UserMailer.owner_invite_email(@invited_user, current_user, description, time, link).deliver
+    elsif project_relationship == "friend"
+      # Send invitation e-mail using version sent from friend of project owner
+      UserMailer.friend_invite_email(@invited_user, current_user, description, time, link).deliver
+    elsif project_relationship == "friend-of-friend"
+      # Send invitation e-mail using version sent from friend-of-a-friend of project owner
+      UserMailer.fof_invite_email(@invited_user, current_user, description, time, link).deliver
+    else
+      # Send invitation e-mail using version non-connected, interested person
+      UserMailer.general_invite_email(@invited_user, current_user, description, time, link).deliver
+    end  
+    # Add the exploration id to the invited person's data
+    User.update(invited_user.id, invited_for_exploration_id: params[:user][:invited_for_exploration_id]) 
+    # Add Exploration User model instance for new invitee if they aren't already in Exploration User model for this Exploration
+    exploration_user_check = ExplorationUser.where(user_id: invited_user.id)
+    if exploration_user_check.nil?
+      new_exploration_user = ExplorationUser.new(:exploration_id => params[:user][:invited_for_exploration_id], 
+      :user_id => invited_user.id, :status => 0, :invited_by_user_id => current_user.id, :user_chosen => "no")
+      new_exploration_user.save! 
+    end
+    # Redirect current user back to Invitation view and send the exploration id through to be referenced again
+    flash[:success] = "You've successfully sent the invite!"
+    redirect_to new_user_invitation_path(params[:user][:invited_for_exploration_id])
     
-    invited_user_email = params[:user][:email]
-    invited_user_id = User.where(email: invited_user_email).pluck(:id)
-    User.update(invited_user_id[0], invited_for_exploration_id: session[:exploration_id]) 
-
-    redirect_to user_session_path
   end
   
   def update
-    # First grab raw token
-    raw_token = params[:user][:invitation_token]
-    invitation_token = Devise.token_generator.digest(User, :invitation_token, raw_token)
-    user_id = User.where(invitation_token: invitation_token).pluck(:id)
-    # Process update--swap token for encrytped password
-    super
-    # Making sure password was set appropriately before inserting new ExplorationUser
-    user = User.where(id: user_id[0]).all.to_a
-    Rails.logger.debug("User is: #{user.inspect}")
-    if user.first.invitation_token.nil?
-      exploration_id = user.first.invited_for_exploration_id
 
-      new_exploration_user = ExplorationUser.new(:exploration_id => exploration_id, :user_id => user_id[0], :status => 0)
-      new_exploration_user.save! 
-    end
+    super
+
   end
 end

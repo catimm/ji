@@ -2,21 +2,19 @@
 #
 # Table name: explorers
 #
-#  id         :integer          not null, primary key
-#  user_id    :integer
-#  last_name  :string(255)
-#  city       :string(255)
-#  state      :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id             :integer          not null, primary key
+#  user_id        :integer
+#  last_name      :string(255)
+#  city           :string(255)
+#  state          :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
+#  exploration_id :integer
+#  lead_explorer  :string(255)
 #
 
 class Explorer < ActiveRecord::Base
   belongs_to :user
+  belongs_to :exploration
   
-  has_many :explorations
-  
-  def self.full_name
-    User.first_name+" "+self.last_name
-  end
 end

@@ -230,7 +230,17 @@ section {
       padding-right: 5px;
     }
 }
-
+.timeInvolved {
+  div {
+    text-align: center;
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+  h6 {
+    margin-top: -5px;
+    margin-bottom: 0;
+  }
+}
 .next_section {
   width: 26em;
   margin-bottom: 3em;
@@ -395,6 +405,10 @@ section {
     display: none !important;
   }
 }
+#user_email_option {
+  width: 100%;
+  padding: 6px 12px !important;
+}
 legend {
   border: none;
   margin-bottom: 0;
@@ -420,6 +434,20 @@ legend {
 #flash_notice {
   margin-bottom: 0.5em;
 }  
+#flash_success {
+  margin-bottom: 0.5em;
+  color: #5CB85C;
+}
+#flash_failure {
+  margin-bottom: 0.5em;
+  color: red;
+}
+.invitationForm {
+  // This is to hide an alert on the Invitation Form page saying the user is already logged in . . . 
+  #flash_alert, #flash_notice {
+    display: none;
+  }
+}
 .moreOppty {
   margin: 1em 0;
 }

@@ -7,7 +7,6 @@
 #  completions_required    :integer
 #  created_at              :datetime
 #  updated_at              :datetime
-#  explorer_id             :integer
 #  steps                   :integer
 #  end_date                :datetime
 #  title                   :string(255)

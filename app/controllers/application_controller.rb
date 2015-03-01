@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << :first_name
     devise_parameter_sanitizer.for(:invite) << :first_name
     devise_parameter_sanitizer.for(:invite) << :invited_for_exploration_id
+    devise_parameter_sanitizer.for(:invite) << :email_option
     devise_parameter_sanitizer.for(:accept_invitation) << :first_name
     devise_parameter_sanitizer.for(:accept_invitation) << :invited_for_exploration_id
   end

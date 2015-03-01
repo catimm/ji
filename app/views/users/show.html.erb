@@ -16,10 +16,24 @@
 			</div>
 			<div class="col-xs-0 col-md-1"></div>
 		</div>
+		<% if !@friend_invitations_ids.empty? %>
+			<div class="row moreOppty">
+				<div class="page-header">
+				  <h2>Friend invitations</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-0 col-md-1"></div>
+				<div class="col-xs-12 col-md-10">
+					<%= render 'friend_invitations_overview' %>
+				</div>
+				<div class="col-xs-0 col-md-1"></div>
+			</div>
+		<% end %>
 		<% if !@unexplored_exploration_ids.empty? %>
 			<div class="row moreOppty">
 				<div class="page-header">
-				  <h2>Exploration opportunities</h2>
+				  <h2>Other opportunities</h2>
 				</div>
 			</div>
 			<div class="row">

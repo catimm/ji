@@ -6,66 +6,61 @@ class UsersController < ApplicationController
     @start = ExplorationUser.new
     @new = Exploration.new
     
-    
-    Rails.logger.debug("Exploration & users info: #{@explorations_test.inspect}")
-    # Use the below to reset the counters in Exploration
-    # Exploration.find_each { |exploration| Exploration.reset_counters(exploration.id, :exploration_users) }
-    
-    
-    
     # Create array of all Exploration IDs
     exploration_ids = Exploration.all.map(& :id)
     Rails.logger.debug("All exploration IDs are: #{exploration_ids.inspect}")
-    # Create array of all Exploration IDs where current user is exploring
-    @exploration_ids = current_user.exploration_ids
-    Rails.logger.debug("IDs of User explorations: #{@exploration_ids.inspect}")
-    # Create array of all Exploration IDs where current user is NOT exploring
-    @unexplored_exploration_ids = exploration_ids - @exploration_ids
+    # Grab all Exploration User info about current user
+    @exploration_users = current_user.exploration_users
+    Rails.logger.debug("Current User Exploration User info: #{@exploration_users.inspect}")
+    # Create array of all Exploration IDs where current user has chosen to explore
+    @exploration_ids = @exploration_users.where(user_chosen: "yes").pluck(:exploration_id)
+    Rails.logger.debug("Current User Exploration User IDs: #{@exploration_ids.inspect}")
+    # Create array of all Exploration IDs where current user has not yet chosen to explore but has been invited to explore
+    @friend_invitations_ids = @exploration_users.where(user_chosen: "no").pluck(:exploration_id)
+    Rails.logger.debug("Friend invitations: #{@friend_invitations_ids.inspect}")
+    # Create array of all Exploration IDs where current user is NOT connected in the Exploration User model
+    @unexplored_exploration_ids = exploration_ids - @exploration_ids - @friend_invitations_ids
     Rails.logger.debug("Explorations User is not exploring: #{@unexplored_exploration_ids.inspect}")
 
-    # If current user is NOT exploring any Explorations that are available, loop through them to show them here
-    if !@unexplored_exploration_ids.empty?
-      @unexplored_explorations = Exploration.where(id: @unexplored_exploration_ids)
-    
-      @unexplored_explorations.each do |b|
-        @time = Time.now
-      end
-    end
-    
-    # If current user is exploring any Explorations, loop through them to show them here 
+    # If current user has chosen to explore any Explorations, loop through them to show them here 
     if !@exploration_ids.empty?
       # Get explorations that the current user is exploring
-      @explorations = current_user.exploration_users
-      Rails.logger.debug("Explorations User is active: #{@explorations.inspect}")
-   
-      # Loop through each exploration to create an overview View
-     # @explorations.each do |d|
-      #  Rails.logger.debug("This exploration is: #{@explorations.inspect}")
-        @time = Time.now
-       # @exploration_user_id = d.exploration_users.pluck(:id)[0]
-        
-      #  Rails.logger.debug("Exploration User ID: #{@exploration_user_id.inspect}")
-      #  @status = d.exploration_users.where(user_id: current_user).pluck(:status)[0]
-      #  Rails.logger.debug("User status: #{@status.inspect}")
-        # gon.status = user_status
-        # Get correct text for button
-        # if !user_status.empty?
-        #  respond_to do |format|               
-        #    format.html
-        #  end
-        # end
-     # end
-    end      
+      @explorations = @exploration_users.where(user_chosen: "yes")
+      Rails.logger.debug("Explorations User has chosen: #{@explorations.inspect}")
+      @time = Time.now
+    end   
+    # If current user is exploring any Explorations, loop through them to show them here 
+    if !@friend_invitations_ids.empty?
+      # Get explorations that the current user is exploring
+      @friend_invitations = @exploration_users.where(user_chosen: "no")
+      Rails.logger.debug("Explorations User has not yet chosen: #{@friend_invitations.inspect}")
+      @time = Time.now
+    end   
+    # If current user is NOT exploring any Explorations that are available, loop through them to show them here
+    if !@unexplored_exploration_ids.empty?
+      @time = Time.now
+      @unexplored_explorations = Exploration.where(id: @unexplored_exploration_ids)
+      Rails.logger.debug("Unexplored explorations: #{@unexplored_explorations.inspect}")      
+    end   
   end
   
   def update
-
-      new_exploration_user = ExplorationUser.new(:exploration_id => params[:exploration_user][:exploration_id], :user_id => current_user.id, :status => 0)
-    
-      if new_exploration_user.save
-        redirect_to user_session_path
+      # Determine if update is coming from Friend Invitations view or Unexplored View
+      if params[:id] == "new"
+        # Add exploration to User Activity view
+        new_exploration_user = ExplorationUser.new(:exploration_id => params[:exploration_user][:exploration_id], 
+        :user_id => current_user.id, :status => 0, :user_chosen => "yes")
+         # Once added return to new Activity view
+        if new_exploration_user.save
+          redirect_to user_session_path and return
+        end
+      else
+        # Update Exploration User instance rather than create a new one
+        update_exploration_user = ExplorationUser.update(params[:exploration_user][:exploration_user_id], :user_chosen => "yes")
+        if update_exploration_user.save
+          redirect_to user_session_path and return
+        end
       end
-    
   end
 
   def invite

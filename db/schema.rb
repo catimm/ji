@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227031450) do
+ActiveRecord::Schema.define(version: 20150301200319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,8 @@ ActiveRecord::Schema.define(version: 20150227031450) do
     t.datetime "updated_at"
     t.string   "status"
     t.datetime "completed"
+    t.integer  "invited_by_user_id"
+    t.string   "user_chosen"
   end
 
   create_table "explorations", force: true do |t|
@@ -107,7 +109,6 @@ ActiveRecord::Schema.define(version: 20150227031450) do
     t.integer  "completions_required"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "explorer_id"
     t.integer  "steps"
     t.datetime "end_date"
     t.string   "title"
@@ -127,6 +128,8 @@ ActiveRecord::Schema.define(version: 20150227031450) do
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "exploration_id"
+    t.string   "lead_explorer"
   end
 
   create_table "problems", force: true do |t|
@@ -139,10 +142,6 @@ ActiveRecord::Schema.define(version: 20150227031450) do
     t.integer  "time_to_take"
     t.string   "intro_message"
     t.string   "intro_video_id"
-    t.string   "camera_two_id"
-    t.string   "camera_four_id"
-    t.string   "camera_five_id"
-    t.string   "camera_six_id"
     t.string   "first_topic"
     t.text     "first_topic_q1"
     t.text     "first_topic_q2"
@@ -155,7 +154,6 @@ ActiveRecord::Schema.define(version: 20150227031450) do
     t.text     "third_topic_q1"
     t.text     "third_topic_q2"
     t.text     "third_topic_q3"
-    t.string   "camera_seven_id"
   end
 
   create_table "question_groups", force: true do |t|
@@ -321,6 +319,7 @@ ActiveRecord::Schema.define(version: 20150227031450) do
     t.string   "invited_by_type"
     t.integer  "invitations_count",          default: 0
     t.integer  "invited_for_exploration_id"
+    t.string   "email_option"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

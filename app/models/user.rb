@@ -25,6 +25,7 @@
 #  invited_by_type            :string(255)
 #  invitations_count          :integer          default(0)
 #  invited_for_exploration_id :integer
+#  email_option               :string(255)
 #
 
 class User < ActiveRecord::Base
