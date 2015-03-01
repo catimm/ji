@@ -22,7 +22,7 @@ class ProblemsController < ApplicationController
     # if @step == "first"
     #  ExplorationUser.update(@exploration_user_id.id, :status => 'intro')
     if @step == "intro"
-      ExplorationUser.update(@exploration_user_id.id, :status => 'first')
+      ExplorationUser.update(@exploration_user_id.id, :status => 'first', :started => Time.now)
     elsif @step == "pthanks"
       ExplorationUser.update(@exploration_user_id.id, :status => 'ninth', :completed => Time.now)
     else
