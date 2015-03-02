@@ -26,12 +26,12 @@ Code::Application.configure do
     address: "smtp.mandrillapp.com",
     port: 587,
     authentication: "plain",
-    user_name: "bonu@heroku.com",
-    password: ENV['MANDRILL_PROD_APIKEY'],
+    user_name: "app32989419@heroku.com",
+    password: ENV['MANDRILL_DEV_APIKEY'],
     enable_starttls_auto: true
   }
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { :host => 'bonu.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'calm-coast-5967.herokuapp.com' }
   config.action_mailer.perform_deliveries = true
   
   # Defaults to nil and saved in location specified by config.assets.prefix

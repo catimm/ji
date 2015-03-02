@@ -67,9 +67,10 @@ class User < ActiveRecord::Base
   end
   
   def send_welcome_email
-    if sign_in_count == 1 || invitation_accepted_at?
+    if invitation_token.blank?
+      Rails.logger.debug("Signup welcome email: #{sign_in_count.inspect}")
       UserMailer.welcome_email(self).deliver
     end
   end
-  
+
 end

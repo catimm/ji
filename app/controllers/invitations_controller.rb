@@ -83,8 +83,6 @@ class InvitationsController < Devise::InvitationsController
   end
   
   def update
-
     super
-
   end
 end

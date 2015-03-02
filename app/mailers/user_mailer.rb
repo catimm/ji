@@ -1,7 +1,11 @@
 class UserMailer < ActionMailer::Base
 
-  def mandrill_client
-    @mandrill_client ||= Mandrill::API.new ENV['MANDRILL_APIKEY']
+  def mandrill_client_dev
+    @mandrill_client ||= Mandrill::API.new ENV['MANDRILL_DEV_APIKEY']
+  end
+  
+  def mandrill_client_prod
+    @mandrill_client ||= Mandrill::API.new ENV['MANDRILL_PROD_APIKEY']
   end
   
   def owner_invite_email(invited, inviter, description, time, link)
@@ -27,7 +31,11 @@ class UserMailer < ActionMailer::Base
          ]}
       ]
     }
-    mandrill_client.messages.send_template template_name, template_content, message
+    if root_url == "https://bonu.herokuapp.com/"
+      mandrill_client_prod.messages.send_template template_name, template_content, message
+    else
+      mandrill_client_dev.messages.send_template template_name, template_content, message
+    end
   end
   
   def friend_invite_email(invited, inviter, description, time, link)
@@ -53,7 +61,11 @@ class UserMailer < ActionMailer::Base
          ]}
       ]
     }
-    mandrill_client.messages.send_template template_name, template_content, message
+    if root_url == "https://bonu.herokuapp.com/"
+      mandrill_client_prod.messages.send_template template_name, template_content, message
+    else
+      mandrill_client_dev.messages.send_template template_name, template_content, message
+    end
   end
   
   def fof_invite_email(invited, inviter, description, time, link)
@@ -78,7 +90,11 @@ class UserMailer < ActionMailer::Base
          ]}
       ]
     }
-    mandrill_client.messages.send_template template_name, template_content, message
+    if root_url == "https://bonu.herokuapp.com/"
+      mandrill_client_prod.messages.send_template template_name, template_content, message
+    else
+      mandrill_client_dev.messages.send_template template_name, template_content, message
+    end
   end
   
   def general_invite_email(invited, inviter, description, time, link)
@@ -103,7 +119,11 @@ class UserMailer < ActionMailer::Base
          ]}
       ]
     }
-    mandrill_client.messages.send_template template_name, template_content, message
+    if root_url == "https://bonu.herokuapp.com/"
+      mandrill_client_prod.messages.send_template template_name, template_content, message
+    else
+      mandrill_client_dev.messages.send_template template_name, template_content, message
+    end
   end
   
   def welcome_email(user)
@@ -123,6 +143,10 @@ class UserMailer < ActionMailer::Base
          ]}
       ]
     }
-    mandrill_client.messages.send_template template_name, template_content, message
+    if root_url == "https://bonu.herokuapp.com/"
+      mandrill_client_prod.messages.send_template template_name, template_content, message
+    else
+      mandrill_client_dev.messages.send_template template_name, template_content, message
+    end
   end  
 end
