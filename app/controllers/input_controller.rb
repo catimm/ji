@@ -11,6 +11,7 @@ class InputController < ApplicationController
     video.user_id = data_parsed['metadata']['user']
     video.camera = data_parsed['metadata']['camera']
     video.exploration_id = data_parsed['metadata']['exploration_id']
+    video.step = data_parsed['metadata']['step']
     video.save!
   end
   
