@@ -21,23 +21,10 @@ html {
   position: relative;
   min-height: 100%;
 }
-.homeImage {
-    background: url("https://s3-us-west-2.amazonaws.com/jiproblemtest/road.jpg") no-repeat fixed center center / cover transparent;
-    background-clip: border-box;
-    background-origin: padding-box;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
 body {
   padding-top: 50px;
-  margin-bottom: 78px;
+  margin-bottom: 100px;
   overflow-x: hidden;
-}
-section {
-  margin: 0;
-  width: 100%;
 }
 .homeNavbar {
   background: #47504D !important;
@@ -68,10 +55,16 @@ section {
     }
   }
 }
-.homeBody {
-  background: transparent;
-}
 
+.banner {
+    background: url("https://s3-us-west-2.amazonaws.com/jiproblemtest/road.jpg") no-repeat fixed center center / cover transparent;
+    background-clip: border-box;
+    background-origin: padding-box;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
 .valueStatement {
   padding-top: 13%;
   height:100vh;
@@ -83,10 +76,11 @@ section {
   }
 }
 section {
-  padding-bottom: 3em;
+  margin: 0;
+  padding: 2.5em 0 3em 0;
+  width: 100%;
   h2 {
-    margin-top: 25px;
-    margin-bottom: 20px;
+    margin-bottom: 35px;
   }
   div {
     text-align: center;
@@ -97,16 +91,25 @@ section {
     }
   }
 }
-.homeSecond {
+.background-dark {
   background: #f7fAfA;
+}
+.background-light {
+  background: #fff; 
+}
+.first-section {
   margin-top: -90px;
 }
-.valueDesc {
-  padding-left: 25px;
-  padding-right: 25px;
+.valuePropRow {
+  .col-sm-4 {
+    padding: 0 25px;
+  }
+  .col-sm-5 {
+    padding: 0 40px;
+  }
 }
-.homeThird {
-  background: #fff; 
+.cta-button-row {
+  margin: 2em 0 1em 0;
 }
 .topRow {
   padding-top: 50px;
@@ -362,7 +365,9 @@ section {
 }
 .inputButton2 {
     font-size: 1.25em;
-    width: 100%;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
 .inputButton3 {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
@@ -452,17 +457,27 @@ legend {
   margin: 1em 0;
 }
 .footer {
-  background-color: #f7fAfA;
-  border-color: #e7e7e7;
+  background: #47504D !important;
+  border-color: #47504D;
   border-width: 1px 0 0 0;
   bottom: 0;
   position: absolute;
-  height: 78px;
+  height: 100px;
   width: 100%;
-  padding-top: 1em;
+  padding-top: 1.5em;
   padding-bottom: 0.5em;
-  a {
-    color: #2E96F0;
+  .container {
+    text-align: center;
+  }
+  a, .footer-menu-divider, p {
+    font-size: 0.9em;
+    font-weight: 300;
+    color: #fff;
+    letter-spacing: 2px;
+  }
+  p {
+    font-size: 0.75em;
+    font-weight: 200;
   }
 }
 .ui-widget-content {
