@@ -5,7 +5,7 @@ class UserMailer < ActionMailer::Base
   end
   
   def mandrill_client_prod
-    @mandrill_client ||= Mandrill::API.new ENV['MANDRILL_PROD_APIKEY']
+    @mandrill_client ||= Mandrill::API.new ENV['MANDRILL_DEV_APIKEY']
   end
   
   def owner_invite_email(invited, inviter, description, time, link)
