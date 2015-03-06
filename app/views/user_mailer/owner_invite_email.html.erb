@@ -1,0 +1,32 @@
+<html>
+  <head>
+      <style type="text/css">
+          @media only screen and (min-width:480px){
+          	.sectionSpace {padding-bottom: 18px !important;}
+          	.paragraphSpace {padding-bottom: 12px !important;}
+          }
+          h4 {font-weight: normal;}
+      </style>
+  </head>
+  <body>
+    <div class="sectionSpace">
+   		<h4>Hi <%= @invited.first_name %>,</h4>
+    </div>
+    <div class="sectionSpace">
+        <h4 class="paragraphSpace">I hope all is well! So, I'm reaching out to ask if I could grab ~<%= @time %> minutes of 
+        	your time in the next week or so.  I'm in the early phases of exploring an idea for a new business related 
+        	to <%= @description %> and I'd love to hear your thoughts on a few related questions.</h4>
+        <h4 class="paragraphSpace">I'm using an online service called <%= link_to "bonu", root_url %> to gather input. 
+        	Hopefully this approach takes up less of your time and gives you a little flexibility to provide answers 
+        	when it works best for you....</h4>
+        <h4>So, if you're willing to help me out, <%= link_to "follow this link", @link %> follow this link to get 
+        	started.</h4>
+    </div>
+    <div class="sectionSpace">
+        <h4>Thanks in advance for your time. I really appreciate it,</h4>
+        <h4 class="paragraphSpace"><%= @inviter.first_name %></h4>
+        <h4>PS - There's an option at the end to invite a few of your friends to provide input. So if you finish and 
+        	think of anyone else who might be interested, please pass it along. Again, I really appreciate it!</h4>
+	</div>
+  </body>
+</html>

@@ -23,16 +23,17 @@ Code::Application.configure do
   # Email setup
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "smtp.mandrillapp.com",
+    user_name: ENV['SENDGRID_UN'],
+    password: ENV['SENDGRID_PW'],
+    domain: "calm-coast-5967.herokuapp.com",
+    address: "smtp.sendgrid.net",
     port: 587,
     authentication: "plain",
-    user_name: "app32989419@heroku.com",
-    password: ENV['MANDRILL_DEV_APIKEY'],
     enable_starttls_auto: true
   }
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { :host => 'calm-coast-5967.herokuapp.com' }
   config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { :host => 'calm-coast-5967.herokuapp.com' }
   
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
