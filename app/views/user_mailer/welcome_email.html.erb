@@ -1,1 +1,26 @@
-<h1><%= @user.email %></h1>
+<html>
+  <head>
+      <style type="text/css">
+          @media only screen and (min-width:480px){
+          	.sectionSpace {padding-bottom: 18px !important;}
+          	.paragraphSpace {padding-bottom: 12px !important;}
+          }
+          h4 {font-weight: normal;}
+      </style>
+  </head>
+  <body>
+    <div class="sectionSpace">
+   		<h4>Welcome <%= @user.first_name %>,</h4>
+    </div>
+    <div class="sectionSpace">
+   		<h4 class="paragraphSpace">We're excited you've taken the time to join bonu! Your thoughts and preferences are 
+   			invaluable to entrepreneurs who are trying to hone their idea and make it great from the start.</h4>
+        <h4>Visit <%= link_to "your Activity Dashboard", root_url+"users/"+@user.id %> to get started on providing 
+        	feedback. And feel free to let us know if you have any questions along the way.</h4>
+    </div>
+    <div class="sectionSpace">
+        <h4>Hope to see you on bonu again soon,</h4>
+		<h4 class="paragraphSpace">Carl</h4>
+	</div>
+  </body>
+</html>
