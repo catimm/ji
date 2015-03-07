@@ -38,16 +38,16 @@ Code::Application.configure do
   # Email setup
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    user_name: ENV['SENDGRID_UN'],
-    password: ENV['SENDGRID_PW'],
-    domain: "localhost",
-    address: "smtp.sendgrid.net",
+    address: "smtp.mandrillapp.com",
     port: 587,
     authentication: "plain",
+    user_name: "app32989419@heroku.com",
+    password: ENV['MANDRILL_DEV_APIKEY'],
     enable_starttls_auto: true
   }
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { :host => 'localhost' }
+  config.action_mailer.perform_deliveries = true
+  
   
 end
