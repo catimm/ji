@@ -26,6 +26,9 @@ body {
   margin-bottom: 100px;
   overflow-x: hidden;
 }
+.container {
+  max-width: 1040px;
+}
 .homeNavbar {
   background: #47504D !important;
   border-color: #47504D;
@@ -39,7 +42,7 @@ body {
       font-size: 24px;
       line-height: 1.1;
       padding: 0;
-      margin-left: 40px !important;
+      margin-left: 5px !important;
     }
     .logo {
       font-family: "ai_kelsor";
@@ -190,18 +193,40 @@ section {
 }
 .explorationOverview {
   border: 1px solid #e7e7e7;
-  margin: 1em 0;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 0 0 6px 0;
+  height: 460px;
+  width: 99%;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  :hover {
+     .explorationTitle {
+     color: #47504D !important;
+     text-decoration: underline !important; 
+  }
+ }
 }
 .packageLeft {
     background-repeat: no-repeat;
     width: 100%;
     height: 240px;
+    margin: 0 auto;
 }
 .explorationTitle {
-    margin-top: 0.5em;
-    h3 {
-      margin: 0;
-    }
+    color: #000;
+}
+.status-bar {
+  height: 1em;
+  background: #F5F5F5;
+}
+.status-bar-progress {
+  background: #5CB85C;
+  height: 1em;
+}
+.days-left {
+  text-align: right;
 }
 .explorationExplorer {
   padding-left: 5px;
@@ -212,26 +237,30 @@ section {
     margin-bottom: 5px;
   } 
 }
+.project-card-content {
+  vertical-align: bottom;
+}
+.text-space-top {
+  margin-top: 5px;
+}
+.text-space-bottom {
+  margin-bottom: 5px;
+}
 .explorationDescription {
-    margin: 1.25em 0 2em 0;
-    h5 {
-      font-size: 1.1em;
-    }
+  margin: 15px 0 5px 0;
+  vertical-align: bottom;
+}
+.project-card-footer {
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #fff 26%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+  padding-top: 45px;
+}
+.explorationParticipants {
+  margin-bottom: 0;
 }
 .explorationStats {
-    margin-bottom: 0.25em;
-    h3 {
-      margin: 0;
-    }
-    h6 {
-      margin: 0;
-    }
-    div {
-      margin-bottom: 0.5em;
-      text-align: center; 
-      padding-left: 5px;
-      padding-right: 5px;
-    }
+    margin-top: 0;
 }
 .timeInvolved {
   div {
@@ -456,6 +485,9 @@ legend {
 .moreOppty {
   margin: 1em 0;
 }
+.projectContent {
+  padding-bottom: 2em;
+}
 .footer {
   background: #47504D !important;
   border-color: #47504D;
@@ -548,4 +580,7 @@ legend {
   h5 {
     line-height: 1.42857;
   }
+}
+.jwlogo {
+  display: block !important;
 }

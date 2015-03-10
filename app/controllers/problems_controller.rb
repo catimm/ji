@@ -4,6 +4,7 @@ class ProblemsController < ApplicationController
   def show
     # Grab data from params
     @exploration_user_id = ExplorationUser.find(params[:exploration_user_id])
+    Rails.logger.debug("Exploration user info: #{@exploration_user_id.inspect}")
     @step = params[:id]
     # Grab exploration data for view variables
     @exploration = Exploration.find(@exploration_user_id.exploration_id)

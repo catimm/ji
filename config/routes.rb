@@ -11,8 +11,8 @@ Code::Application.routes.draw do
   resources :users
   resources :explorations
 
-  resources :exploration_users, :path => "exploring" do
-    resources :problems, :path => "issues"  
+  resources :problems do
+    resources :exploration_users, :path => "exploring"   
   end
   
   root :to => 'home#index'
@@ -22,6 +22,7 @@ Code::Application.routes.draw do
 
   post 'users/:id' => 'users#update'
   post 'users/new' => 'users#update'
+  get  "/problems/show" => 'problems#show', :as => 'poverview', :path => "problems/exploring/:exploration_user_id"
   get  "/problems/intro" => 'problems#show', :as => 'pintro', :path => "exploring/:exploration_user_id/issues/intro"
   get  "/problems/first" => 'problems#show', :as => 'pstep1', :path => "exploring/:exploration_user_id/issues/first"
   get  "/problems/second" => 'problems#show', :as => 'pstep2', :path => "exploring/:exploration_user_id/issues/second"
