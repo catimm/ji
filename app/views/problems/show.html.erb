@@ -1,5 +1,50 @@
 <%= render 'layouts/header' %> 
 <div class="container">
-	<h2>Content here for <%= @problems.exploration.short_description %> <%= @exploration_user_id.status %> step</h2>
+	<div class="row">
+		<div class="page-header">
+			<h1><%= @exploration.title %></h1>
+			<div class="row">
+				<div class="col-xs-4">
+					<h6><span class="glyphicon glyphicon-user" aria-hidden="true"></span> by
+						<% @explorers.each do |d| %>
+							<% if d == @explorers.last %> 
+								<%= d.user.first_name %> <%= d.last_name %>
+							<% else %>
+								<%= d.user.first_name %> <%= d.last_name %>,
+							<% end %>
+						<% end %>
+					</h6>
+				</div>
+				<div class="col-xs-3">
+					<h6 class="gray"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> 
+						<%= @explorer_lead.city %>, <%= @explorer_lead.state %>
+					</h6>
+				</div>
+				<div class="col-xs-5">
+					<h6><i class="fa fa-exclamation-triangle"></i> This project is in the problem exploration phase 
+						<span class="info-text">(<%= link_to "Meaning?", record_path %>)</span>
+					</h6>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-0 col-sm-0 col-md-1"></div>
+			<div class="col-xs-12 col-sm-6 col-md-5 videoArea">
+				<video id='introVideo' class="img-responsive" data-uuid= <%= @problems.intro_video_id %> ></video>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-5">
+				<div class="row textAreaToXS hidden-xs"> <!--Using class tags to change height of div based on device viewing-->
+					<h5 class="specialFontSize"><%= @problems.intro_message %></h5>
+				</div>
+				<div class="row textAreaXS visible-xs"> <!--Using class tags to change height of div based on device viewing-->
+					<h5 class="specialFontSize"><%= @problems.intro_message %></h5>
+				</div>
+				<div class="row buttonArea">
+					<%= link_to "Take me to Step 2", record_path, class: "btn btn-success inputButton" %>
+				</div>	
+			</div>
+			<div class="col-xs-0 col-sm-0 col-md-1"></div>
+	</div>
 </div>
 <%= render 'layouts/footer' %>

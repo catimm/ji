@@ -1,24 +1,26 @@
 <% @explorations.each do |d| %>
 	<div class="col-xs-12 col-sm-4">
-		<%= link_to poverview_path(d.id) do %>
-		<div class="row explorationOverview">
-				<div class="packageLeft img-responsive visible-xs" alt="Responsive image" style="background-image: url(<%= d.exploration.picture_xs %>)"></div>
-				<div class="packageLeft img-responsive visible-sm visible-md visible-lg" alt="Responsive image" style="background-image: url(<%= d.exploration.picture_lg %>)"></div>
+		<% if d.exploration_phase == "Problem" %>
+			<% @problem = Problem.where(exploration_id: d.id).pluck(:id) %>
+			<%= link_to exploration_problem_path(d.id, @problem) do %>
+			<div class="row explorationOverview">
+				<div class="packageLeft img-responsive visible-xs" alt="Responsive image" style="background-image: url(<%= d.picture_xs %>)"></div>
+				<div class="packageLeft img-responsive visible-sm visible-md visible-lg" alt="Responsive image" style="background-image: url(<%= d.picture_lg %>)"></div>
 				<div class="col-xs-12 project-card-content">
-					<h4 class="explorationTitle text-space-bottom"><%= d.exploration.title %></h4>
+					<h4 class="explorationTitle text-space-bottom"><%= d.title %></h4>
 					<h6 class="gray text-space-top">  
-					<% if d.exploration.exploration_phase == "Problem" %>
-						 <i class="fa fa-exclamation-triangle"></i> <%= d.exploration.exploration_category %>
-					<% elsif d.exploration.exploration_phase == "Solution" %>
-						 <i class="fa fa-lightbulb-o"></i> <%= d.exploration.exploration_category %>
+					<% if d.exploration_phase == "Problem" %>
+						 <i class="fa fa-exclamation-triangle"></i> <%= d.exploration_category %>
+					<% elsif d.exploration_phase == "Solution" %>
+						 <i class="fa fa-lightbulb-o"></i> <%= d.exploration_category %>
 					<% end %>
 					</h6>
-					<h5 class="gray explorationDescription"><%= d.exploration.description %></h5>
+					<h5 class="gray explorationDescription"><%= d.description %></h5>
 				</div>
 				<div class="col-xs-12 project-card-footer">
-					<h4 class="gray text-space-bottom"><%= d.exploration.completions_required %> participants</h4>
-					<% completed = d.exploration.exploration_users.count(:completed) %>
-					<% percentage = ((completed.to_f/d.exploration.completions_required.to_f)*100).round %>
+					<h4 class="gray text-space-bottom"><%= d.completions_required %> participants</h4>
+					<% completed = d.exploration_users.count(:completed) %>
+					<% percentage = ((completed.to_f/d.completions_required.to_f)*100).round %>
 					<div class="status-bar">
 						<div class="status-bar-progress" style="width:<%= percentage %>%"></div>
 					</div>
@@ -27,12 +29,14 @@
 							<h6 class="gray text-space-top"><%= percentage %>%</h6>
 						</div>
 						<div class="col-xs-6 days-left">
-							<% days_left = ((d.exploration.end_date - @time)/1.day).round %>
+							<% days_left = ((d.end_date - @time)/1.day).round %>
 							<h6 class="gray text-space-top"><%= days_left %> days left</h6>
 						</div>
 					</div>
 				</div>
 			</div>
 		<% end %>
-		</div> 
+		</div>
+		<% end %>
+		 
 <% end %>

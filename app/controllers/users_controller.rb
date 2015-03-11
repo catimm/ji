@@ -25,14 +25,14 @@ class UsersController < ApplicationController
     # If current user has chosen to explore any Explorations, loop through them to show them here 
     if !@exploration_ids.empty?
       # Get explorations that the current user is exploring
-      @explorations = @exploration_users.where(user_chosen: "yes")
+      @explorations = Exploration.where(id: @exploration_ids)
       Rails.logger.debug("Explorations User has chosen: #{@explorations.inspect}")
       @time = Time.now
     end   
     # If current user is exploring any Explorations, loop through them to show them here 
     if !@friend_invitations_ids.empty?
       # Get explorations that the current user is exploring
-      @friend_invitations = @exploration_users.where(user_chosen: "no")
+      @friend_invitations = Exploration.where(id: @friend_invitations_ids)
       Rails.logger.debug("Explorations User has not yet chosen: #{@friend_invitations.inspect}")
       @time = Time.now
     end   

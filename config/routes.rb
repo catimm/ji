@@ -9,10 +9,9 @@ Code::Application.routes.draw do
   end
   
   resources :users
-  resources :explorations
 
-  resources :problems do
-    resources :exploration_users, :path => "exploring"   
+  resources :explorations, :path => "exploring" do
+    resources :problems   
   end
   
   root :to => 'home#index'
