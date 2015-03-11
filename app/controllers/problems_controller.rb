@@ -27,14 +27,16 @@ class ProblemsController < ApplicationController
     # Create problems variable for dynamic input in various steps
     @problems = Problem.where(exploration_id: @exploration.id).all.to_a[0]
     Rails.logger.debug("Problems data: #{@problems.inspect}")
+    # Set time variable
+    @time = Time.now
     # Create new variable for invitations form in ninth step
     @new = Exploration.new
     # if @step == "first"
     #  ExplorationUser.update(@exploration_user_id.id, :status => 'intro')
     if @step == "intro"
-      ExplorationUser.update(@exploration_user.id, :status => 'first', :started => Time.now)
+      ExplorationUser.update(@exploration_user.id, :status => 'first', :started => @time)
     elsif @step == "pthanks"
-      ExplorationUser.update(@exploration_user.id, :status => 'ninth', :completed => Time.now)
+      ExplorationUser.update(@exploration_user.id, :status => 'ninth', :completed => @time)
     else
       ExplorationUser.update(@exploration_user.id, :status => @step)
     end

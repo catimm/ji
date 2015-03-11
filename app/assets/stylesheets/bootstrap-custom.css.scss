@@ -221,9 +221,13 @@ section {
   height: 1em;
   background: #F5F5F5;
 }
+.status-bar-project-page {
+  height: 1.5em;
+  background: #F5F5F5;
+}
 .status-bar-progress {
   background: #5CB85C;
-  height: 1em;
+  height: 100%;
 }
 .days-left {
   text-align: right;
@@ -264,6 +268,25 @@ section {
 }
 .info-text {
   font-size: 0.8em;
+}
+.stated-goal {
+  margin-bottom: 1.5em;
+}
+.phase-time {
+  padding: 0 15px;
+  margin-top: 2em;
+  margin-bottom: 1.5em;
+  h5 {
+    span {
+      font-size: 0.8em;
+    }
+  }
+}
+.project-location {
+  text-align: center;
+}
+.project-phase {
+  text-align: right;
 }
 .timeInvolved {
   div {
@@ -308,12 +331,29 @@ section {
 .videoArea {
   background: #fff;
   text-align: center;
+  height: 420px;
+  padding-left: 5px;
 }
 #introVideo {
   width: 100% !important;
-  height: 240px;
+  height: 420px !important;
   margin-right: auto;
   margin-left: auto;
+}
+.currentStatusColumn {
+    border: 1px solid #e7e7e7;
+    padding: 5px 2em;
+    height: 420px;
+}
+.project-background {
+  margin: 2em 0;
+  h4 {
+    font-size: 20px;
+  }
+  h5 {
+    line-height: 1.2; 
+    font-size: 16px;
+  }
 }
 .row.inputArea {
   background: #000;
@@ -377,6 +417,12 @@ section {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+.responseArea {
+  font-size: 1.25em;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
 .buttonArea {
   font-size: 1.25em;
   width: 80%;
@@ -390,6 +436,11 @@ section {
   margin-left: auto;
   margin-right: auto;
   display: block;
+}
+.initialButton {
+  font-size: 1.25em;
+  width: 100%;
+  margin-top: 3em;
 }
 .inputButton {
     font-size: 1.25em;

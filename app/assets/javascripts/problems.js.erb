@@ -1,5 +1,12 @@
 $(document).ready(function(){
 
+	//code to start providing input
+	$("#provideInput").on("click", function(){
+		$("#initialVideo").removeClass("show").addClass("hidden");
+		$("#pstep1").removeClass("hidden").addClass("show");
+		$("#altVideo").removeClass("hidden").addClass("show");
+	});
+	
 	//code to swap out video and add written functionality
 	$(".noWebcam").on("click", function(){
 	    
