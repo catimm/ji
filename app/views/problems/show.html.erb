@@ -1,11 +1,11 @@
 <%= render 'layouts/header' %> 
-<div class="container">
+<div class="container pageContainer">
 	<!--Header row-->
-	<div class="row">
+	<div class="row projectHeader">
 		<div class="page-header">
 			<h1><%= @exploration.title %></h1>
 			<div class="row">
-				<div class="col-xs-4">
+				<div class="col-xs-4 project-owners">
 					<h6><span class="glyphicon glyphicon-user" aria-hidden="true"></span> by
 						<% @explorers.each do |d| %>
 							<% if d == @explorers.last %> 
@@ -29,59 +29,24 @@
 			</div>
 		</div>
 	</div>
-	<!--Project video-->
-	<div class="row">
-		<div class="col-sm-8 videoArea show" id="initialVideo">
-			<video id='introVideo' class="img-responsive" data-uuid= <%= @problems.intro_video_id %> ></video>
-		</div>
-		<div class="col-sm-8 videoArea hidden" id="pstep1">
-			<div class="row">
-				<div class="col-sm-6">
-				<div class="row inputArea">
-					<camera class="camera show img-responsive" id='problemTwo' data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' data-poll-for-processed='true'></camera>
-					<textarea name="textInputArea" id="textInputArea2" class="textInputArea hidden" placeholder="Type input here"></textarea>
-				</div>
-				<div class="row visible-xs visible-lg">
-					<div class="col-xs-7 extraInfoSpacing">
-						<h6 class="emailContact">Questions? Email me: ctiv@hotmail.com</h6>
-					</div>
-					<div class="col-xs-5 altInput extraInfoSpacing">
-						<%= link_to(raw("Provide written response instead."), "#", :class => "noWebcam two", :id => "noWebcam") %>
-					</div>
-				</div>
-				<div class="row visible-sm visible-md">
-					<div class="col-xs-7 extraInfoSpacing two">
-						<h6 class="emailContact">Questions? Email me: ctiv@hotmail.com</h6>
-					</div>
-					<div class="col-xs-5 altInput extraInfoSpacing two">
-						<%= link_to(raw("Provide written response instead."), "#", :class => "noWebcam two", :id => "noWebcam") %>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 col-sm-6 col-md-5">
-				<div class="row textAreaToXS hidden-xs"> <!--Using class tags to change height of div based on device viewing-->
-					<h5 class="specialFontSize">Here's what we think:</h5>
-					<ul>
-						<li class="specialFontSize"><%= @problems.problem_one %></li>
-						<li class="specialFontSize"><%= @problems.problem_two %></li>
-						<li class="specialFontSize"><%= @problems.problem_three %></li>
-					</ul>
-					<h5 class="specialFontSize">Does any of this resonate with you? Please use the webcam to share your general thoughts on the topic.</h5>
-				</div>
-				<div class="row textAreaXS visible-xs"> <!--Using class tags to change height of div based on device viewing-->
-					<h5 class="specialFontSize">Here's what we think:</h5>
-					<ul>
-						<li class="specialFontSize"><%= @problems.problem_one %></li>
-						<li class="specialFontSize"><%= @problems.problem_two %></li>
-						<li class="specialFontSize"><%= @problems.problem_three %></li>
-					</ul>
-					<h5 class="specialFontSize">Does any of this resonate with you? Please use the webcam to share your general thoughts on the topic.</h5>
-				</div>
+	<!--Project info-->
+	<div class="row topProjectRow hidden" id="pstep1"></div>
+	<div class="row topProjectRow hidden" id="pstep2"></div>
+	<div class="row topProjectRow hidden" id="pstep3"></div>
+	<div class="row topProjectRow hidden" id="pfinished"></div>
+	<div class="row topProjectRow show" id="firstView">	
+		<%= form_for @written, url: project_update_feedback_path(@exploration.id, @problems.id)  do |f| %>
+		<!--Project main area--info-->
+		<div class="col-sm-8 mainArea">
+			<h4 class="responseBackgroundHeader hidden">Our project background</h4>
+			<div class="row videoArea" id="initialVideo">
+				<video id='introVideo' class="img-responsive" data-uuid= <%= @problems.intro_video_id %> ></video>
 			</div>
 		</div>
-		</div>
-		<div class="col-sm-4 currentStatusColumn">
-				<h3 class="text-space-bottom"><%= @exploration.exploration_users.count(:completed) %> have provided input</h3>
+		<!--Project side bar-->
+		<div class="col-sm-4 sideArea show" id="firstSideArea">
+			<div class="row sideBarArea">
+				<h4 class="text-space-bottom"><%= @exploration.exploration_users.count(:completed) %> people provided input</h4>
 				<h5 class="gray text-space-top stated-goal">out of a goal of <%= @exploration.completions_required %></h5>
 				<% completed = @exploration.exploration_users.count(:completed) %>
 				<% percentage = ((completed.to_f/@exploration.completions_required.to_f)*100).round %>
@@ -89,7 +54,7 @@
 					<div class="status-bar-progress" style="width:<%= percentage %>%"></div>
 				</div>
 				<div class="row">
-					<div class="col-xs-6">
+					<div class="col-xs-6 percent-complete">
 						<h5 class="gray text-space-top"><%= percentage %>% complete</h5>
 					</div>
 					<div class="col-xs-6 days-left">
@@ -101,30 +66,17 @@
 					<h5 class="gray">This phase of the project started on <%= (@exploration.created_at).strftime("%B %e") %> and will close on 
 						<%= (@exploration.end_date).strftime("%B %e, %Y") %> <span>(11:59PM PT)</span>.</h5>
 				</div>
-				<div class="row responseArea">
-					<%= link_to "Tell us what you think!", "#", id: "provideInput", class: "btn btn-success initialButton" %>
-				</div>
+			</div>
+			<div class="row responseAreaInitial show">
+				<%= f.submit id: "initialButton", value: "Share your thoughts", class: "btn btn-success responseButton toStep1" %>
+			</div>
+			<% end %>
 		</div>
-	</div>
-	<!--Project overview-->
-	<div class="row hidden" id="altVideo">
-		<div class="col-sm-8 videoArea">
-			<video id='introVideo' class="img-responsive" data-uuid= <%= @problems.intro_video_id %> ></video>
-		</div>
-	</div>
-	<div class="row project-background">
-		<div class="col-sm-8">
-			<h4>Our project background</h4>
-			<h5>We like to drink craft beer—good craft beer, that is.  To be clear, we define “good” as something that we each, 
-				individually like.  It’s very personal, as it should be.</h5>
-			<h5>With craft beer now available everywhere, you’d think this wouldn’t be a problem.  But the real issue is that we 
-				can only drink so many beers on any given night and life is too short to waste limited beer drinking opportunities 
-				on crappy beers….</h5>
-			<h5>We’ve tried asking people for recommendations, checking various blogs, websites, and apps to find the best beers. 
-				Sometimes this results in finding a good beer. But often times it doesn’t. And almost all the time it ends up taking 
-				way too much time.</h5>
-			<h5>So, we’re now on a mission to make finding and drinking good craft beer super simple. We hope you’ll join us on this 
-				journey!</h5>
+		<div class="col-sm-8 mainArea">
+			<div class="row project-background">
+				<h4 class="initialBackgroundHeader show">Our project background</h4>
+				<h5><%=raw @problems.project_background %></h5>
+			</div>
 		</div>
 	</div>
 </div>

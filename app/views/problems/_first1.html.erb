@@ -1,0 +1,99 @@
+<!--Wrap code in form to capture written response if provided-->
+<%= form_for @written, url: project_update_feedback_path(@exploration.id, @problems.id)  do |f| %>
+<!--Project main area--info-->
+<div class="col-sm-8 mainArea">
+	<div class="row zeroPadding">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4 stepGuide">
+			<h6 class="step one current">1</h6>
+			<% if @step == "first" %>
+				<h6 class="step two not-visited">2</h6>
+				<h6 class="step three not-visited">3</h6>
+			<% elsif @step == "second" %>
+				<%= link_to(raw("2"), "#", :class => "step two visited") %>
+				<h6 class="step three not-visited">3</h6>
+			<% elsif @step == "third" %>
+				<%= link_to(raw("2"), "#", :class => "step two visited") %>
+				<%= link_to(raw("3"), "#", :class => "step three visited") %>
+			<% else %>
+				<%= link_to(raw("2"), "#", :class => "step two visited") %>
+				<%= link_to(raw("3"), "#", :class => "step three visited") %>
+				<%= link_to(raw("F"), "#", :class => "step finished visited") %>
+			<% end %>
+		</div>
+		<div class="col-sm-4"></div>
+	</div>
+	<div class="row zeroPadding">
+		<div class="col-sm-6">
+			<div class="row inputArea">
+				<camera class="camera show img-responsive" id='problemTwo' data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' data-poll-for-processed='true'></camera>
+				<textarea name="textInputArea" id="textInputArea1" class="textInputArea hidden" placeholder="Type input here"></textarea>
+			</div>
+			<div class="row visible-xs visible-lg">
+				<div class="col-xs-5 extraInfoSpacing">
+					<h6 class="emailContact">Questions? <%= mail_to "ctiv@hotmail.com", "Email us" %></h6>
+				</div>
+				<div class="col-xs-7 altInput extraInfoSpacing">
+					<%= link_to(raw("Provide written response instead."), "#", :class => "noWebcam one", :id => "noWebcam") %>
+				</div>
+			</div>
+			<div class="row visible-sm visible-md">
+				<div class="col-xs-5 extraInfoSpacing two">
+					<h6 class="emailContact">Questions? <%= mail_to "ctiv@hotmail.com", "Email us" %></h6>
+				</div>
+				<div class="col-xs-7 altInput extraInfoSpacing two">
+					<%= link_to(raw("Provide written response instead."), "#", :class => "noWebcam one", :id => "noWebcam") %>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="row textAreaToXS hidden-xs"> <!--Using class tags to change height of div based on device viewing-->
+				<h5 class="specialFontSize">Here's what we think:</h5>
+				<ul>
+					<li class="specialFontSize"><%= @problems.problem_one %></li>
+					<li class="specialFontSize"><%= @problems.problem_two %></li>
+					<li class="specialFontSize"><%= @problems.problem_three %></li>
+				</ul>
+				<h5 class="specialFontSize">Does any of this resonate with you? Please use the webcam to share your general thoughts on the topic.</h5>
+			</div>
+			<div class="row textAreaXS visible-xs"> <!--Using class tags to change height of div based on device viewing-->
+				<h5 class="specialFontSize">Here's what we think:</h5>
+				<ul>
+					<li class="specialFontSize"><%= @problems.problem_one %></li>
+					<li class="specialFontSize"><%= @problems.problem_two %></li>
+					<li class="specialFontSize"><%= @problems.problem_three %></li>
+				</ul>
+				<h5 class="specialFontSize">Does any of this resonate with you? Please use the webcam to share your general thoughts on the topic.</h5>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Project side bar-->
+<div class="col-sm-4 sideArea" id="altSideArea">
+	<div class="row sideBarArea">
+		<h4 class="text-space-bottom"><%= @exploration.exploration_users.count(:completed) %> people provided input</h4>
+		<h5 class="gray text-space-top stated-goal">out of a goal of <%= @exploration.completions_required %></h5>
+		<% completed = @exploration.exploration_users.count(:completed) %>
+		<% percentage = ((completed.to_f/@exploration.completions_required.to_f)*100).round %>
+		<div class="status-bar-project-page">
+			<div class="status-bar-progress" style="width:<%= percentage %>%"></div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6 percent-complete">
+				<h5 class="gray text-space-top"><%= percentage %>% complete</h5>
+			</div>
+			<div class="col-xs-6 days-left">
+				<% days_left = ((@exploration.end_date - @time)/1.day).round %>
+				<h5 class="gray text-space-top"><i class="fa fa-clock-o"></i> <%= days_left %> days left</h5>
+			</div>
+		</div>
+		<div class="row phase-time">
+			<h5 class="gray">This phase of the project started on <%= (@exploration.created_at).strftime("%B %e") %> and will close on 
+				<%= (@exploration.end_date).strftime("%B %e, %Y") %> <span>(11:59PM PT)</span>.</h5>
+		</div>
+	</div>
+	<div class="row responseArea show">
+		<%= f.submit id: "step1Button", value: "Next", class: "btn btn-success responseButton toStep2", disabled: "true" %>
+	</div>
+</div>
+<% end %>

@@ -4,7 +4,7 @@
 
 en:
   surveyor:
-    step3: "Take me to Step 4"
+    next: "Next"
     step7: "Finish"
     take_these_surveys: "You may take these surveys"
     take_it: "Take it"

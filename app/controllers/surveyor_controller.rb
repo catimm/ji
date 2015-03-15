@@ -5,7 +5,7 @@ module SurveyorControllerCustomMethods
   def self.included(base)
     # base.send :before_filter, :require_user   # AuthLogic
     # base.send :before_filter, :login_required  # Restful Authentication
-    base.send :layout, 'surveyor_custom'
+    base.send :layout, '_surveyor'
   end
 
   # Actions
@@ -72,16 +72,19 @@ module SurveyorControllerCustomMethods
     super
   end
   def update
-    exploration_user_id = ResponseSet.where(access_code: params[:response_set_code]).pluck(:user_id)
-    Rails.logger.debug("Surveyor Initial Update User ID is: #{exploration_user_id.inspect}")
-    step_title = params[:survey_code]
-    if step_title == "craft-beer-input"
-      session[:finish_path] = pstep4_path(exploration_user_id)
-    end
-    if step_title == "craft-beer-demographics"
-      session[:finish_path] = pstep9_path(exploration_user_id)
-    end
-    super
+    
+    @exploration_user_id = ResponseSet.where(access_code: params[:response_set_code]).pluck(:user_id)[0]
+    Rails.logger.debug("Surveyor Initial Update User ID is: #{@exploration_user_id.inspect}")
+    @exploration = ExplorationUser.find(@exploration_user_id)
+    Rails.logger.debug("Exploration info is: #{@exploration.inspect}")
+    @problem = Problem.where(exploration_id: @exploration.exploration_id).pluck(:id)[0]
+    Rails.logger.debug("Problem info is: #{@problem.inspect}")
+    # Original code from Surveyor
+    question_ids_for_dependencies = (params[:r] || []).map{|k,v| v["question_id"] }.compact.uniq 
+    saved = load_and_update_response_set_with_retries 
+    
+    redirect_to project_update_from_survey_path(@exploration.exploration_id, @problem) and return 
+     
   end
 
   # Paths

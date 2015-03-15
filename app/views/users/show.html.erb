@@ -1,37 +1,39 @@
 <%= render 'layouts/header' %> 
 <div class="container">
-		<div class="row">
-			<div class="page-header">
-			  <h2>Activity</h2>
-			</div>
+	<div class="row activityHeader">
+		<div class="page-header">
+		  <h2>Activity</h2>
 		</div>
-		<div class="row projectContent">
-				<% if !@exploration_ids.empty? %>
-					<%= render 'exploration_overview2' %>
-				<% else %>
-					<h3>You haven't chosen to share any thoughts yet! Choose an opportunity below to get started.</h3>
-				<% end %>
-		</div>
-		
-		<% if !@friend_invitations_ids.empty? %>
-			<div class="row moreOppty">
-				<div class="page-header">
-				  <h2>Friend invitations</h2>
-				</div>
-			</div>
-			<div class="row projectContent">
-				<%= render 'friend_invitations_overview' %>
-			</div>
-		<% end %>
-		<% if !@unexplored_exploration_ids.empty? %>
-			<div class="row moreOppty">
-				<div class="page-header">
-				  <h2>Other projects to explore</h2>
-				</div>
-			</div>
-			<div class="row projectContent">
-				<%= render 'opportunity_overview2' %>
-			</div>
+	</div>
+	<div class="row projectContent">
+		<% if !@exploration_ids.empty? %>
+			<%= render 'exploration_overview2' %>
+		<% else %>
+			<h3>You haven't chosen to share any thoughts yet! Choose an opportunity below to get started.</h3>
 		<% end %>
 	</div>
+		
+	<% if !@friend_invitations_ids.empty? %>
+	<div class="row friendOpptyHeader">
+		<div class="page-header">
+		  <h2>Friend invitations</h2>
+		</div>
+	</div>
+	<div class="row projectContent">
+		<%= render 'friend_invitations_overview' %>
+	</div>
+	<% end %>
+
+	<% if !@unexplored_exploration_ids.empty? %>
+	<div class="row moreOpptyHeader">
+		<div class="page-header">
+		  <h2>Other projects to explore</h2>
+		</div>
+	</div>
+	<div class="row projectContent">
+		<%= render 'opportunity_overview2' %>
+	</div>
+	<% end %>
+
+</div>
 <%= render 'layouts/footer' %>

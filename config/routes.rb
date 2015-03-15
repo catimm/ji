@@ -21,17 +21,12 @@ Code::Application.routes.draw do
 
   post 'users/:id' => 'users#update'
   post 'users/new' => 'users#update'
-  get  "/problems/show" => 'problems#show', :as => 'poverview', :path => "problems/exploring/:exploration_user_id"
-  get  "/problems/intro" => 'problems#show', :as => 'pintro', :path => "exploring/:exploration_user_id/issues/intro"
-  get  "/problems/first" => 'problems#show', :as => 'pstep1', :path => "exploring/:exploration_user_id/issues/first"
-  get  "/problems/second" => 'problems#show', :as => 'pstep2', :path => "exploring/:exploration_user_id/issues/second"
-  match "/surveys/craft-beer-input" => 'surveyor#create', :via => [:post], :as => 'craft_beer_input'
-  get  "/problems/fourth" => 'problems#show', :as => 'pstep4', :path => "exploring/:exploration_user_id/issues/fourth"
-  get  "/problems/fifth" => 'problem#show', :as => 'pstep5', :path => "exploring/:exploration_user_id/issues/fifth"
-  get  "/problems/sixth" => 'problem#show', :as => 'pstep6', :path => "exploring/:exploration_user_id/issues/sixth"
-  get  "/problems/seventh" => 'problem#show', :as => 'pstep7', :path => "exploring/:exploration_user_id/issues/seventh"
-  match "/surveys/craft-beer-demographics" => 'surveyor#create', :via => [:post], :as => 'craft_beer_demographics'
-  get  "/problems/ninth" => 'problem#show', :as => 'pstep9', :path => "exploring/:exploration_user_id/issues/pthanks"
+  get  "/problems" => 'problems#show'
+  post "exploring/:exploration_id/problems/:id" => 'problems#update', :as => 'project_update_feedback'
+  get "exploring/:exploration_id/problems/:id/update" => 'problems#update', :as => 'project_update_from_survey'
+ 
+  post "/surveys/:survey_code" => 'surveyor#create'
+ 
   get   "/devise/invitations/new"
     
   match '/video/new' => 'input#video_url', :via => [:post]

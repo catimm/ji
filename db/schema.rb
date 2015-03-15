@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301200319) do
+ActiveRecord::Schema.define(version: 20150312192441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 20150301200319) do
     t.string   "picture_lg"
     t.integer  "exploration_users_count"
     t.string   "exploration_phase"
+    t.string   "survey_access_code"
   end
 
   create_table "explorers", force: true do |t|
@@ -154,6 +155,7 @@ ActiveRecord::Schema.define(version: 20150301200319) do
     t.text     "third_topic_q1"
     t.text     "third_topic_q2"
     t.text     "third_topic_q3"
+    t.text     "project_background"
   end
 
   create_table "question_groups", force: true do |t|

@@ -35,7 +35,7 @@ class InvitationsController < Devise::InvitationsController
     # Make sure project relationship is not empty. If it is empty, send user back to page with an error.
     if project_relationship.empty?
       flash[:failure] = "Please choose an option from the drop down"
-      redirect_to new_user_invitation_path(params[:user][:invited_for_exploration_id]) and return
+      redirect_to exploration_problem_path(params[:user][:invited_for_exploration_id], params[:user][:problem_id]) and return
     end
     # add invited person to User model
     @invited_user = User.invite!(invite_params, current_inviter) do |u|
@@ -78,7 +78,7 @@ class InvitationsController < Devise::InvitationsController
     
     # Redirect current user back to Invitation view and send the exploration id through to be referenced again
     flash[:success] = "You've successfully sent the invite!"
-    redirect_to new_user_invitation_path(params[:user][:invited_for_exploration_id])
+    redirect_to exploration_problem_path(params[:user][:invited_for_exploration_id],params[:user][:problem_id])
     
   end
   

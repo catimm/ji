@@ -17,6 +17,7 @@
 #  picture_lg              :string(255)
 #  exploration_users_count :integer
 #  exploration_phase       :string(255)
+#  survey_access_code      :string(255)
 #
 
 require 'rails_helper'
