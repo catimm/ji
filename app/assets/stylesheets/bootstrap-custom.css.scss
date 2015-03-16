@@ -317,9 +317,6 @@ section {
   width: 26em;
   margin-bottom: 3em;
 }
-ul {
-  padding-left: 15px !important;
-}
 .emailContact {
   float: left;
   a {
@@ -979,4 +976,8 @@ Copyright (c) 2012 Dan Eden*/
   -moz-animation-name: shake;
   -o-animation-name: shake;
   animation-name: shake;
+}
+ul {
+  padding-left: 15px !important;
+  list-style: outside !important;
 }

@@ -71,7 +71,11 @@
 <!--Project side bar-->
 <div class="col-sm-4 sideArea" id="altSideArea">
 	<div class="row sideBarArea">
-		<h4 class="text-space-bottom"><%= @exploration.exploration_users.count(:completed) %> people provided input</h4>
+		<% if @exploration.exploration_users.count(:completed) == 1 %>
+			<h4 class="text-space-bottom"><%= @exploration.exploration_users.count(:completed) %> person provided input</h4>
+		<% else %>
+			<h4 class="text-space-bottom"><%= @exploration.exploration_users.count(:completed) %> people provided input</h4>
+		<% end %>
 		<h5 class="gray text-space-top stated-goal">out of a goal of <%= @exploration.completions_required %></h5>
 		<% completed = @exploration.exploration_users.count(:completed) %>
 		<% percentage = ((completed.to_f/@exploration.completions_required.to_f)*100).round %>
