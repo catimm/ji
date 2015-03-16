@@ -72,12 +72,13 @@
 					</div>
 				</div>
 				<div class="row phase-time">
-					<h5 class="gray">This phase of the project started on <%= (@exploration.created_at).strftime("%B %e") %> and will close on 
+					<h5 class="gray">This phase of the project started on <%= (@exploration.start_date).strftime("%B %e") %> and will close on 
 						<%= (@exploration.end_date).strftime("%B %e, %Y") %> <span>(11:59PM PT)</span>.</h5>
 				</div>
 			</div>
 			<div class="row responseAreaInitial show">
 				<%= f.submit id: "initialButton", value: "Share your thoughts", class: "btn btn-success responseButton toStep1" %>
+				<h6 class="liStatement">Takes ~<%= @problems.time_to_take %> minutes to complete.</h6>
 			</div>
 			<% end %>
 		</div>
