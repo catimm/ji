@@ -54,6 +54,8 @@ GEM
       execjs
       json
     bcrypt (3.1.10-x86-mingw32)
+    bootstrap-modal-rails (2.2.5)
+      railties (>= 3.1)
     bootstrap-sass (3.3.3)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
@@ -265,6 +267,7 @@ DEPENDENCIES
   Ziggeo!
   annotate
   autoprefixer-rails
+  bootstrap-modal-rails
   bootstrap-sass (= 3.3.3)
   bootstrap-social-rails (~> 4.8.0)
   capybara

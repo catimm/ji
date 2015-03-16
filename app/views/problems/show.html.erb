@@ -22,9 +22,18 @@
 					</h6>
 				</div>
 				<div class="col-xs-5 project-phase">
-					<h6><i class="fa fa-exclamation-triangle"></i> This project is in the problem exploration phase 
-						<span class="info-text">(<%= link_to "Meaning?", record_path %>)</span>
+					<h6><i class="fa fa-exclamation-triangle"></i> This project is in the problem phase of exploration 
+						<span class="info-text">(<%= link_to "Meaning?", "#", data: {toggle: "modal", target: "#problem_background"} %>)</span>
 					</h6>
+				</div>
+				<div id="problem_background" class="modal">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h3>Problem phase background</h3>
+					</div>
+					<div class="modal-body">
+						<video id='problemIntroVideo' class="img-responsive" data-uuid="v-66d09c00-f211-4989-8fad-f1bd1937cb75"></video>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -40,7 +49,7 @@
 		<div class="col-sm-8 mainArea">
 			<h4 class="responseBackgroundHeader hidden">Our project background</h4>
 			<div class="row videoArea" id="initialVideo">
-				<video id='introVideo' class="img-responsive" data-uuid= <%= @problems.intro_video_id %> ></video>
+				<video id='projectIntroVideo' class="img-responsive" data-uuid= <%= @problems.intro_video_id %> ></video>
 			</div>
 		</div>
 		<!--Project side bar-->

@@ -110,14 +110,14 @@ $(document).ready(function(){
 	
 	// code to insert correct partial called by view
 	if ($("#pstep1").hasClass("show")) {
-		$("#pstep1").html("<%=j render :partial => 'first1' %>");
+		$("#pstep1").html("<%=j render :partial => 'first' %>");
 	}
 	if ($("#pstep2").hasClass("show")) {
-		$("#pstep2").html("<%=j render :partial => 'second2' %>");
+		$("#pstep2").html("<%=j render :partial => 'second' %>");
 		
 	}
 	if ($("#pstep3").hasClass("show")) {
-		$("#pstep3").html("<%=j render :partial => 'third3' %>");
+		$("#pstep3").html("<%=j render :partial => 'third' %>");
 	}
 	if ($("#pfinished").hasClass("show")) {
 		$("#pfinished").html("<%=j render :partial => 'finish' %>");

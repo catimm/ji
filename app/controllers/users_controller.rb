@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @exploration_ids = @exploration_users.where(user_chosen: "yes").pluck(:exploration_id)
     Rails.logger.debug("Current User Exploration User IDs: #{@exploration_ids.inspect}")
     # Create array of all Exploration IDs where current user has not yet chosen to explore but has been invited to explore
-    @friend_invitations_ids = @exploration_users.where(user_chosen: "no").pluck(:exploration_id)
+    @friend_invitations_ids = @exploration_users.where(user_chosen: "no").where("invited_by_user_id IS NOT NULL").pluck(:exploration_id)
     Rails.logger.debug("Friend invitations: #{@friend_invitations_ids.inspect}")
     # Create array of all Exploration IDs where current user is NOT connected in the Exploration User model
     @unexplored_exploration_ids = exploration_ids - @exploration_ids - @friend_invitations_ids

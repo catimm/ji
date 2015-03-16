@@ -1,88 +1,41 @@
 <% @explorations.each do |d| %>
-	<div class="row explorationOverview">
-			<div class="col-xs-12 col-sm-4 colNoMargin">
-				<div class="packageLeft img-responsive visible-xs" alt="Responsive image" style="background-image: url(<%= d.exploration.picture_xs %>)"></div>
-				<div class="packageLeft img-responsive visible-sm visible-md" alt="Responsive image" style="background-image: url(<%= d.exploration.picture_sm %>)"></div>
-				<div class="packageLeft img-responsive visible-lg" alt="Responsive image" style="background-image: url(<%= d.exploration.picture_lg %>)"></div>
+<div class="col-xs-12 col-sm-4">
+	<% if d.exploration_phase == "Problem" %>
+		<% @problem = Problem.where(exploration_id: d.id).pluck(:id) %>
+		<%= link_to exploration_problem_path(d.id, @problem) do %>
+		<div class="row explorationOverview">
+			<div class="packageLeft img-responsive visible-xs" alt="Responsive image" style="background-image: url(<%= d.picture_xs %>)"></div>
+			<div class="packageLeft img-responsive visible-sm visible-md visible-lg" alt="Responsive image" style="background-image: url(<%= d.picture_lg %>)"></div>
+			<div class="col-xs-12 project-card-content">
+				<h4 class="explorationTitle text-space-bottom"><%= d.title %></h4>
+				<h6 class="gray text-space-top">  
+				<% if d.exploration_phase == "Problem" %>
+					 <i class="fa fa-exclamation-triangle"></i> <%= d.exploration_category %>
+				<% elsif d.exploration_phase == "Solution" %>
+					 <i class="fa fa-lightbulb-o"></i> <%= d.exploration_category %>
+				<% end %>
+				</h6>
+				<h5 class="gray explorationDescription"><%= d.description %></h5>
 			</div>
-			<div class="col-xs-12 col-sm-8">
-					<div class="row explorationTitle">
-						<div class="col-sm-10">
-							<h3><%= d.exploration.title %></h3>
-						</div>
+			<div class="col-xs-12 project-card-footer">
+				<h4 class="gray text-space-bottom"><%= d.completions_required %> participants</h4>
+				<% completed = d.exploration_users.count(:completed) %>
+				<% percentage = ((completed.to_f/d.completions_required.to_f)*100).round %>
+				<div class="status-bar">
+					<div class="status-bar-progress" style="width:<%= percentage %>%"></div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6">
+						<h6 class="gray text-space-top"><%= percentage %>%</h6>
 					</div>
-					<div class="row explorationExplorer">
-						<% @explorer_lead = Explorer.where(exploration_id: d.exploration.id, lead_explorer: "yes").all.to_a[0] %>
-						<div class="col-xs-4 col-sm-3">
-							<h6 class="gray"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> by <%= @explorer_lead.user.first_name %> <%= @explorer_lead.last_name %></h6>
-						</div>
-						<div class="col-xs-4 col-sm-3">
-							<h6 class="gray"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <%= @explorer_lead.city %>, <%= @explorer_lead.state %></h6>
-						</div>
-						<div class="col-xs-4 col-sm-3">
-							<% if d.exploration.exploration_phase == "Problem" %>
-						        <h6 class="gray"><i class="fa fa-exclamation-triangle"></i> <%= d.exploration.exploration_category %></h6>
-						    <% end %>
-							<% if d.exploration.exploration_phase == "Solution" %>
-						        <h6 class="gray"><i class="fa fa-lightbulb-o"></i> <%= d.exploration.exploration_category %></h6>
-						    <% end %>
-						</div>
-						<div class="col-xs-0 col-sm-3"></div>
+					<div class="col-xs-6 days-left">
+						<% days_left = ((d.end_date - @time)/1.day).round %>
+						<h6 class="gray text-space-top"><%= days_left %> days left</h6>
 					</div>
-					<div class="row explorationDescription">
-						<h5 class="gray"><%= d.exploration.description %></h5>
-					</div>
-					<div class="row explorationStats">
-						<div class="col-xs-4 col-sm-2">
-							<h3><%= d.exploration.completions_required %></h3>
-							<h6 class="gray">desired</h6>
-						</div>
-						<div class="col-xs-4 col-sm-2">
-							<% completed = d.exploration.exploration_users.count(:completed) %>
-							<h3><%= completed %></h3>
-							<h6 class="gray">provided</h6>
-						</div>
-						<div class=" col-xs-4 col-sm-2">
-							<% days_left = ((d.exploration.end_date - @time)/1.day).round %>
-							<h3><%= days_left %></h3>
-							<h6 class="gray">days to go</h6>                                                                         
-						</div>
-						<div class="col-xs-12 col-sm-5">
-							<% if d.status == "third" %>
-								<form method="post" action="/surveys/craft-beer-input" accept-charset="UTF-8">
-									<input type="submit" id="step2Button" value="Continue sharing" name="commit" default="default" class="btn btn-success inputButton">
-									<input type="hidden" name="exploration_user_id" value=<%= d.id %> >
-								</form>
-							<% elsif d.status == "eighth" %>
-								<form method="post" action="/surveys/craft-beer-demographics" accept-charset="UTF-8">
-									<input type="submit" id="step7Button" value="Finish sharing" name="commit" default="default" class="btn btn-success inputButton">
-									<input type="hidden" name="exploration_user_id" value=<%= d.id %> >
-								</form>
-							<% elsif d.status == "ninth" %>
-								<%= form_for @new, url: new_user_invitation_path, method: :get  do |f| %>
-									<%= f.hidden_field :invited_for_exploration_id, value: d.exploration.id %>
-									<%= f.submit id: "inviteButton", value: "Invite others", class: "btn btn-success inputButton" %>
-								<% end %>
-							<% else %>
-								<% if d.status == "0" %>
-									<%= link_to "Share thoughts", pintro_path(d.id), :class => "btn btn-success inputButton"  %>
-								<% else %>
-									<%= link_to "Continue sharing", exploration_user_problem_path(d.id, d.status), :class => "btn btn-success inputButton"  %>									
-								<% end %>
-							<% end %>
-						</div>
-						<div class="col-sm-1"></div>
-					</div>	
-					<% if d.status == "0" %>
-					<div class="row timeInvolved">
-						<div class="col-xs-12 col-sm-6"></div>
-						<div class="col-xs-12 col-sm-5">
-							<% @time_to_take = Problem.where(exploration_id: d.exploration.id).all.to_a[0] %>
-							<h6 class="timeLeft">(Takes ~<%= @time_to_take.time_to_take %> minutes to complete)</h6>
-						</div>
-						<div class="col-sm-1"></div>
-					</div>
-					<% end %>	
+				</div>
 			</div>
-		</div> 
+		</div>
+		<% end %>
+	<% end %>
+</div>		 
 <% end %>

@@ -18,6 +18,7 @@
 #  exploration_users_count :integer
 #  exploration_phase       :string(255)
 #  survey_access_code      :string(255)
+#  start_date              :datetime
 #
 
 require 'rails_helper'

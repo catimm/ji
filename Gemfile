@@ -41,6 +41,7 @@ gem 'rabl'
 gem 'pg', '0.17.1'
 gem 'bootstrap-sass', '3.3.3'
 gem 'bootstrap-social-rails', '~> 4.8.0'
+gem 'bootstrap-modal-rails'
 gem 'autoprefixer-rails'
 gem "omnicontacts"
 gem 'squeel'

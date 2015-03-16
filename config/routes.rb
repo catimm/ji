@@ -24,9 +24,7 @@ Code::Application.routes.draw do
   get  "/problems" => 'problems#show'
   post "exploring/:exploration_id/problems/:id" => 'problems#update', :as => 'project_update_feedback'
   get "exploring/:exploration_id/problems/:id/update" => 'problems#update', :as => 'project_update_from_survey'
- 
   post "/surveys/:survey_code" => 'surveyor#create'
- 
   get   "/devise/invitations/new"
     
   match '/video/new' => 'input#video_url', :via => [:post]

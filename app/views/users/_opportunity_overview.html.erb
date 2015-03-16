@@ -1,71 +1,77 @@
-<% @unexplored_explorations.each do |b| %>
-	<div class="row explorationOverview">
-			<div class="col-xs-12 col-sm-4 colNoMargin">
-				<div class="packageLeft img-responsive visible-xs" alt="Responsive image" style="background-image: url(<%= b.picture_xs %>)"></div>
-				<div class="packageLeft img-responsive visible-sm visible-md" alt="Responsive image" style="background-image: url(<%= b.picture_sm %>)"></div>
-				<div class="packageLeft img-responsive visible-lg" alt="Responsive image" style="background-image: url(<%= b.picture_lg %>)"></div>
+<% @unexplored_explorations.each do |d| %>
+<div class="col-xs-12 col-sm-4">
+	<% if d.exploration_phase == "Problem" %>
+		<% @problem = Problem.where(exploration_id: d.id).pluck(:id) %>
+		<%= link_to exploration_problem_path(d.id, @problem) do %>
+		<div class="row explorationOverview">
+			<div class="packageLeft img-responsive visible-xs" alt="Responsive image" style="background-image: url(<%= d.picture_xs %>)"></div>
+			<div class="packageLeft img-responsive visible-sm visible-md visible-lg" alt="Responsive image" style="background-image: url(<%= d.picture_lg %>)"></div>
+			<div class="col-xs-12 project-card-content">
+				<h4 class="explorationTitle text-space-bottom"><%= d.title %></h4>
+				<h6 class="gray text-space-top">  
+				<% if d.exploration_phase == "Problem" %>
+					 <i class="fa fa-exclamation-triangle"></i> <%= d.exploration_category %>
+				<% elsif d.exploration_phase == "Solution" %>
+					 <i class="fa fa-lightbulb-o"></i> <%= d.exploration_category %>
+				<% end %>
+				</h6>
+				<h5 class="gray explorationDescription"><%= d.description %></h5>
 			</div>
-			<div class="col-xs-12 col-sm-8">
-					<div class="row explorationTitle">
-						<div class="col-sm-12">
-							<h3><%= b.title %></h3>
-						</div>
+			<div class="col-xs-12 project-card-footer">
+				<h4 class="gray text-space-bottom"><%= d.completions_required %> participants</h4>
+				<% completed = d.exploration_users.count(:completed) %>
+				<% percentage = ((completed.to_f/d.completions_required.to_f)*100).round %>
+				<div class="status-bar">
+					<div class="status-bar-progress" style="width:<%= percentage %>%"></div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6">
+						<h6 class="gray text-space-top"><%= percentage %>%</h6>
 					</div>
-					<div class="row explorationExplorer">
-						<% @explorer_lead = Explorer.where(exploration_id: b.id, lead_explorer: "yes").all.to_a[0] %>
-						<div class="col-xs-4 col-sm-3">
-
-							<h6 class="gray"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <%= @explorer_lead.user.first_name %> <%= @explorer_lead.last_name %></h6>
-						</div>
-						<div class="col-xs-4 col-sm-3">
-							<h6 class="gray"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <%= @explorer_lead.city %>, <%= @explorer_lead.state %></h6>
-
-						</div>
-
-						<div class="col-xs-4 col-sm-3">
-							<% if b.exploration_phase == "Problem" %>
-						        <h6 class="gray"><i class="fa fa-exclamation-triangle"></i> <%= b.exploration_category %></h6>
-						    <% end %>
-							<% if b.exploration_phase == "Solution" %>
-						        <h6 class="gray"><i class="fa fa-lightbulb-o"></i> <%= b.exploration_category %></h6>
-						    <% end %>
-						</div>
-						<div class="col-xs-0 col-sm-3"></div>
+					<div class="col-xs-6 days-left">
+						<% days_left = ((d.end_date - @time)/1.day).round %>
+						<h6 class="gray text-space-top"><%= days_left %> days left</h6>
 					</div>
-					<div class="row explorationDescription">
-						<h5 class="gray"><%= b.description %></h5>
-					</div>
-					<div class="row explorationStats">
-						<div class="col-xs-4 col-sm-2">
-							<h3><%= b.completions_required %></h3>
-							<h6 class="gray">desired</h6>
-						</div>
-						<div class="col-xs-4 col-sm-2">
-							<% completed = b.exploration_users.count(:completed) %>
-							<h3><%= completed %></h3>
-							<h6 class="gray">completed</h6>
-						</div>
-						<div class="col-xs-4 col-sm-2">
-							<% days_left = ((b.end_date - @time)/1.day).round %>
-							<h3><%= days_left %></h3>
-							<h6 class="gray">days to go</h6>                                                                         
-						</div>
-						<div class="col-xs-12 col-sm-5">
-							<%= form_for @start, url: {action: "new"} do |h| %>
-								<%= h.hidden_field :exploration_id, value: b.id %>
-								<%= h.submit id: "originalButton", value: "I'll share!", class: "btn btn-success inputButton" %>
-							<% end %>
-						</div>
-						<div class="col-sm-1"></div>
-					</div>
-					<div class="row timeInvolved">
-						<div class="col-xs-12 col-sm-6"></div>
-						<div class="col-xs-12 col-sm-5">
-							<% @time_to_take = Problem.where(exploration_id: b.id).all.to_a[0] %>
-							<h6 class="timeLeft">(Takes ~<%= @time_to_take.time_to_take %> minutes to complete)</h6>
-						</div>
-						<div class="col-sm-1"></div>
-					</div>
+				</div>
 			</div>
-		</div> 
+		</div>
+		<% end %>
+	<% elsif d.exploration_phase == "Solution" %>
+		<% @problem = Problem.where(exploration_id: d.id).pluck(:id) %>
+		<%= link_to exploration_problem_path(d.id, @problem) do %>
+		<div class="row explorationOverview">
+			<div class="packageLeft img-responsive visible-xs" alt="Responsive image" style="background-image: url(<%= d.picture_xs %>)"></div>
+			<div class="packageLeft img-responsive visible-sm visible-md visible-lg" alt="Responsive image" style="background-image: url(<%= d.picture_lg %>)"></div>
+			<div class="col-xs-12 project-card-content">
+				<h4 class="explorationTitle text-space-bottom"><%= d.title %></h4>
+				<h6 class="gray text-space-top">  
+				<% if d.exploration_phase == "Problem" %>
+					 <i class="fa fa-exclamation-triangle"></i> <%= d.exploration_category %>
+				<% elsif d.exploration_phase == "Solution" %>
+					 <i class="fa fa-lightbulb-o"></i> <%= d.exploration_category %>
+				<% end %>
+				</h6>
+				<h5 class="gray explorationDescription"><%= d.description %></h5>
+			</div>
+			<div class="col-xs-12 project-card-footer">
+				<h4 class="gray text-space-bottom"><%= d.completions_required %> participants</h4>
+				<% completed = d.exploration_users.count(:completed) %>
+				<% percentage = ((completed.to_f/d.completions_required.to_f)*100).round %>
+				<div class="status-bar">
+					<div class="status-bar-progress" style="width:<%= percentage %>%"></div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6">
+						<h6 class="gray text-space-top"><%= percentage %>%</h6>
+					</div>
+					<div class="col-xs-6 days-left">
+						<% days_left = ((d.end_date - @time)/1.day).round %>
+						<h6 class="gray text-space-top"><%= days_left %> days left</h6>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% end %>
+	<% end %>
+</div>		
 <% end %>
