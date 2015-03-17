@@ -1,97 +1,33 @@
 <%= render 'layouts/header' %> 
 <div class="container pageContainer">
 	<!--Header row-->
-	<div class="row projectHeader">
-		<div class="page-header">
-			<h1><%= @exploration.title %></h1>
-			<div class="row">
-				<div class="col-xs-4 project-owners">
-					<h6><span class="glyphicon glyphicon-user" aria-hidden="true"></span> by
-						<% @explorers.each do |d| %>
-							<% if d == @explorers.last %> 
-								<%= d.user.first_name %> <%= d.last_name %>
-							<% else %>
-								<%= d.user.first_name %> <%= d.last_name %>,
-							<% end %>
-						<% end %>
-					</h6>
-				</div>
-				<div class="col-xs-3 project-location">
-					<h6 class="gray"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> 
-						<%= @explorer_lead.city %>, <%= @explorer_lead.state %>
-					</h6>
-				</div>
-				<div class="col-xs-5 project-phase">
-					<h6><i class="fa fa-exclamation-triangle"></i> This project is in the problem phase of exploration 
-						<span class="info-text">(<%= link_to "Meaning?", "#", data: {toggle: "modal", target: "#problem_background"} %>)</span>
-					</h6>
-				</div>
-				<div id="problem_background" class="modal">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h3>Problem phase background</h3>
-					</div>
-					<div class="modal-body">
-						<video id='problemIntroVideo' class="img-responsive" data-uuid="v-66d09c00-f211-4989-8fad-f1bd1937cb75"></video>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<%= render 'layouts/problem_projectHeader' %> 	
 	<!--Project info-->
-	<div class="row topProjectRow hidden" id="pstep1"></div>
-	<div class="row topProjectRow hidden" id="pstep2"></div>
-	<div class="row topProjectRow hidden" id="pstep3"></div>
-	<div class="row topProjectRow hidden" id="pfinished"></div>
-	<div class="row topProjectRow show" id="firstView">	
+	<div class="row topProjectRow">
 		<%= form_for @written, url: project_update_feedback_path(@exploration.id, @problems.id)  do |f| %>
 		<!--Project main area--info-->
 		<div class="col-sm-8 mainArea">
-			<h4 class="responseBackgroundHeader hidden">Our project background</h4>
 			<div class="row videoArea" id="initialVideo">
 				<video id='projectIntroVideo' class="img-responsive" data-uuid= <%= @problems.intro_video_id %> ></video>
 			</div>
 		</div>
 		<!--Project side bar-->
 		<div class="col-sm-4 sideArea show" id="firstSideArea">
-			<div class="row sideBarArea">
-				<% if @exploration.exploration_users.count(:completed) == 1 %>
-					<h4 class="text-space-bottom"><%= @exploration.exploration_users.count(:completed) %> person provided input</h4>
-				<% else %>
-					<h4 class="text-space-bottom"><%= @exploration.exploration_users.count(:completed) %> people provided input</h4>
-				<% end %>
-				<h5 class="gray text-space-top stated-goal">out of a goal of <%= @exploration.completions_required %></h5>
-				<% completed = @exploration.exploration_users.count(:completed) %>
-				<% percentage = ((completed.to_f/@exploration.completions_required.to_f)*100).round %>
-				<div class="status-bar-project-page">
-					<div class="status-bar-progress" style="width:<%= percentage %>%"></div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6 percent-complete">
-						<h5 class="gray text-space-top"><%= percentage %>% complete</h5>
-					</div>
-					<div class="col-xs-6 days-left">
-						<% days_left = ((@exploration.end_date - @time)/1.day).round %>
-						<h5 class="gray text-space-top"><i class="fa fa-clock-o"></i> <%= days_left %> days left</h5>
-					</div>
-				</div>
-				<div class="row phase-time">
-					<h5 class="gray">This phase of the project started on <%= (@exploration.start_date).strftime("%B %e") %> and will close on 
-						<%= (@exploration.end_date).strftime("%B %e, %Y") %> <span>(11:59PM PT)</span>.</h5>
-				</div>
-			</div>
+			<%= render 'layouts/problem_sideBar_stats' %>
 			<div class="row responseAreaInitial show">
 				<%= f.submit id: "initialButton", value: "Share your thoughts", class: "btn btn-success responseButton toStep1" %>
 				<h6 class="liStatement">Takes ~<%= @problems.time_to_take %> minutes to complete.</h6>
 			</div>
-			<% end %>
 		</div>
+		<% end %>
+	</div>
+	<div class="row secondProjectRow">
 		<div class="col-sm-8 mainArea">
-			<div class="row project-background">
-				<h4 class="initialBackgroundHeader show">Our project background</h4>
-				<h5><%=raw @problems.project_background %></h5>
+			<div class="row">
+				<h4 class="backgroundHeader">Our project background</h4>
+				<h5 class="project-background"><%=raw @problems.project_background %></h5>
 			</div>
-		</div>
+		</div>		
 	</div>
 </div>
 <%= render 'layouts/footer' %>

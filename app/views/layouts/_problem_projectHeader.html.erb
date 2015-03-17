@@ -1,0 +1,37 @@
+<div class="row projectHeader">
+		<div class="page-header">
+			<h1><%= @exploration.title %></h1>
+			<div class="row">
+				<div class="col-xs-4 project-owners">
+					<h6><span class="glyphicon glyphicon-user" aria-hidden="true"></span> by
+						<% @explorers.each do |d| %>
+							<% if d == @explorers.last %> 
+								<%= d.user.first_name %> <%= d.last_name %>
+							<% else %>
+								<%= d.user.first_name %> <%= d.last_name %>,
+							<% end %>
+						<% end %>
+					</h6>
+				</div>
+				<div class="col-xs-3 project-location">
+					<h6 class="gray"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> 
+						<%= @explorer_lead.city %>, <%= @explorer_lead.state %>
+					</h6>
+				</div>
+				<div class="col-xs-5 project-phase">
+					<h6><i class="fa fa-exclamation-triangle"></i> This project is in the problem phase of exploration 
+						<span class="info-text">(<%= link_to "Meaning?", "#", data: {toggle: "modal", target: "#problem_background"} %>)</span>
+					</h6>
+				</div>
+				<div id="problem_background" class="modal">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h3>Problem phase background</h3>
+					</div>
+					<div class="modal-body">
+						<video id='problemIntroVideo' class="img-responsive" data-uuid="v-66d09c00-f211-4989-8fad-f1bd1937cb75"></video>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

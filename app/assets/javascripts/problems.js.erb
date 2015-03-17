@@ -1,127 +1,44 @@
 $(document).ready(function(){
 
-	// code to show correct view if user is in first step of providing input
-	function first_view() {
-		if ($("#firstSideArea").hasClass("show")){
-			$("#firstSideArea").removeClass("show").addClass("hidden");
-		}
-		$("#pstep1").removeClass("hidden").addClass("show");
-		if ($("#pstep2").hasClass("show")){
-			$("#pstep2").removeClass("show").addClass("hidden");
-		}
-		if ($("#pstep3").hasClass("show")){
-			$("#pstep3").removeClass("show").addClass("hidden");
-		}
-		if ($("#pfinished").hasClass("show")){
-			$("#pfinished").removeClass("show").addClass("hidden");
-		}
-		if ($(".initialBackgroundHeader").hasClass("show")){
-			$(".initialBackgroundHeader").removeClass("show").addClass("hidden");
-		}
-		if ($(".responseBackgroundHeader").hasClass("hidden")){
-			$(".responseBackgroundHeader").removeClass("hidden").addClass("show");
-		}
-		$.ajax({  
-			type: "GET",    
-	    	url: "/exploring/"+gon.exploration_id+"/problems/"+gon.problem_id
-	  	});
-	}
 	
-	// code to show correct view if user is in second step of providing input
-	function second_view() {
-		if ($("#firstSideArea").hasClass("show")){
-			$("#firstSideArea").removeClass("show").addClass("hidden");
-		}
-		$("#pstep2").removeClass("hidden").addClass("show");
-		if ($("#pstep1").hasClass("show")){
-			$("#pstep1").removeClass("show").addClass("hidden");
-		}
-		if ($("#pstep3").hasClass("show")){
-			$("#pstep3").removeClass("show").addClass("hidden");
-		}
-		if ($("#pfinished").hasClass("show")){
-			$("#pfinished").removeClass("show").addClass("hidden");
-		}
-		if ($(".initialBackgroundHeader").hasClass("show")){
-			$(".initialBackgroundHeader").removeClass("show").addClass("hidden");
-		}
-		if ($(".responseBackgroundHeader").hasClass("hidden")){
-			$(".responseBackgroundHeader").removeClass("hidden").addClass("show");
-		}
-		$.ajax({  
-			type: "GET",    
-	    	url: "/exploring/"+gon.exploration_id+"/problems/"+gon.problem_id
-	  	});
-	}
+	//code to check if written input has been provided
+	$("#textInputArea1").on("keyup", function(){
+		$(".responseButton").removeAttr('disabled');
+	});
+	$("#textInputArea3").on("keyup", function(){
+		$(".responseButton").removeAttr('disabled');
+	});
 	
-	// code to show correct view if user is in third step of providing input
-	function third_view() {
-		if ($("#firstSideArea").hasClass("show")){
-			$("#firstSideArea").removeClass("show").addClass("hidden");
-		}
-		$("#pstep3").removeClass("hidden").addClass("show");
-		if ($("#pstep1").hasClass("show")){
-			$("#pstep1").removeClass("show").addClass("hidden");
-		}
-		if ($("#pstep2").hasClass("show")){
-			$("#pstep2").removeClass("show").addClass("hidden");
-		}
-		if ($("#pfinished").hasClass("show")){
-			$("#pfinished").removeClass("show").addClass("hidden");
-		}
-		if ($(".initialBackgroundHeader").hasClass("show")){
-			$(".initialBackgroundHeader").removeClass("show").addClass("hidden");
-		}
-		if ($(".responseBackgroundHeader").hasClass("hidden")){
-			$(".responseBackgroundHeader").removeClass("hidden").addClass("show");
-		}
-		$.ajax({  
-			type: "GET",    
-	    	url: "/exploring/"+gon.exploration_id+"/problems/"+gon.problem_id
-	  	});
-	}
+	$(".noWebcam").on("click", function(){
+	    
+	    if ($(this).hasClass("one")) {
+	    	if ($("#problemTwo").hasClass("show")) {
+	    		$("#problemTwo").removeClass("show").addClass("hidden");
+				$("#textInputArea1").removeClass("hidden").addClass("show");
+				$(".noWebcam").html("Use webcam option.");	
+	    	} else {
+	    		$("#problemTwo").removeClass("hidden").addClass("show");
+	    		$("#textInputArea1").removeClass("show").addClass("hidden");
+	    		$(".noWebcam").html("Provide written response instead.");
+	    		$("#step1Button").attr('disabled', true);
+	    	}
+
+		} 
+		if ($(this).hasClass("three")) {
+	    	if ($("#problemFour").hasClass("show")) {
+	    		$("#problemFour").removeClass("show").addClass("hidden");
+				$("#textInputArea3").removeClass("hidden").addClass("show");
+				$(".noWebcam").html("Use webcam option.");
+	    	} else {
+	    		$("#problemFour").removeClass("hidden").addClass("show");
+	    		$("#textInputArea3").removeClass("show").addClass("hidden");
+	    		$(".noWebcam").html("Provide written response instead.");
+	    		$("#step3Button").attr('disabled', true);
+	    	}
+
+		} 
+	});
 	
-	// code to show correct view if user is in finished providing input
-	function invite_view() {
-		if ($("#firstSideArea").hasClass("show")){
-			$("#firstSideArea").removeClass("show").addClass("hidden");
-		}
-		$("#pfinished").removeClass("hidden").addClass("show");
-		if ($("#pstep1").hasClass("show")){
-			$("#pstep1").removeClass("show").addClass("hidden");
-		}
-		if ($("#pstep2").hasClass("show")){
-			$("#pstep2").removeClass("show").addClass("hidden");
-		}
-		if ($("#pstep3").hasClass("show")){
-			$("#pstep3").removeClass("show").addClass("hidden");
-		}
-		if ($(".initialBackgroundHeader").hasClass("show")){
-			$(".initialBackgroundHeader").removeClass("show").addClass("hidden");
-		}
-		if ($(".responseBackgroundHeader").hasClass("hidden")){
-			$(".responseBackgroundHeader").removeClass("hidden").addClass("show");
-		}
-		$.ajax({  
-			type: "GET",    
-	    	url: "/exploring/"+gon.exploration_id+"/problems/"+gon.problem_id
-	  	});
-	}
-	
-	// code to determine which view to show when user first opens project page
-	if (gon.step == "first") {
-		first_view();
-	} else if (gon.step == "second") {
-		second_view();
-	} else if (gon.step == "third") {
-		third_view();
-	} else if (gon.step == "finished"){
-		invite_view();
-	} else {
-		return;
-	}
-		
-	//code to keep Next Step buttons disabled until video is published
 	//code also sends extra information--camera name and user id--with each video to be stored in DB
 	CameraTag.observe('problemTwo', "published", function(){			
 		myCamera = CameraTag.cameras['problemTwo'];

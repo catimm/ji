@@ -375,12 +375,6 @@ section {
     overflow-x: hidden;
   }
 }
-.responseBackgroundHeader {
-  margin-top: 1em;
-}
-.sideArea {
-
-}
 .sideBarArea {
     border: 1px solid #e7e7e7;
     padding: 5px 1.5em;
@@ -420,16 +414,15 @@ section {
   border-color: #4CAE4C;
   color: #fff;
 }
-.responseBackgroundHeader, .initialBackgroundHeader {
+.backgroundHeader {
+  margin-top: 1em;
   font-size: 20px;
 }
 .project-background {
   margin: 2em 0;
-  h5 {
-    p {
-      line-height: 1.3; 
-      font-size: 16px;
-    }
+  p {
+    line-height: 1.3; 
+    font-size: 16px;
   }
 }
 .row.inputArea {
@@ -980,4 +973,7 @@ Copyright (c) 2012 Dan Eden*/
 ul {
   padding-left: 15px !important;
   list-style: outside !important;
+}
+p {
+  font-family: inherit !important;
 }

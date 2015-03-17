@@ -1,0 +1,95 @@
+<%= render 'layouts/header' %> 
+<div class="container pageContainer">
+	<!--Header row-->
+	<%= render 'layouts/problem_projectHeader' %> 
+	<div class="row topProjectRow">
+		<!--Wrap code in form to capture written response if provided-->
+		<%= form_for @written, url: project_update_feedback_path(@exploration.id, @problems.id)  do |f| %>
+		<!--Project main area--info-->
+		<div class="col-sm-8 mainArea">
+			<div class="row zeroPadding">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4 stepGuide">
+					<h6 class="step one current">1</h6>
+					<% if @step == "first" %>
+						<h6 class="step two not-visited">2</h6>
+						<h6 class="step three not-visited">3</h6>
+					<% elsif @step == "second" %>
+						<%= link_to(raw("2"), psecond_path(@exploration.id, @problems.id, "second"), :class => "step two visited") %>
+						<h6 class="step three not-visited">3</h6>
+					<% elsif @step == "third" %>
+						<%= link_to(raw("2"), psecond_path(@exploration.id, @problems.id, "second"), :class => "step two visited") %>
+						<%= link_to(raw("3"), pthird_path(@exploration.id, @problems.id, "third"), :class => "step three visited") %>
+					<% else %>
+						<%= link_to(raw("2"), psecond_path(@exploration.id, @problems.id, "second"), :class => "step two visited") %>
+						<%= link_to(raw("3"), pthird_path(@exploration.id, @problems.id, "third"), :class => "step three visited") %>
+						<%= link_to(raw("F"), pfinished_path(@exploration.id, @problems.id, "finished"), :class => "step finished visited") %>
+					<% end %>
+				</div>
+				<div class="col-sm-4"></div>
+			</div>
+			<div class="row zeroPadding">
+				<div class="col-sm-6">
+					<div class="row inputArea">
+						<camera class="camera show img-responsive" id='problemTwo' data-app-id='a-ea644890-87df-0132-10ec-22000a8c0328' data-sources='record,upload' data-maxlength='300' data-poll-for-processed='true'></camera>
+						<textarea name="textInputArea" id="textInputArea1" class="textInputArea hidden" placeholder="Type input here"></textarea>
+					</div>
+					<div class="row visible-xs visible-lg">
+						<div class="col-xs-5 extraInfoSpacing">
+							<h6 class="emailContact">Questions? <%= mail_to "ctiv@hotmail.com", "Email us" %></h6>
+						</div>
+						<div class="col-xs-7 altInput extraInfoSpacing">
+							<%= link_to(raw("Provide written response instead."), "#", :class => "noWebcam one", :id => "noWebcam") %>
+						</div>
+					</div>
+					<div class="row visible-sm visible-md">
+						<div class="col-xs-5 extraInfoSpacing two">
+							<h6 class="emailContact">Questions? <%= mail_to "ctiv@hotmail.com", "Email us" %></h6>
+						</div>
+						<div class="col-xs-7 altInput extraInfoSpacing two">
+							<%= link_to(raw("Provide written response instead."), "#", :class => "noWebcam one", :id => "noWebcam") %>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="row textAreaToXS hidden-xs"> <!--Using class tags to change height of div based on device viewing-->
+						<h5 class="specialFontSize">Here's what we think:</h5>
+						<ul>
+							<li class="specialFontSize"><%= @problems.problem_one %></li>
+							<li class="specialFontSize"><%= @problems.problem_two %></li>
+							<li class="specialFontSize"><%= @problems.problem_three %></li>
+						</ul>
+						<h5 class="specialFontSize">Does any of this resonate with you? Please use the webcam to share your general thoughts on the topic.</h5>
+					</div>
+					<div class="row textAreaXS visible-xs"> <!--Using class tags to change height of div based on device viewing-->
+						<h5 class="specialFontSize">Here's what we think:</h5>
+						<ul>
+							<li class="specialFontSize"><%= @problems.problem_one %></li>
+							<li class="specialFontSize"><%= @problems.problem_two %></li>
+							<li class="specialFontSize"><%= @problems.problem_three %></li>
+						</ul>
+						<h5 class="specialFontSize">Does any of this resonate with you? Please use the webcam to share your general thoughts on the topic.</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Project side bar-->
+		<div class="col-sm-4 sideArea" id="altSideArea">
+			<%= render 'layouts/problem_sideBar_stats' %>
+			<div class="row responseArea">
+				<%= f.submit id: "step1Button", value: "Next", class: "btn btn-success responseButton toStep2", disabled: "true" %>
+			</div>
+		</div>
+	<% end %>
+	</div>
+	<div class="row secondProjectRow">	
+		<div class="col-sm-8 mainArea">
+			<h4 class="backgroundHeader">Our project background</h4>
+			<div class="row videoArea" id="initialVideo">
+				<video id='projectIntroVideo' class="img-responsive" data-uuid= <%= @problems.intro_video_id %> ></video>
+			</div>
+			<h5 class="project-background"><%=raw @problems.project_background %></h5>
+		</div>	
+	</div>
+</div>
+<%= render 'layouts/footer' %>

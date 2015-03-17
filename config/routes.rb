@@ -21,9 +21,11 @@ Code::Application.routes.draw do
 
   post 'users/:id' => 'users#update'
   post 'users/new' => 'users#update'
-  get  "/problems" => 'problems#show'
+  get  "/problems/first"=> 'problems#show', :as => 'pfirst', :path => "exploring/:exploration_id/problems/:id/:step"
+  get  "/problems/second"=> 'problems#show', :as => 'psecond', :path => "exploring/:exploration_id/problems/:id/:step"
+  get  "/problems/third"=> 'problems#show', :as => 'pthird', :path => "exploring/:exploration_id/problems/:id/:step"
+  get  "/problems/finished"=> 'problems#show', :as => 'pfinished', :path => "exploring/:exploration_id/problems/:id/:step"  
   post "exploring/:exploration_id/problems/:id" => 'problems#update', :as => 'project_update_feedback'
-  get "exploring/:exploration_id/problems/:id/update" => 'problems#update', :as => 'project_update_from_survey'
   post "/surveys/:survey_code" => 'surveyor#create'
   get   "/devise/invitations/new"
     

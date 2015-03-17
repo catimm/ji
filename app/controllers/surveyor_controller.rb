@@ -79,11 +79,13 @@ module SurveyorControllerCustomMethods
     Rails.logger.debug("Exploration info is: #{@exploration.inspect}")
     @problem = Problem.where(exploration_id: @exploration.exploration_id).pluck(:id)[0]
     Rails.logger.debug("Problem info is: #{@problem.inspect}")
+    # Update exploration user's step status
+    ExplorationUser.update(@exploration.id, :status => "third")
     # Original code from Surveyor
     question_ids_for_dependencies = (params[:r] || []).map{|k,v| v["question_id"] }.compact.uniq 
     saved = load_and_update_response_set_with_retries 
     
-    redirect_to project_update_from_survey_path(@exploration.exploration_id, @problem) and return 
+    redirect_to pthird_path(@exploration.exploration_id, @problem, "third") and return 
      
   end
 

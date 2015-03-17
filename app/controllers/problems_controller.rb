@@ -50,6 +50,24 @@ class ProblemsController < ApplicationController
     @time = Time.now
     # Create User variable for new user invite in final step
     @user = User.new
+    @view = params[:step]
+    Rails.logger.debug("View is: #{@view.inspect}")
+    # Check if @vivew is nil and if so, make it equal @step
+    if !params.has_key?(:step)
+      @view = @step
+    end
+    Rails.logger.debug("View is now: #{@view.inspect}")
+    if @view == "finished"
+      render "problems/finished" and return
+    elsif @view == "third" 
+      render "problems/third" and return
+    elsif @view == "second"
+      render "problems/second" and return
+    elsif @view == "first" 
+      render "problems/first" and return
+    else
+    end
+    
     # Pass variables to problem.js.erb
     gon.current_user = current_user.id
     gon.exploration_id = @exploration.id
@@ -83,16 +101,24 @@ class ProblemsController < ApplicationController
     # update the status of the Exploration User
     if @step == "0"
       ExplorationUser.update(@exploration_user.id, :status => "first", :started => @time, :user_chosen => "yes")
+      session[:next_step_path] = pfirst_path(@exploration_id, @problem_id, "first")
     elsif @step == "first" 
       ExplorationUser.update(@exploration_user.id, :status => "second")
+      session[:next_step_path] = psecond_path(@exploration_id, @problem_id, "second")
     elsif @step == "second"
       ExplorationUser.update(@exploration_user.id, :status => "third")
+      session[:next_step_path] = pthird_path(@exploration_id, @problem_id, "third")
     elsif @step == "third" 
       ExplorationUser.update(@exploration_user.id, :status => "finished",:completed => @time)
+      session[:next_step_path] = pfinished_path(@exploration_id, @problem_id, "finished")
     else
     end
     
     # Return to Show action to show project page again    
-    redirect_to exploration_problem_path(@exploration_id, @problem_id)
+    redirect_to next_step_path
+  end
+  
+  def next_step_path
+    session[:next_step_path]
   end
 end

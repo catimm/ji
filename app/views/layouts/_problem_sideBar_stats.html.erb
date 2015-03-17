@@ -1,0 +1,26 @@
+<div class="row sideBarArea">
+				<% if @exploration.exploration_users.count(:completed) == 1 %>
+					<h4 class="text-space-bottom"><%= @exploration.exploration_users.count(:completed) %> person provided input</h4>
+				<% else %>
+					<h4 class="text-space-bottom"><%= @exploration.exploration_users.count(:completed) %> people provided input</h4>
+				<% end %>
+				<h5 class="gray text-space-top stated-goal">out of a goal of <%= @exploration.completions_required %></h5>
+				<% completed = @exploration.exploration_users.count(:completed) %>
+				<% percentage = ((completed.to_f/@exploration.completions_required.to_f)*100).round %>
+				<div class="status-bar-project-page">
+					<div class="status-bar-progress" style="width:<%= percentage %>%"></div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6 percent-complete">
+						<h5 class="gray text-space-top"><%= percentage %>% complete</h5>
+					</div>
+					<div class="col-xs-6 days-left">
+						<% days_left = ((@exploration.end_date - @time)/1.day).round %>
+						<h5 class="gray text-space-top"><i class="fa fa-clock-o"></i> <%= days_left %> days left</h5>
+					</div>
+				</div>
+				<div class="row phase-time">
+					<h5 class="gray">This phase of the project started on <%= (@exploration.start_date).strftime("%B %e") %> and will close on 
+						<%= (@exploration.end_date).strftime("%B %e, %Y") %> <span>(11:59PM PT)</span>.</h5>
+				</div>
+			</div>
