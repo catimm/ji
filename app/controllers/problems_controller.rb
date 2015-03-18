@@ -36,14 +36,11 @@ class ProblemsController < ApplicationController
     else
       @owner = "no"
     end
-    Rails.logger.debug("Explorer is a lead: #{@owner.inspect}")
     @explorer_lead = @explorers.where(lead_explorer: "yes")[0]
-    Rails.logger.debug("Explorer Lead #{@explorer_lead.inspect}")
     # Create written input form for steps that use that
     @written = WrittenInput.new
     # Create problems variable for dynamic input in various steps
     @problems = Problem.where(exploration_id: @exploration.id)[0]
-    Rails.logger.debug("Problems data: #{@problems.inspect}")
     # Set current problem id as session varialbe
     session[:problem_id] = @problems.id
     # Set time variable
@@ -51,7 +48,13 @@ class ProblemsController < ApplicationController
     # Create User variable for new user invite in final step
     @user = User.new
     @view = params[:step]
-    Rails.logger.debug("View is: #{@view.inspect}")
+    # Pass variables to problem.js.erb
+    gon.current_user = current_user.id
+    Rails.logger.debug("Gon current user id: #{gon.current_user.inspect}")
+    gon.exploration_id = @exploration.id
+    Rails.logger.debug("Gon exploration id: #{@view.inspect}")
+    gon.problem_id = @problems.id
+    gon.step = @step
     # Check if @vivew is nil and if so, make it equal @step
     if !params.has_key?(:step)
       @view = @step
@@ -66,17 +69,7 @@ class ProblemsController < ApplicationController
     elsif @view == "first" 
       render "problems/first" and return
     else
-    end
-    
-    # Pass variables to problem.js.erb
-    gon.current_user = current_user.id
-    gon.exploration_id = @exploration.id
-    gon.problem_id = @problems.id
-    gon.step = @step
-    respond_to do |format|
-      format.js
-      format.html
-    end
+    end   
   end
   
   def update

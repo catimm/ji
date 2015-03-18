@@ -40,7 +40,7 @@ $(document).ready(function(){
 	});
 	
 	//code also sends extra information--camera name and user id--with each video to be stored in DB
-	CameraTag.observe('problemTwo', "published", function(){			
+	CameraTag.observe('problemTwo', "initialized", function(){				
 		myCamera = CameraTag.cameras['problemTwo'];
 
 		var js_object = {
@@ -49,7 +49,7 @@ $(document).ready(function(){
 		    exploration_id: gon.exploration_id,
 		    step: gon.step
 		};
-			
+		
 		myCamera.addVideoData(js_object);
 		
 		$("#step1Button").removeAttr('disabled');
