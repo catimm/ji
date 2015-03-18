@@ -40,7 +40,7 @@ $(document).ready(function(){
 	});
 	
 	//code also sends extra information--camera name and user id--with each video to be stored in DB
-	CameraTag.observe('problemTwo', "initialized", function(){				
+	CameraTag.observe('problemTwo', "published", function(){				
 		myCamera = CameraTag.cameras['problemTwo'];
 
 		var js_object = {
