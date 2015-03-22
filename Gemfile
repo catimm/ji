@@ -53,6 +53,7 @@ gem "Ziggeo", :git => "https://github.com/Ziggeo/ZiggeoRubySdk.git"
 gem 'mandrill-api', require: "mandrill"
 gem 'gon'
 gem 'font-awesome-sass', '~> 4.3.0'
+gem 'whenever', :require => false
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

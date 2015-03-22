@@ -148,5 +148,58 @@ class UserMailer < ActionMailer::Base
     else
       mandrill_client_dev.messages.send_template template_name, template_content, message
     end
-  end  
+  end
+  
+  def signup_reminder_email(invited, inviter, description)
+    # url = root_url+"users/invitation/accept?invitation_token="
+    website = root_url
+    link = root_url+"users/invitation/accept?invitation_token="+invited.raw_invitation_token
+    Rails.logger.debug("Link is: #{link.inspect}")
+    template_name = "signup-reminder-email"
+    template_content = []
+    message = {
+      to: [{email: invited.email}],
+      inline_css: true,
+      merge_vars: [
+        {rcpt: invited.email,
+         vars: [
+           {name: "invited", content: invited.first_name},
+           {name: "inviter", content: inviter.first_name},
+           {name: "website", content: website},
+           {name: "link", content: link},
+           {name: "token", content: invited.raw_invitation_token},
+           {name: "description", content: description}
+         ]}
+      ]
+    }
+    if root_url == "https://bonu.herokuapp.com/"
+      mandrill_client_prod.messages.send_template template_name, template_content, message
+    else
+      mandrill_client_dev.messages.send_template template_name, template_content, message
+    end
+  end
+  
+  def project_reminder_email(invited, description)
+    # url = root_url+"users/invitation/accept?invitation_token="
+    website = root_url
+    template_name = "project-reminder-email"
+    template_content = []
+    message = {
+      to: [{email: invited.email}],
+      inline_css: true,
+      merge_vars: [
+        {rcpt: invited.email,
+         vars: [
+           {name: "invited", content: invited.first_name},
+           {name: "website", content: website},
+           {name: "description", content: description}
+         ]}
+      ]
+    }
+    if root_url == "https://bonu.herokuapp.com/"
+      mandrill_client_prod.messages.send_template template_name, template_content, message
+    else
+      mandrill_client_dev.messages.send_template template_name, template_content, message
+    end
+  end 
 end

@@ -44,6 +44,8 @@ class InvitationsController < Devise::InvitationsController
     end
     # Set the value for :invitation_sent_at because we skip calling the Devise Invitable method deliver_invitation which normally sets this value
     @invited_user.update_attribute :invitation_sent_at, Time.now.utc unless @invited_user.invitation_sent_at
+    # Set reminders to "0" for all invited users
+    @invited_user.update_attribute :reminders, 0
     # Grab User model info of new invitee
     invited_user = User.where(email: params[:user][:email]).all.to_a[0]
     Rails.logger.debug("Invited User: #{invited_user.inspect}")
@@ -52,7 +54,7 @@ class InvitationsController < Devise::InvitationsController
     Rails.logger.debug("Exploration User Check: #{exploration_user_check.inspect}")
     if exploration_user_check.empty?
       new_exploration_user = ExplorationUser.new(:exploration_id => params[:user][:invited_for_exploration_id], 
-      :user_id => invited_user.id, :status => 0, :invited_by_user_id => current_user.id, :user_chosen => "no")
+      :user_id => invited_user.id, :status => 0, :invited_by_user_id => current_user.id, :user_chosen => "no", :reminders => 0)
       new_exploration_user.save! 
     end
     # Send appropriate callback link to invitee--to either login or set password, based on whether invitee is already in User model

@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     require 'date'
     @start = ExplorationUser.new
     @new = Exploration.new
+    @time = Time.now
     
     # Create array of all Exploration IDs
     exploration_ids = Exploration.all.map(& :id)
@@ -27,18 +28,15 @@ class UsersController < ApplicationController
       # Get explorations that the current user is exploring
       @explorations = Exploration.where(id: @exploration_ids)
       Rails.logger.debug("Explorations User has chosen: #{@explorations.inspect}")
-      @time = Time.now
     end   
     # If current user is exploring any Explorations, loop through them to show them here 
     if !@friend_invitations_ids.empty?
       # Get explorations that the current user is exploring
       @friend_invitations = Exploration.where(id: @friend_invitations_ids)
       Rails.logger.debug("Explorations User has not yet chosen: #{@friend_invitations.inspect}")
-      @time = Time.now
     end   
     # If current user is NOT exploring any Explorations that are available, loop through them to show them here
     if !@unexplored_exploration_ids.empty?
-      @time = Time.now
       @unexplored_explorations = Exploration.where(id: @unexplored_exploration_ids)
       Rails.logger.debug("Unexplored explorations: #{@unexplored_explorations.inspect}")      
     end   

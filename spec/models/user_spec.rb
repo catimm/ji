@@ -26,6 +26,8 @@
 #  invitations_count          :integer          default(0)
 #  invited_for_exploration_id :integer
 #  email_option               :string(255)
+#  reminders                  :integer
+#  last_reminder_sent         :datetime
 #
 
 require 'rails_helper'

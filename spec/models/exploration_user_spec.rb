@@ -12,6 +12,8 @@
 #  completed          :datetime
 #  invited_by_user_id :integer
 #  user_chosen        :string(255)
+#  reminders          :integer
+#  last_reminder_sent :datetime
 #
 
 require 'rails_helper'
