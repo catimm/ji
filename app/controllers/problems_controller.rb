@@ -93,7 +93,7 @@ class ProblemsController < ApplicationController
     end
     # update the status of the Exploration User
     if @step == "0"
-      ExplorationUser.update(@exploration_user.id, :status => "first", :started => @time, :user_chosen => "yes")
+      ExplorationUser.update(@exploration_user.id, :status => "first", :started => @time, :user_chosen => "yes", :reminders => 0)
       session[:next_step_path] = pfirst_path(@exploration_id, @problem_id, "first")
     elsif @step == "first" 
       ExplorationUser.update(@exploration_user.id, :status => "second")

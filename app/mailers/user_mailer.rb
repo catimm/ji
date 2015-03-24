@@ -150,11 +150,8 @@ class UserMailer < ActionMailer::Base
     end
   end
   
-  def signup_reminder_email(invited, inviter, description)
-    # url = root_url+"users/invitation/accept?invitation_token="
+  def signup_reminder_email(invited, inviter, description, link)
     website = root_url
-    link = root_url+"users/invitation/accept?invitation_token="+invited.raw_invitation_token
-    Rails.logger.debug("Link is: #{link.inspect}")
     template_name = "signup-reminder-email"
     template_content = []
     message = {
@@ -164,10 +161,9 @@ class UserMailer < ActionMailer::Base
         {rcpt: invited.email,
          vars: [
            {name: "invited", content: invited.first_name},
-           {name: "inviter", content: inviter.first_name},
+           {name: "inviter", content: inviter},
            {name: "website", content: website},
            {name: "link", content: link},
-           {name: "token", content: invited.raw_invitation_token},
            {name: "description", content: description}
          ]}
       ]

@@ -54,7 +54,7 @@ class InvitationsController < Devise::InvitationsController
     Rails.logger.debug("Exploration User Check: #{exploration_user_check.inspect}")
     if exploration_user_check.empty?
       new_exploration_user = ExplorationUser.new(:exploration_id => params[:user][:invited_for_exploration_id], 
-      :user_id => invited_user.id, :status => 0, :invited_by_user_id => current_user.id, :user_chosen => "no", :reminders => 0)
+      :user_id => invited_user.id, :status => 0, :invited_by_user_id => current_user.id, :user_chosen => "no")
       new_exploration_user.save! 
     end
     # Send appropriate callback link to invitee--to either login or set password, based on whether invitee is already in User model
@@ -66,16 +66,24 @@ class InvitationsController < Devise::InvitationsController
     # send different mail based on project_relationship value
     if project_relationship == "owner"
       # Send invitation e-mail using version sent from project owner
-      UserMailer.owner_invite_email(@invited_user, current_user, description, time, link).deliver
+      UserMailer.signup_reminder_email(@invited_user, current_user, description, time, link).deliver
+      ReminderWorker.first_at(2.minutes.from_now, @invited_user, current_user.first_name, description, link)
+      ReminderWorker.second_at(7.days.from_now, @invited_user, current_user.first_name, description, link)
     elsif project_relationship == "friend"
       # Send invitation e-mail using version sent from friend of project owner
       UserMailer.friend_invite_email(@invited_user, current_user, description, time, link).deliver
+      ReminderWorker.first_at(3.days.from_now, @invited_user, current_user.first_name, description, link)
+      ReminderWorker.second_at(7.days.from_now, @invited_user, current_user.first_name, description, link)
     elsif project_relationship == "friend-of-friend"
       # Send invitation e-mail using version sent from friend-of-a-friend of project owner
       UserMailer.fof_invite_email(@invited_user, current_user, description, time, link).deliver
+      ReminderWorker.first_at(3.days.from_now, @invited_user, current_user.first_name, description, link)
+      ReminderWorker.second_at(7.days.from_now, @invited_user, current_user.first_name, description, link)
     else
       # Send invitation e-mail using version non-connected, interested person
       UserMailer.general_invite_email(@invited_user, current_user, description, time, link).deliver
+      ReminderWorker.first_at(3.days.from_now, @invited_user, current_user.first_name, description, link)
+      ReminderWorker.second_at(7.days.from_now, @invited_user, current_user.first_name, description, link)
     end  
     
     # Redirect current user back to Invitation view and send the exploration id through to be referenced again

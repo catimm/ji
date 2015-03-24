@@ -76,30 +76,4 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.reminder_email
-    invited = User.where.not(invitation_token: nil).where("reminders < ?", 2)
-    invited.each do |d|
-      Rails.logger.debug("Invited user info: #{d.inspect}")
-      if d.reminders < 2
-        inviter = User.find(d.invited_by_id)
-        Rails.logger.debug("Inviter info: #{inviter.inspect}")
-        description = Exploration.find(d.invited_for_exploration_id)
-        token = d.invitation_token {@raw_invitation_token}
-        Rails.logger.debug("Token: #{token.inspect}")
-        raw_token = d.raw_invitation_token 
-        Rails.logger.debug("Raw Token: #{@raw_invitation_token.inspect}")
-        if d.reminders == 0
-          UserMailer.signup_reminder_email(self, inviter.first_name, description.short_description).deliver
-        else 
-          last_sent = ((Time.now - d.last_reminder_sent)/1.day).round
-          Rails.logger.debug("Days ago last sent: #{last_sent.inspect}")
-          if last_sent > 3
-            UserMailer.signup_reminder_email(self, inviter.first_name, description.short_description).deliver
-          end
-        end
-      end
-    end
-    Rails.logger.debug("User model Invited users: #{invited.inspect}")
-  end
-
 end
