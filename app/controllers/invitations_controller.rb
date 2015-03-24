@@ -67,23 +67,23 @@ class InvitationsController < Devise::InvitationsController
     if project_relationship == "owner"
       # Send invitation e-mail using version sent from project owner
       UserMailer.signup_reminder_email(@invited_user.first_name, @invited_user.email, current_user, description, link).deliver
-      FirstReminderWorker.perform_at(2.minutes.from_now, @invited_user.id, current_user.first_name, description, link)
-      SecondReminderWorker.perform_at(7.days.from_now, @invited_user.id, current_user.first_name, description, link)
+      # FirstReminderWorker.perform_at(2.minutes.from_now, @invited_user.id, current_user.first_name, description, link)
+      # SecondReminderWorker.perform_at(7.days.from_now, @invited_user.id, current_user.first_name, description, link)
     elsif project_relationship == "friend"
       # Send invitation e-mail using version sent from friend of project owner
       UserMailer.friend_invite_email(@invited_user, current_user, description, time, link).deliver
-      FirstReminderWorker.perform_at(3.days.from_now, @invited_user, current_user.first_name, description, link)
-      SecondReminderWorker.perform_at(7.days.from_now, @invited_user, current_user.first_name, description, link)
+      # FirstReminderWorker.perform_at(3.days.from_now, @invited_user, current_user.first_name, description, link)
+      # SecondReminderWorker.perform_at(7.days.from_now, @invited_user, current_user.first_name, description, link)
     elsif project_relationship == "friend-of-friend"
       # Send invitation e-mail using version sent from friend-of-a-friend of project owner
       UserMailer.fof_invite_email(@invited_user, current_user, description, time, link).deliver
-      FirstReminderWorker.perform_at(3.days.from_now, @invited_user, current_user.first_name, description, link)
-      SecondReminderWorker.perform_at(7.days.from_now, @invited_user, current_user.first_name, description, link)
+      # FirstReminderWorker.perform_at(3.days.from_now, @invited_user, current_user.first_name, description, link)
+      # SecondReminderWorker.perform_at(7.days.from_now, @invited_user, current_user.first_name, description, link)
     else
       # Send invitation e-mail using version non-connected, interested person
       UserMailer.general_invite_email(@invited_user, current_user, description, time, link).deliver
-      FirstReminderWorker.perform_at(3.days.from_now, @invited_user, current_user.first_name, description, link)
-      SecondReminderWorker.perform_at(7.days.from_now, @invited_user, current_user.first_name, description, link)
+      # FirstReminderWorker.perform_at(3.days.from_now, @invited_user, current_user.first_name, description, link)
+      # SecondReminderWorker.perform_at(7.days.from_now, @invited_user, current_user.first_name, description, link)
     end  
     
     # Redirect current user back to Invitation view and send the exploration id through to be referenced again
