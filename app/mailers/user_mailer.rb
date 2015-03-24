@@ -150,17 +150,17 @@ class UserMailer < ActionMailer::Base
     end
   end
   
-  def signup_reminder_email(invited, inviter, description, link)
+  def signup_reminder_email(invited_name, invited_email, inviter, description, link)
     website = root_url
     template_name = "signup-reminder-email"
     template_content = []
     message = {
-      to: [{email: invited.email}],
+      to: [{email: invited_email}],
       inline_css: true,
       merge_vars: [
-        {rcpt: invited.email,
+        {rcpt: invited_email,
          vars: [
-           {name: "invited", content: invited.first_name},
+           {name: "invited", content: invited_name},
            {name: "inviter", content: inviter},
            {name: "website", content: website},
            {name: "link", content: link},

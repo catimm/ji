@@ -32,6 +32,6 @@ production:
   database: ji_production
   username: postgres
   password: b414nc3
-  pool: 5
+  pool: 25
   timeout: 5000
 
