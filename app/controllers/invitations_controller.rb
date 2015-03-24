@@ -66,7 +66,8 @@ class InvitationsController < Devise::InvitationsController
     # send different mail based on project_relationship value
     if project_relationship == "owner"
       # Send invitation e-mail using version sent from project owner
-      UserMailer.signup_reminder_email(@invited_user.first_name, @invited_user.email, current_user.first_name, description, link).deliver
+      UserMailer.owner_invite_email(@invited_user, current_user, description, time, link).deliver
+      # Used to send manual reminders . . . UserMailer.signup_reminder_email(@invited_user.first_name, @invited_user.email, current_user.first_name, description, link).deliver
       # FirstReminderWorker.perform_at(2.minutes.from_now, @invited_user.id, current_user.first_name, description, link)
       # SecondReminderWorker.perform_at(7.days.from_now, @invited_user.id, current_user.first_name, description, link)
     elsif project_relationship == "friend"
