@@ -54,7 +54,7 @@ gem 'mandrill-api', require: "mandrill"
 gem 'gon'
 gem 'font-awesome-sass', '~> 4.3.0'
 gem 'whenever', :require => false
-gem 'sidekiq'
+gem 'sidekiq', '3.2.1'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
